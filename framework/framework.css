@@ -1370,6 +1370,7 @@ span.helper.primary, span.helper.error, span.helper.success, span.helper.info, s
 	float:none;
 	width:100%;
 	clear:both;
+	display:none;
 }
 .navbar.responsive.condensed li{
 	display:block;

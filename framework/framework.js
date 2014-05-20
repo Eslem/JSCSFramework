@@ -11,37 +11,48 @@ $(document).ready(function(){
 	navbarResponsiveVertical();*/
 });
 
+function windowResize(){
+	$( window ).resize(function() {
+		resizeSlider();
+		responsive();
+		writeGridContent();
+		ScrollVerticalNav();
+		navbarResponsiveVertical();
+	});
+}
+
+
 function slider(){
 	var click=true;
 
 	var speed = $('.slider').data("time")*1000;
 	var run = setInterval('rotate()', speed);	
 
-	var count=$('#slides').children().length;
-	$('#slides').css({'width' : count*100+"%"});
-	$('#slides li').css({'width' : 100/count+"%"});
+	var count=$('.slides').children().length;
+	$('.slides').css({'width' : count*100+"%"});
+	$('.slides li').css({'width' : 100/count+"%"});
 
-	var item_width = $('#slides li').outerWidth(); 
+	var item_width = $('.slides li').outerWidth(); 
 	var left_value = item_width * (-1); 
 
-	$('#slides li:first').before($('#slides li:last'));
+	$('.slides li:first').before($('.slides li:last'));
 
-	$('#slides').css({'left' : left_value});
+	$('.slides').css({'left' : left_value});
 
-	$('#slides').css({'visibility' : "visible"});
+	$('.slides').css({'visibility' : "visible"});
 
 
 	$('.prev').click(function() {
-		item_width = $('#slides li').outerWidth(); 
+		item_width = $('.slides li').outerWidth(); 
 		left_value = item_width * (-1); 
-		var left_indent = parseInt($('#slides').css('left')) + item_width;
+		var left_indent = parseInt($('.slides').css('left')) + item_width;
 		if(click){
 			click=false;
-			$('#slides').animate({'left' : left_indent}, 600, function () {
-				$('#slides li').css("visibility", "hidden");
-				$('#slides li:first').before($('#slides li:last'));     
-				$('#slides').css({'left' : left_value});
-				$('#slides li').css("visibility", "visible");
+			$('.slides').animate({'left' : left_indent}, 600, function () {
+				$('.slides li').css("visibility", "hidden");
+				$('.slides li:first').before($('.slides li:last'));     
+				$('.slides').css({'left' : left_value});
+				$('.slides li').css("visibility", "visible");
 				click=true;
 			});
 		}
@@ -50,16 +61,16 @@ function slider(){
 
 
 	$('.next').click(function() {
-		item_width = $('#slides li').outerWidth(); 
-		var left_indent = parseInt($('#slides').css('left')) - item_width;
+		item_width = $('.slides li').outerWidth(); 
+		var left_indent = parseInt($('.slides').css('left')) - item_width;
 		left_value = item_width * (-1); 
 		if(click){
 			click=false;
-			$('#slides').animate({'left' : left_indent}, 600, function () {
-				$('#slides li').css("visibility", "hidden");
-				$('#slides li:last').after($('#slides li:first'));     
-				$('#slides').css({'left' : left_value});
-				$('#slides li').css("visibility", "visible");
+			$('.slides').animate({'left' : left_indent}, 600, function () {
+				$('.slides li').css("visibility", "hidden");
+				$('.slides li:last').after($('.slides li:first'));     
+				$('.slides').css({'left' : left_value});
+				$('.slides li').css("visibility", "visible");
 				click=true;
 			});
 		}
@@ -78,28 +89,27 @@ function slider(){
 
 function resizeSlider(){
 
-	var count=$('#slides').children().length;
-	$('#slides').css({'width' : count*100+"%"});
-	$('#slides li').css({'width' : 100/count+"%"});
+	var count=$('.slides').children().length;
+	$('.slides').css({'width' : count*100+"%"});
+	$('.slides li').css({'width' : 100/count+"%"});
 
 	item_width = $('#slides li').outerWidth(); 
 	var left_value = (item_width) * (-1); 
-	$('#slides').css({'left' : left_value});
+	$('.slides').css({'left' : left_value});
+	
+	var imgHeight=$('.slides li img').css("height");
+	
+	
+	var ulHeight=$('.slides').css("height");
 
+	console.log(imgHeight+" - "+ulHeight);
+	if(ulHeight>imgHeight){
+		ulHeight=$('.slider').css("height", imgHeight);
+	}
 }
 
 function rotate() {
 	$('.next').click();
-}
-
-function windowResize(){
-	$( window ).resize(function() {
-		resizeSlider();
-		responsive();
-		writeGridContent();
-		ScrollVerticalNav();
-		navbarResponsiveVertical();
-	});
 }
 
 function responsive(){
@@ -147,6 +157,38 @@ function navbarResponsive(){
 	}
 }
 
+function removeResponsive(){
+	if(($(".slideNavButton").length)!=0){
+		$(".slideNavButton").remove();
+		$(".navbar.responsive").removeClass("condensed");
+		$(".navbar.responsive ul").show();
+	}
+
+	/*if($(".navbar.responsive").hasClass("navbar-vertical")){
+	$(".navbar-vertical").removeClass("navbar-vertical-responsive");
+	$("body").remove(".slideNavButton");
+	$(".bodyContent").removeClass("bodyContent-responsive");
+	$(".navbar-vertical").fadeIn();
+	}*/
+}
+
+function slideMenu(button){
+	if($(".navbar.responsive").hasClass("navbar-vertical")){
+		$(".navbar.responsive").fadeToggle();
+		$(".slideNavButton").fadeToggle();
+		detectMouseNav();
+	}else{
+		$(".navbar.responsive ul").slideToggle();
+		if($(".slideNavButton i").hasClass("fa-rotate-90")){
+			$(".slideNavButton i").removeClass("fa-rotate-90");
+		}
+		else{
+			$(".slideNavButton i").addClass("fa-rotate-90");
+		}
+
+	}
+}
+
 function navbarResponsiveVertical(){
 	var ulWidth=$(".navbar-vertical ul").width();
 	var divWidth=$(".navbar-vertical").width();
@@ -159,7 +201,6 @@ function navbarResponsiveVertical(){
 	var parentWidth = $('body').offsetParent().width();
 	var percent = 100*divWidth/parentWidth;
 
-	console.log(divWidth+" - "+parentWidth +" - "+percent);
 	var maxWidth=$('.navbar-vertical').data("max-width");
 
 	if(percent>maxWidth){
@@ -212,32 +253,7 @@ function ScrollVerticalNav(){
 	}
 
 }
-function removeResponsive(){
-	if(($(".slideNavButton").length)!=0){
-		$(".slideNavButton").remove();
-		$(".navbar.responsive").removeClass("condensed");
-		$(".navbar.responsive ul").show();
-	}
 
-	if($(".navbar.responsive").hasClass("navbar-vertical")){
-		$(".navbar-vertical").removeClass("navbar-vertical-responsive");
-		$("body").remove(".slideNavButton");
-		$(".bodyContent").removeClass("bodyContent-responsive");
-		$(".navbar-vertical").fadeIn();
-	}
-}
-
-function slideMenu(button){
-	if($(".navbar.responsive").hasClass("navbar-vertical")){
-		$(".navbar.responsive").fadeToggle();
-		$(".slideNavButton").fadeToggle();
-		detectMouseNav();
-	}else{
-		$(".navbar.responsive ul").slideToggle();
-		$(".slideNavButton i").toggleClass("fa-bars fa-toggle-up");
-
-	}
-}
 
 function detectMouseNav(){
 	$(document).mouseup(function()

@@ -98,14 +98,9 @@ function resizeSlider(){
 	$('.slides').css({'left' : left_value});
 	
 	var imgHeight=$('.slides li img').css("height");
-	
-	
-	var ulHeight=$('.slides').css("height");
+	console.log(imgHeight);
+	//$('.slides').css("height", imgHeight);
 
-	console.log(imgHeight+" - "+ulHeight);
-	if(ulHeight>imgHeight){
-		ulHeight=$('.slider').css("height", imgHeight);
-	}
 }
 
 function rotate() {

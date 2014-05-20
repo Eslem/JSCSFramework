@@ -1,54 +1,211 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>SlemFramework by Eslem</title>
+	<head>
+		<meta http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Lang" content="en">
+		<meta name="author" content="">
+		<meta http-equiv="Reply-to" content="@.com">
+		<meta name="generator" content="PhpED 6.0">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="creation-date" content="06/01/2011">
+		<meta name="revisit-after" content="15 days">
+		<title>Css Elements</title>
+		<link rel="stylesheet" type="text/css" href="framework/framework.css">
+		<link rel="stylesheet" type="text/css" href="framework/prettify.css">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>SlemFramework</h1>
-        <p>Css &amp; Js responsive Framework</p>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="framework/framework.js"></script>
+		<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				windowResize();
+				responsive();
+				Tabs();
+				ScrollVerticalNav();
+				navbarResponsiveVertical();
+				escapeHtml();
+			});
 
-        <p class="view"><a href="https://github.com/Eslem/SlemFramework">View the Project on GitHub <small>Eslem/SlemFramework</small></a></p>
+			function escapeHtml(){
+				var html=$("pre code").html();
+				var html=html.replace(/^\t\t\t\t\t\t\t\t/mg, "");
+				var escaped=$("pre code").text(html).html();
+			}
+		</script>
 
+		<style type="text/css">
+			.demo .row .container{
+				background-color:#EBF3FA;
+				outline:1px solid #999;
+				padding:10px;
+			}
+		</style>
 
-        <ul>
-          <li><a href="https://github.com/Eslem/SlemFramework/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/Eslem/SlemFramework/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/Eslem/SlemFramework">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h1>
-<a name="slemframework" class="anchor" href="#slemframework"><span class="octicon octicon-link"></span></a>SlemFramework</h1>
+	</head>
+	<body>
+		<div class="row">
+			<div class="nav-col-1 navbar navbar-vertical responsive-vertical fixed inverse noBorderRadius" data-responsive=true data-max-width="20">
+				<div class="content ">
+					<ul class="center-text tabs">
+						<li ><a class="header primary" >Css Framework</a></li>
+						<li><hr class="primary"></li>
+						<li><a class="active" data-target="#grid">Grid</a></li>
+						<li><a class="" data-target="#colors">Colors</a></li>
+						<li><a data-target="#buttons">Buttons</a></li>
+						<li><a data-target="#divs">Divs</a></li>
+						<li><a data-target="#forms">Forms</a></li>
+						<li><a data-target="#images">Images</a></li>
+						<li><a data-target="#navs">Navs</a></li>
+						<li><a data-target="#breadcrumbs">BreadCrumbs</a></li>
+						<li><a data-target="#panel">Panel</a></li>
+						<li><a data-target="#tables">Tables</a></li>
+						<li><a data-target="#span">Helper Span</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-11 offset-1 bodyContent">
+				<div class="container">
+					<div class="tabs">
+						<div id="grid" class="active">
+							<h2 class="primary">Grid System</h2>
+							<hr class="primary">
 
-<p>Css &amp; Js responsive Framework</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/Eslem">Eslem</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-38477952-6");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
+							<div class="container demo">
+								<div class="row ">
+									<div class="col-12">
+										<div class="row">
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12">
+										<div class="row">
+											<div class="col-2 container">col-2</div>
+											<div class="col-2 container">col-2</div>
+											<div class="col-2 container">col-2</div>
+											<div class="col-2 container">col-2</div>
+											<div class="col-2 container">col-2</div>
+											<div class="col-2 container">col-2</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12">
+										<div class="row">
+											<div class="col-3 container">col-3</div>
+											<div class="col-3 container">col-3</div>
+											<div class="col-3 container">col-3</div>
+											<div class="col-3 container">col-3</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12">
+										<div class="row">
+											<div class="col-4 container">col-4</div>
+											<div class="col-4 container">col-4</div>
+											<div class="col-4 container">col-4</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12">
+										<div class="row">
+											<div class="col-6 container">col-6</div>
+											<div class="col-6 container">col-6</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12">
+										<div class="row">
+											<div class="col-12 container">col-12</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<button class="bt noStyle" onclick="toggleSlide(this)" data-target="#gridCode">Show Code <i class="fa fa-code"></i></button>
+							<pre class="prettyprint shadow hidden border border-info" id="gridCode"><code >
+									<div class="row">
+										<div class="col-3 module"><h3 class="primary">Module</h3></div>
+										<div class="col-3 shadow"><h3 class="primary">Shadow</h3></div>
+										<div class="col-3 center-text shadow"><h3 class="primary">Center Text</h3></div>
+										<div class="col-3 center-text primary shadow inline-block" id="fixed">
+											<h3>Color</h3> 
+											<button class="bt sm" onclick="fixDiv(this)">Add Class Fixed</button>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-2 container border"><h3 class="primary">Border</h3></div>
+										<div class="col-2 container border double border-info"><h3 class="primary">Border Double</h3></div>
+										<div class="col-2 container border dotted border-event"><h3 class="primary">Border Dotted Color</h3></div>
+										<div class="col-2 container border outset border-primary"><h3 class="primary">Border Outset</h3></div>
+										<div class="col-2 container border grove border-black"><h3 class="primary">Border Groove</h3></div>
+									</div>
+									<hr>
+									<div class="centerDiv center-text" id="centerDiv">Center Div (size: 50%)</div>
+									<h2>Gradients</h2>
+									<div class="row center-text">
+										<div class="col-3 border gradient"><h3 class="primary">Default</h3></div>
+										<div class="col-3 border gradient primary"><h3 class="white">Primary</h3></div>
+										<div class="col-3 border gradient black"><h3 class="white">Black</h3></div>
+										<div class="col-3 border gradient error"><h3 class="white">Error</h3></div>
+										<div class="col-3 border gradient success"><h3 class="white">Success</h3></div>
+										<div class="col-3 border gradient info"><h3 class="white">Info</h3></div>
+										<div class="col-3 border gradient event"><h3 class="white">Event</h3></div>
+									</div>
+								</code>
+							</pre>
+						</div>
+						<div id="colors" >
+							<h2 class="primary">Colors</h2>
+							<hr class="primary">
 
-  </body>
+						</div>
+						<div id="buttons" class="">
+							<h3 class="primary">Tab2</h3>
+						</div>
+						<div id="forms" class="">
+							<h3 class="primary">Tab2</h3>
+						</div>
+						<div id="images" class="">
+							<h3 class="primary">Tab2</h3>
+						</div>
+						<div id="navs" class="">
+							<h3 class="primary">Tab2</h3>
+						</div>
+						<div id="breadcrumbs" class="">
+							<h3 class="primary">Tab2</h3>
+						</div>
+						<div id="panel" class="">
+							<h3 class="primary">Tab2</h3>
+						</div>
+						<div id="tables" class="">
+							<h3 class="primary">Tab2</h3>
+						</div>
+						<div id="span" class="">
+							<h3 class="primary">Tab2</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>

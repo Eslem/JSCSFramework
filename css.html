@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Lang" content="en">
+		<meta name="author" content="">
+		<meta http-equiv="Reply-to" content="@.com">
+		<meta name="generator" content="PhpED 6.0">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="creation-date" content="06/01/2011">
+		<meta name="revisit-after" content="15 days">
+		<title>Framework Css View</title>
+		<link rel="stylesheet" type="text/css" href="framework/framework.css">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="framework/framework.js"></script>
+		<style>
+			[class*='col-'] .container{
+				background-color:#eee;
+				outline:1px solid #aaa;
+				padding:10px;
+			}
+
+			.transparentButton{
+				background-image: url('images/white.jpg'); 
+				height: 500px;
+				width: 500px;
+				background-size:   cover;                      /* <------ */
+				background-repeat: no-repeat;
+				background-position:center; 
+			}
+
+			.BlockButton{
+				width:60%;
+				height:auto;
+				border:1px solid #aaa;
+				padding:25px;
+				text-align: center;
+			}
+
+			#centerDiv{
+				width:50%;
+				border:1px solid #aaa;
+				padding:25px;
+			}
+
+			.navsExample {
+				padding:25px;
+			}
+			.row-menu{
+				position:relative;
+				height:100%;
+			}
+
+			.navbar-vertical{
+				position:relative;
+				height:100%;
+			}
+
+		</style>
+	</head>
+	<body>
+
+		<div class="container centerText">
+			<h2>Grid System</h2>
+			<div class="row ">
+				<div class="col-12">
+					<div class="row">
+						<div class="col-1 container">col-1</div>
+						<div class="col-1 container">col-1</div>
+						<div class="col-1 container">col-1</div>
+						<div class="col-1 container">col-1</div>
+						<div class="col-1 container">col-1</div>
+						<div class="col-1 container">col-1</div>
+						<div class="col-1 container">col-1</div>
+						<div class="col-1 container">col-1</div>
+						<div class="col-1 container">col-1</div>
+						<div class="col-1 container">col-1</div>
+						<div class="col-1 container">col-1</div>
+						<div class="col-1 container">col-1</div>
+					</div>
+				</div>
+			</div>
+			<div class="row ">
+				<div class="col-12">
+					<div class="row">
+						<div class="col-1 container offset-1">col-1</div>
+						<div class="col-1 container offset-1">col-1</div>
+						<div class="col-1 container offset-1">col-1</div>
+						<div class="col-1 container offset-1">col-1</div>
+						<div class="col-1 container offset-1">col-1</div>
+						<div class="col-1 container offset-1">col-1</div>
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-12">
+					<div class="row">
+						<div class="col-2 container">col-2</div>
+						<div class="col-2 container">col-2</div>
+						<div class="col-2 container">col-2</div>
+						<div class="col-2 container">col-2</div>
+						<div class="col-2 container">col-2</div>
+						<div class="col-2 container">col-2</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="row">
+						<div class="col-2 offset-2 container">col-2</div>
+						<div class="col-2 offset-2 container">col-2</div>
+						<div class="col-2 offset-2 container">col-2</div>
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-12">
+					<div class="row">
+						<div class="col-3 container">col-3</div>
+						<div class="col-3 container">col-3</div>
+						<div class="col-3 container">col-3</div>
+						<div class="col-3 container">col-3</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="row">
+						<div class="col-3 offset-3 container">col-3</div>
+						<div class="col-3 offset-3 container">col-3</div>
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-12">
+					<div class="row">
+						<div class="col-4 container">col-4</div>
+						<div class="col-4 container">col-4</div>
+						<div class="col-4 container">col-4</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="row">
+						<div class="col-4 offset-4 container">col-4</div>
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-12">
+					<div class="row">
+						<div class="col-6 container">col-6</div>
+						<div class="col-6 container">col-6</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="row">
+						<div class="col-6 offset-6 container">col-6</div>
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-12">
+					<div class="row">
+						<div class="col-12 container">col-12</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+
+		<div class="container">
+			<h2 class="primary">Divs</h2>
+			<div class="container">
+				<div class="row">
+					<div class="col-3 module"><h3 class="primary">Module</h3></div>
+					<div class="col-3 shadow"><h3 class="primary">Shadow</h3></div>
+					<div class="col-3 center-text shadow"><h3 class="primary">Center Text</h3></div>
+					<div class="col-3 center-text primary shadow inline-block" id="fixed"><h3>Color</h3> <button class="bt sm" onclick="fixDiv(this)">Add Class Fixed</button></div>
+				</div>
+				<div class="row">
+					<div class="col-2 container border"><h3 class="primary">Border</h3></div>
+					<div class="col-2 container border double border-info"><h3 class="primary">Border Double</h3></div>
+					<div class="col-2 container border dotted border-event"><h3 class="primary">Border Dotted Color</h3></div>
+					<div class="col-2 container border outset border-primary"><h3 class="primary">Border Outset</h3></div>
+					<div class="col-2 container border grove border-black"><h3 class="primary">Border Groove</h3></div>
+				</div>
+				<hr>
+				<div class="centerDiv center-text" id="centerDiv">Center Div (size: 50%)</div>
+				<h2>Gradients</h2>
+				<div class="row center-text">
+					<div class="col-3 border gradient"><h3 class="primary">Default</h3></div>
+					<div class="col-3 border gradient primary"><h3 class="white">Primary</h3></div>
+					<div class="col-3 border gradient black"><h3 class="white">Black</h3></div>
+					<div class="col-3 border gradient error"><h3 class="white">Error</h3></div>
+					<div class="col-3 border gradient success"><h3 class="white">Success</h3></div>
+					<div class="col-3 border gradient info"><h3 class="white">Info</h3></div>
+					<div class="col-3 border gradient event"><h3 class="white">Event</h3></div>
+				</div>
+			</div>
+
+			<h2 class="primary">Animated Border</h3>
+			<div class="container">
+				<div class="border-animated ">
+					<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+						<line class="top" x1="0" y1="0" x2="900" y2="0"/>
+						<line class="left" x1="0" y1="460" x2="0" y2="-920"/>
+						<line class="bottom" x1="300" y1="460" x2="-600" y2="460"/>
+						<line class="right" x1="300" y1="0" x2="300" y2="1380"/>
+					</svg>
+					<h3>Div</h3>
+				</div>
+				<div class="black" style="padding:50px;display: inline-block;">
+					<div class="border-animated border-animated-inverse">
+						<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+							<line class="top" x1="0" y1="0" x2="900" y2="0"/>
+							<line class="left" x1="0" y1="460" x2="0" y2="-920"/>
+							<line class="bottom" x1="300" y1="460" x2="-600" y2="460"/>
+							<line class="right" x1="300" y1="0" x2="300" y2="1380"/>
+						</svg>
+						<h3>Div</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="container">
+			<h1>Headers</h1>	
+			<div class="module centerDiv">
+				<h1>Header h1 <small class="muted">Secondary</small></h1>
+				<h2>Header h2 <small>Secondary</small></h2>
+				<h3>Header h3 <small>Secondary</small></h3>
+				<h4>Header h4 <small>Secondary</small></h4>
+				<h5>Header h5 <small>Secondary</small></h5>
+				<h6>Header h6 <small>Secondary</small></h6>
+				<div class="header">
+					<h1>Page Header <small>page</small></h2>
+				</div>
+			</div>	
+
+		</div>
+		<hr>
+
+		<div class="container">
+			<h1>Blockquote, text align</h1>	
+			<div class="centerDiv">
+				<blockquote>
+					<p class="left-text"><strong>Left</strong> ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ac eleifend orci. In at interdum tellus, vel porta risus. Duis rutrum pharetra mauris, quis bibendum tortor pretium vitae. Aliquam imperdiet vehicula justo, eu hendrerit libero eleifend eleifend. Pellentesque porttitor id odio fermentum lobortis. Nunc in eleifend turpis. Aenean sit amet turpis ac dolor consequat consectetur. Vivamus a pretium velit. Donec placerat lacus nec ipsum mattis, ut pharetra enim suscipit. Donec cursus augue sed ligula pharetra, commodo iaculis odio congue. Nullam sem turpis, venenatis eu nulla in, blandit ultrices velit. Nam in lobortis sapien. Aenean ac tortor placerat, bibendum justo vitae, rhoncus magna. Sed sit amet ultrices leo, et tempus massa.</p>
+					<hr>
+
+					<p class="center-text"><strong>Center</strong>  non posuere augue, vel luctus mi. Aenean ac massa pellentesque erat cursus feugiat. Donec ac elit sem. Proin eu consequat ipsum. Aenean odio metus, ullamcorper dapibus velit vitae, accumsan rutrum eros. Donec tincidunt ut ipsum vel pellentesque. Suspendisse laoreet vehicula convallis. Phasellus pulvinar elit sit amet arcu porta viverra. Sed rhoncus, eros eu dictum ultricies, urna justo semper ligula, eu sagittis sapien magna vel quam.</p>
+					<hr>
+					<p class="right-text"><strong>Right</strong>  nonVestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum viverra erat vitae ante dapibus vestibulum. In bibendum diam non lorem porttitor, at sollicitudin enim mollis. Cras cursus lorem urna, ac blandit enim lacinia cursus. Sed a enim a risus lacinia luctus. Nam est nisl, tincidunt iaculis congue molestie, gravida at quam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi mollis diam ligula. Suspendisse tincidunt, arcu quis pretium eleifend, elit ante suscipit mi, non laoreet urna urna ut elit. Nullam mi lorem, consequat eget consequat at, vulputate quis ipsum.</p>
+					<hr>
+					<p class="justify-text"><strong>Justify</strong>  nonNulla id ligula eget sapien placerat consectetur. Donec ut tortor lacus. Aenean laoreet nulla est, a faucibus quam faucibus ac. Vivamus eu odio at leo ultrices aliquet. Donec odio tortor, cursus ac lorem in, auctor ullamcorper neque. Aenean id urna vel lectus aliquet tincidunt eu sit amet justo. Aliquam sit amet dui ac magna lobortis condimentum. Cras sit amet mi sit amet tellus porttitor rhoncus. Proin egestas porta sodales. Nulla pharetra tellus vel ante bibendum vehicula. Ut non magna eu dui sagittis rutrum nec non purus. Sed eu ullamcorper justo, ut adipiscing lacus. Mauris purus eros, blandit a ipsum non, sagittis interdum lectus. Nullam rhoncus aliquam lectus. Cras tempor ultrices magna, sed dapibus arcu l<kbd>cd</kbd>obortis non. Proin sit amet mauris ut metus mollis fringilla id ut nulla. </p></blockquote>
+			</div>		
+		</div>
+		<hr>
+
+		<div class="container">
+			<h1>Buttons</h1>	
+			<div class="module centerDiv">
+				<h2>Colors</h2>
+				<button class="bt ">Default</button>
+				<button class="bt primary">Primary</button>
+				<button class="bt black">Black</button>
+				<button class="bt error">Error</button>
+				<button class="bt info">Info</button>
+				<button class="bt success">Success</button>
+				<button class="bt event">Event</button>
+				<button class="bt noStyle">No Style</button>
+				<button class="bt primary noBorder">No Border</button>
+				<button class="bt primary rounded" style="height:75px; width:75px">Rounded</button>
+				<div style="background-color:#fff; padding:20px; display: inline-block;">
+					<button class="bt event shadow">Shadow</button>
+				</div>
+				<h2>Gradients</h2>
+				<button class="bt gradient ">Default</button>
+				<button class="bt primary gradient ">Primary</button>
+				<button class="bt black gradient ">Black</button>
+				<button class="bt error gradient ">Error</button>
+				<button class="bt info gradient ">Info</button>
+				<button class="bt success gradient ">Success</button>
+				<button class="bt event gradient ">Event</button>
+				<h2 class="success">Transparent</h2>
+				<div class="container transparentButton noCenter">
+					<button class="bt primary" onclick="invertTransparentBack()">Inverse <i class="fa fa-adjust"></i></button>
+					<button class="bt transparent">Transparent</button>
+					<button class="bt transparent inverse">Transparent Inverse</button>
+				</div>
+				<h2 class="success">Sizes</h2>
+				<button class="bt primary xs">Text - Extra Small</button>
+				<button class="bt primary sm">Text - Small</button>
+				<button class="bt primary ">Text - Defauls</button>
+				<button class="bt primary lg">Text - Large</button>
+				<button class="bt primary xl">Text - Extra Large</button>
+				<br>
+				<div class="BlockButton">
+					<button class="bt primary block">Block Button</button>
+				</div>
+
+				<h2 class="success">States</h2>
+				<button class="bt primary">Default</button>
+				<button class="bt active">Active</button>
+				<button class="bt event disabled">Disabled</button>
+				<button class="bt primary" disabled="disabled">Disabled [Attr]</button>
+			</div>		
+		</div>
+		<hr>
+
+		<div class="container module">
+			<h2 class="primary">Helper Span</h2>
+			<div class="container ">
+				<ul class="nav nav-pills nav-list">
+					<li class="active"><a href="#">Option <span class="helper event noBorder"><i class="fa fa-minus"></i></span></a></li>
+					<li><a href="#">Mails <span class="helper rounded">10</span></a></li>
+					<li><a href="#">Option <span class="helper primary"><i class="fa fa-plus"></i></span></a></li>
+				</ul>
+			</div>
+		</div>
+
+		<hr>
+		<div class="container border">
+			<h2 class="primary">Navs</h2>
+			<div class="border container padding" >
+				<ul class="nav nav-tab">
+					<li class="active"><a href="#">Option</a></li>
+					<li><a href="#">Option</a></li>
+					<li><a href="#">Option</a></li>
+				</ul>
+			</div>
+			<div class="border container padding" >
+				<ul class="nav nav-pills">
+					<li class="active"><a href="#">Option</a></li>
+					<li><a href="#">Option</a></li>
+					<li><a href="#">Option</a></li>
+				</ul>
+			</div>
+			<div class="border container padding" >
+				<ul class="nav nav-list" style="max-width: 300px;">
+					<li class="active"><a href="#">Option</a></li>
+					<li><a href="#">Option</a></li>
+					<li><a href="#">Option</a></li>
+				</ul>
+			</div>
+			<div class="border container padding" >
+				<ul class="nav nav-tab nav-full">
+					<li class="active"><a href="#">Option</a></li>
+					<li><a href="#">Option</a></li>
+					<li><a href="#">Option</a></li>
+				</ul>
+			</div>
+			<div class="border container padding" >
+				<ul class="nav nav-pills nav-full primary">
+					<li class="active"><a href="#">Option</a></li>
+					<li><a href="#">Option</a></li>
+					<li><a href="#">Option</a></li>
+				</ul>
+			</div>
+		</div>
+		<hr>
+
+		<div class="container">
+			<h2 class="primary">Breadcrumbs</h2>
+			<div class="crumbs">
+				<ul>
+					<li><a href="#">BreadCrumb</a></li>
+					<li><a href="#">BreadCrumb</a></li>
+					<li><a href="#">BreadCrumb</a></li>
+					<li><a href="#">BreadCrumb</a></li>
+					<li><a href="#" class="active">BreadCrumb</a></li>
+				</ul>
+			</div>
+			<div class="crumbs inverse">
+				<ul>
+					<li><a href="#">BreadCrumb</a></li>
+					<li><a href="#">BreadCrumb</a></li>
+					<li><a href="#">BreadCrumb</a></li>
+					<li><a href="#">BreadCrumb</a></li>
+					<li><a href="#" class="active">BreadCrumb</a></li>
+				</ul>
+			</div>
+			<div class="crumbs inverse sm">
+				<ul>
+					<li><a href="#">BreadCrumb</a></li>
+					<li><a href="#">BreadCrumb</a></li>
+					<li><a href="#">BreadCrumb</a></li>
+					<li><a href="#">BreadCrumb</a></li>
+					<li><a href="#" class="active">BreadCrumb</a></li>
+				</ul>
+			</div>
+			<div class="simple-crumbs sm">
+				<ul>
+					<li><a href="#">BreadCrumb</a></li>
+					<li><a href="#">BreadCrumb</a></li>
+					<li><a href="#">BreadCrumb</a></li>
+					<li><a href="#">BreadCrumb</a></li>
+					<li><a href="#" class="active">BreadCrumb</a></li>
+				</ul>
+			</div>
+		</div>
+		<hr>
+
+		<div class="container">
+			<h2 class="primary">Pagination</h2>
+			<div class="pagination">
+				<ul>
+					<li><a href="#">&laquo;</a></li>
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#" class="active">3</a></li>
+					<li><a href="#" class="">&raquo;</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<hr>
+
+		<div class="container border">
+			<h2 class="primary">NavBar</h2>
+			<div class="border " id="navs">
+				<div class="navbar responsive">
+					<div class="container">
+						<div class="content">
+							<ul>
+								<li><a href="#home" class="header">Home</a></li>
+								<li><a href="#news">News</a></li>
+								<li><a href="#contact">Contact</a></li>
+								<li><a href="#about" class="active">About</a></li>
+							</ul>
+							<ul class="right">
+								<li><a href="#home" class="header">Home</a></li>
+
+							</ul>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="navbar responsive inverse">
+					<div class="container">
+						<ul>
+							<li class="header"><a href="#home">Home</a></li>
+							<li><a href="#news">News</a></li>
+							<li><a href="#contact">Contact</a></li>
+							<li><a href="#about" class="active">About</a></li>
+						</ul>
+						<form class="right">
+							<button class="bt primary noBorder">ok</button>
+						</form>
+					</div>
+				</div>
+				<hr>
+				<div class="navbar responsive center">
+					<ul >
+						<li class="header"><a href="#home">Home</a></li>
+						<li><a href="#news">News</a></li>
+						<li><a href="#contact">Contact</a></li>
+						<li><a href="#about" class="active">About</a></li>
+					</ul>
+				</div>
+				<hr>
+				<div class="navbar responsive inverse">
+					<div class="container">
+						<ul class="right">
+							<li class="header"><a href="#home">Home</a></li>
+							<li><a href="#news">News</a></li>
+							<li><a href="#contact">Contact</a></li>
+							<li><a href="#about" class="active">About</a></li>
+						</ul>
+					</div>
+				</div>
+				<hr>
+				<div class="navbar responsive expand">
+					<ul class="">
+						<li class="header col-3"><a href="#home">Home</a></li>
+						<li class="col-3"><a href="#news">News</a></li>
+						<li class="col-3"><a href="#contact">Contact</a></li>
+						<li class="col-3"><a href="#about" class="active">About</a></li>
+					</ul>
+				</div>
+				<hr>
+
+				<div class="navbar responsive inverse text-primary" id="fixMenu">
+					<div class="container">
+						<ul class="">
+							<li class="header"><a href="#home">Home</a></li>
+							<li class=""><a href="#news">News</a></li>
+							<li class=""><a href="#contact">Contact</a></li>
+							<li class=""><a href="#about" class="active">About</a></li>
+						</ul>
+						<form class="right">
+							<button class="bt transparent" onclick="fixMenu(this)">Fix</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<div style="background-image: url('images/white.jpg'); background-size:   cover; background-repeat: no-repeat;	background-position:center;height:250px;">
+				<div class="navbar transparent text-event" id="fixMenu">
+					<div class="container">
+						<ul class="">
+							<li class="header"><a href="#home">Transparent</a></li>
+							<li class=""><a href="#news">News</a></li>
+							<li class=""><a href="#contact">Contact</a></li>
+							<li class=""><a href="#about" class="active">About</a></li>
+						</ul>
+						<form class="right">
+							<button class="bt transparent" onclick="fixMenu(this)">Fix</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<div style="background-image: url('images/skyrim.jpg');background-size:   cover; background-repeat: no-repeat;	background-position:center;  height:250px; ">
+				<div class="navbar inverse transparent " >
+					<div class="container">
+						<ul class="">
+							<li class="header"><a href="#home">Transparent</a></li>
+							<li class=""><a href="#news">News</a></li>
+							<li class=""><a href="#contact">Contact</a></li>
+							<li class=""><a href="#about" class="active">About</a></li>
+						</ul>
+						<form class="right">
+							<button class="bt transparent" onclick="fixMenu(this)">Fix</button>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<h2 class="primary">Vertical Navs</h2>
+			<div  style="height:500px; margin: 0px; padding: 0px; outline: 1px solid #aaa;">
+				<div class="row row-menu">
+					<div class="navbar inverse navbar-vertical arrow noBorderRadius col-1 text-primary noBorder">
+						<div class="content">
+							<ul>
+								<li><a href="#home" class="header">Home</a></li>
+								<li><a href="#news">News</a></li>
+								<li><a href="#contact">Contact</a></li>
+								<li><a href="#about" class="active">About</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="container module">
+			<h2 class="event">Forms</h2>
+			<div class="container">
+				<form class="form primary">
+					<label class="label">Name</label>
+					<input type="text" placeholder="name">
+					<label class="label">Email</label>
+					<input class="inverse" type="text" placeholder="email">
+					<select>
+						<option>Select 1</option>
+						<option>Select 2</option>
+						<option>Select 3</option>
+					</select>
+					<textarea cols="50" rows="5"></textarea>
+				</form>
+				<hr class="event">
+
+				<form class="form inline">
+					<div class="form-group inline">
+						<label class="label primary">Name</label>
+						<input class="primary" type="text" placeholder="name">
+					</div>
+					<div class="form-group inline">
+						<label class="label">Email</label>
+						<input class="event" type="text" placeholder="email">
+					</div>
+					<div class="form-group inline">
+						<label class="label">Select</label>
+						<select>
+							<option>Select 1</option>
+							<option>Select 2</option>
+							<option>Select 3</option>
+						</select>
+					</div>
+				</form>
+
+				<form class="form inline">
+					<input class="black" type="text" placeholder="name">
+					<input class="success xl" type="password" placeholder="pass">
+					<input class="info" type="text" placeholder="tel">
+					<input class="error border-error" type="text" placeholder="Border">
+
+					<input type="checkbox" name="check">
+					<button class="bt">Sign in</button>
+				</form>
+				<hr class="error">
+				<div class="inverse container border borderRadius shadow" style="padding:15px;">
+					<form class="form inverse ">
+						<label class="label">Name</label>
+						<input type="text" placeholder="name">
+						<label class="label xl">Email</label>
+						<input class="event xs" type="text" placeholder="email">
+					</form>
+				</div>
+
+				<hr class="black">
+				<h2 class="primary">States</h2>
+				<div class="container">
+					<form class="form inline border-event event">
+						<input type="text" placeholder="Disabled" disabled="">
+						<input class="event focus" type="text" placeholder="focus">
+					</form>
+				</div>
+				<h2 class="primary">Addon</h2>
+				<div class="container">
+					<form class="form inline">
+						<div class="left-inner-addon">
+							<input class="event" type="text" placeholder="login " >
+							<i class="fa fa-user event"></i>
+						</div>
+						<div class="right-inner-addon">
+							<input type="text" placeholder="search" >
+							<i class="fa fa-search"></i>
+						</div>
+					</form>
+				</div>
+				<h2 class="primary">Transition Width</h2>
+				<div class="container">
+					<form class="form transition inline">
+						<input class="event transition" type="text" placeholder="login " >
+						<input type="text" placeholder="search" >
+					</form>
+				</div>
+				<div class="container">
+					<form class="form transition">
+						<input class="event transition" type="text" placeholder="login " >
+						<input type="text" placeholder="search" >
+					</form>
+				</div>
+				<hr class="primary">
+				<h2 class="primary">Horizontal Form</h2>
+				<div class="container border">
+					<form class="form form-horizontal">
+						<div class="form-group ">
+							<label class="col-2">Your Name :</label>
+							<input class="col-10" id="name" type="text" name="name" placeholder="Your Full Name" />
+						</div>
+
+						<div class="form-group">
+							<label class="col-2">Your Email :</label>
+							<input class="col-10" id="email" type="email" name="email" placeholder="Valid Email Address" />
+						</div>
+
+						<div class="form-group">
+							<label class="col-2">Message :</label>
+							<textarea class="col-10" id="message" name="message" placeholder="Your Message to Us"></textarea>
+						</div>
+						<div class="form-group">
+							<label class="col-2">Subject :</label>
+							<select name="selection" class="col-10">
+								<option value="Job Inquiry">Job Inquiry</option>
+								<option value="General Question">General Question</option>
+							</select>
+						</div>    
+						<div class="form-group">
+							<input type="button" class="bt primary" value="Send" />
+						</div>    
+					</form>
+				</div>
+				<hr class="primary">
+				<h2 class="primary">Radio</h2>
+				<div class="container border">
+					<form class="form inline">
+						<div class="customRadio">
+							<input type="radio" id="radio1" name="radios" value="all" checked>
+							<label for="radio1"></label>
+							<input type="radio" id="radio2" name="radios" value="false">
+							<label for="radio2"></label>
+							<input type="radio" id="radio3" name="radios" value="true">
+							<label for="radio3"></label> 
+						</div>
+
+					</form>
+					<form class="form form-horizontal">
+						<div class="form-group ">
+							<label class="col-1">Radio Color:</label>
+							<div class="customRadio radioVertical col-2 radio-info">
+								<div class="radio">
+									<input type="radio" id="rad1" name="radio" value="all" checked>
+									<label for="rad1"></label>
+									<label>Opt 1</label>
+								</div>
+								<div class="radio">
+									<input type="radio" id="rad2" name="radio" value="false">
+									<label for="rad2"></label>
+									<label>Opt 1</label>
+								</div>
+								<div class="radio">
+									<input type="radio" id="rad3" name="radio" value="true">
+									<label for="rad3"></label> 
+									<label>Opt 1</label>
+								</div>
+							</div>
+							<label class="col-1">Radio Color:</label>
+							<div class="customRadio radioVertical col-2 radio-event">
+								<div class="radio">
+									<input type="radio" id="rd1" name="rdio" value="all" checked>
+									<label for="rd1"></label>
+									<label>Opt 1</label>
+								</div>
+								<div class="radio">
+									<input type="radio" id="rd2" name="rdio" value="false">
+									<label for="rd2"></label>
+									<label>Opt 1</label>
+								</div>
+								<div class="radio">
+									<input type="radio" id="rd3" name="rdio" value="true">
+									<label for="rd3"></label> 
+									<label>Opt 1</label>
+								</div>
+							</div>
+							<label class="col-1">Radio Color:</label>
+							<div class="customRadio radioVertical col-2 radio-event">
+								<div class="radio">
+									<input type="radio" id="radi1" name="rad" value="all" checked>
+									<label for="radi1"></label>
+									<label>Opt 1</label>
+								</div>
+								<div class="radio">
+									<input type="radio" id="radi2" name="rad" value="false">
+									<label for="radi2"></label>
+									<label>Opt 1</label>
+								</div>
+								<div class="radio">
+									<input type="radio" id="radi3" name="rad" value="true">
+									<label for="radi3"></label> 
+									<label>Opt 1</label>
+								</div>
+							</div>
+							<label class="col-1">Radio Inverse:</label>
+							<div class="customRadio radioVertical col-2 radio-inverse" style="background-color: #222;">
+								<div class="radio">
+									<input type="radio" id="radios1" name="rad" value="all" checked>
+									<label for="radios1"></label>
+									<label>Opt 1</label>
+								</div>
+								<div class="radio">
+									<input type="radio" id="radios2" name="rad" value="false">
+									<label for="radios"></label>
+									<label>Opt 1</label>
+								</div>
+								<div class="radio">
+									<input type="radio" id="radios3" name="rad" value="true">
+									<label for="radios3"></label> 
+									<label>Opt 1</label>
+								</div>
+							</div>
+						</div>
+
+
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<h2 class="event">Panel</h2>
+			<div class="container">
+				<div class="panel">
+					<div class="panel-body">
+						Default Panel
+					</div>
+				</div>
+				<hr>
+				<div class="panel">
+					<div class="panel-header">Header</div>
+					<div class="panel-body">
+						Panel content
+					</div>
+				</div>
+				<hr>
+				<div class="panel info">
+					<div class="panel-header ">Panel Color</div>
+					<div class="panel-body">
+						Panel content
+					</div>
+				</div>
+				<hr>
+				<div class="panel event">
+					<div class="panel-header ">Panel Color</div>
+					<div class="panel-body">
+						Panel content
+					</div>
+				</div>
+				<hr>
+				<div class="panel black">
+					<div class="panel-header ">Panel Color</div>
+					<div class="panel-body">
+						Panel content
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<hr><!-- Table -->
+		<div class="container ">
+			<h2 class="event">Tables</h2>
+
+			<h4 class="primary">Normal</h4>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Username</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>Mark</td>
+						<td>Otto</td>
+						<td>@mdo</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Jacob</td>
+						<td>Thornton</td>
+						<td>@fat</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Larry</td>
+						<td>the Bird</td>
+						<td>@twitter</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h4 class="primary">Bordered</h4>
+			<table class="table bordered">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Username</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>Mark</td>
+						<td>Otto</td>
+						<td>@mdo</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Jacob</td>
+						<td>Thornton</td>
+						<td>@fat</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Larry</td>
+						<td>the Bird</td>
+						<td>@twitter</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h4 class="primary">Hover</h4>
+			<table class="table hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Username</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>Mark</td>
+						<td>Otto</td>
+						<td>@mdo</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Jacob</td>
+						<td>Thornton</td>
+						<td>@fat</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Larry</td>
+						<td>the Bird</td>
+						<td>@twitter</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h4 class="primary">Hover td</h4>
+			<table class="table hover-td">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Username</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>Mark</td>
+						<td>Otto</td>
+						<td>@mdo</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Jacob</td>
+						<td>Thornton</td>
+						<td>@fat</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Larry</td>
+						<td>the Bird</td>
+						<td>@twitter</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h4 class="primary">Striped</h4>
+			<table class="table striped">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Username</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>Mark</td>
+						<td>Otto</td>
+						<td>@mdo</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Jacob</td>
+						<td>Thornton</td>
+						<td>@fat</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Larry</td>
+						<td>the Bird</td>
+						<td>@twitter</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h4 class="primary">Striped Color</h4>
+			<table class="table striped-event">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Username</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>Mark</td>
+						<td>Otto</td>
+						<td>@mdo</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Jacob</td>
+						<td>Thornton</td>
+						<td>@fat</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Larry</td>
+						<td>the Bird</td>
+						<td>@twitter</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h4 class="primary">Inverse, Condensed</h4>
+			<table class="table inverse hover condensed">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Username</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>Mark</td>
+						<td>Otto</td>
+						<td>@mdo</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Jacob</td>
+						<td>Thornton</td>
+						<td>@fat</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Larry</td>
+						<td>the Bird</td>
+						<td>@twitter</td>
+					</tr>
+				</tbody>
+			</table>
+			<h4 class="primary">Color</h4>
+			<table class="table table-info hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Username</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>Mark</td>
+						<td>Otto</td>
+						<td>@mdo</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Jacob</td>
+						<td>Thornton</td>
+						<td>@fat</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Larry</td>
+						<td>the Bird</td>
+						<td>@twitter</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="table-responsive">
+				<table class="table striped">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Table heading</th>
+							<th>Table heading</th>
+							<th>Table heading</th>
+							<th>Table heading</th>
+							<th>Table heading</th>
+							<th>Table heading</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>3</td>
+							<td>Table cell</td>
+							<td>Table cell</td>
+							<td>Table cell</td>
+							<td>Table cell</td>
+							<td>Table cell</td>
+							<td>Table cell</td>
+						</tr><tr>
+							<td>3</td>
+							<td>Table cell</td>
+							<td>Table cell</td>
+							<td>Table cell</td>
+							<td>Table cell</td>
+							<td>Table cell</td>
+							<td>Table cell</td>
+						</tr><tr>
+							<td>3</td>
+							<td>Table cell</td>
+							<td>Table cell</td>
+							<td>Table cell</td>
+							<td>Table cell</td>
+							<td>Table cell</td>
+							<td>Table cell</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<hr>
+		<div class="container module">
+			<h3 class="primary">Images</h3>
+
+			<img class="rounded" src="images/skyrim.jpg" height="150px" width="150px">
+			<img class="circle hover border border-double border-grove" src="images/skyrim.jpg" height="150px" width="150px">
+			<img class="thumbnail hover" src="images/skyrim.jpg" height="150px" width="150px">
+			<img class="rounded border border-outset border-event" src="images/skyrim.jpg" height="150px" width="150px">
+			<a class="thumbnail">
+				<img class="thumbnail" src="images/skyrim.jpg" height="150px" width="150px">
+			</a>
+			<hr class="primary">
+			<h3 class="primary">Image Caption</h3>
+			<div class="container">
+				<div class="row">
+					<div class="col-4 padding">
+						<div class="imgWrap ">
+							<img class="rounded fit" src="images/white.jpg" >
+							<div class="description full">
+								<p>Sometext</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-4 padding">
+						<div class="imgWrap imgWrap-inverse">
+							<img class="rounded fit" src="images/skyrim.jpg" >
+							<div class="description ">
+								<p>Sometext</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-4 padding">
+						<div class="imgWrap imgWrap-top imgWrap-inverse">
+							<img class="rounded fit" src="images/eye.jpg" >
+							<div class="description ">
+								<p>Sometext</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<xmp>
+				<div class="imgWrap ">
+					<img class="rounded fit" src="images/white.jpg" >
+					<div class="description full">
+						<p>Sometext</p>
+					</div>
+				</div>
+			</xmp>
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script type="text/javascript">
+			var white=true;
+			var fixed=false;
+			var fixedM=false;
+
+			var count=0;
+			$(document).ready(function(){
+				slider();
+
+			});
+
+			function slider(item){
+				var click=true;
+
+				var speed = $('.slider').data("time")*1000;
+				var run = setInterval('rotate()', speed);	
+
+				var count=$('#slides').children().length;
+				$('#slides').css({'width' : count*100+"%"});
+				$('#slides li').css({'width' : 100/count+"%"});
+
+				var item_width = $('#slides li').outerWidth(); 
+				var left_value = item_width * (-1); 
+
+				$('#slides li:first').before($('#slides li:last'));
+
+				$('#slides').css({'left' : left_value});
+
+				$('#slides').css({'visibility' : "visible"});
+
+
+				$('#prev').click(function() {
+					var left_indent = parseInt($('#slides').css('left')) + item_width;
+					if(click){
+						click=false;
+						$('#slides').animate({'left' : left_indent}, 600, function () {
+							$('#slides li').css("visibility", "hidden");
+							$('#slides li:first').before($('#slides li:last'));     
+							$('#slides').css({'left' : left_value});
+							$('#slides li').css("visibility", "visible");
+							click=true;
+						});
+					}
+					return false;
+				});  
+
+
+				$('#next').click(function() {
+					var left_indent = parseInt($('#slides').css('left')) - item_width;
+					if(click){
+						click=false;
+						$('#slides').animate({'left' : left_indent}, 600, function () {
+							$('#slides li').css("visibility", "hidden");
+							$('#slides li:last').after($('#slides li:first'));     
+							$('#slides').css({'left' : left_value});
+							$('#slides li').css("visibility", "visible");
+							click=true;
+						});
+					}
+					return false;
+				});    
+
+				$('.slider').hover(
+					function() {
+						clearInterval(run);
+					}, 
+					function() {
+						run = setInterval('rotate()', speed);	
+					}
+				); 
+
+			}
+
+			function rotate() {
+				$('#next').click();
+			}
+
+
+			function invertTransparentBack(){
+				if(white){
+					$(".transparentButton").css("background-image", "url('images/skyrim.jpg')");
+					white=false;
+				}
+
+				else{
+					$(".transparentButton").css("background-image", "url('images/white.jpg')");
+					white=true;
+				}
+			}
+			function fixDiv(button){
+				if(!fixed){
+					$("#fixed").addClass("fixed");
+					$(button).addClass("active");
+					$(button).text("remove Class Fixed");
+					fixed=true;
+				}
+
+				else{
+					$("#fixed").removeClass("fixed");
+					$(button).removeClass("active");
+					$(button).text("add Class Fixed");
+
+					fixed=false;
+				}
+			}
+			function fixMenu(button){
+				if(!fixedM){
+					$("#fixMenu").addClass("fixed");
+					$(button).addClass("active");
+					$(button).text("remove Class Fixed");
+					fixedM=true;
+				}
+
+				else{
+					$("#fixMenu").removeClass("fixed");
+					$(button).removeClass("active");
+					$(button).text("add Class Fixed");
+
+					fixedM=false;
+				}
+			}
+		</script>
+	</body>
+</html>

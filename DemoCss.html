@@ -15,11 +15,12 @@
 		<meta name="revisit-after" content="15 days">
 		<title>Css Elements</title>
 		<link rel="stylesheet" type="text/css" href="framework/framework.css">
-		<link rel="stylesheet" type="text/css" href="framework/prettify.css">
+		<link rel="stylesheet" type="text/css" href="../framework/framework.css">
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script src="../framework/framework.js"></script>
+		<script src="framework/framework.js"></script>
 		<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
@@ -43,7 +44,7 @@
 				background-color:#EBF3FA;
 				outline:1px solid #999;
 				padding:10px;
-		}
+			}
 		</style>
 
 	</head>
@@ -74,7 +75,7 @@
 						<div id="grid" class="active">
 							<h2 class="primary">Grid System</h2>
 							<hr class="primary">
-
+							<h3>Responsive Grid</h3>
 							<div class="container demo">
 								<div class="row ">
 									<div class="col-12">
@@ -141,71 +142,215 @@
 									</div>
 								</div>
 							</div>
-							<button class="bt noStyle" onclick="toggleSlide(this)" data-target="#gridCode">Show Code <i class="fa fa-code"></i></button>
-							<pre class="prettyprint shadow hidden border border-info" id="gridCode"><code >
-									<div class="row">
-										<div class="col-3 module"><h3 class="primary">Module</h3></div>
-										<div class="col-3 shadow"><h3 class="primary">Shadow</h3></div>
-										<div class="col-3 center-text shadow"><h3 class="primary">Center Text</h3></div>
-										<div class="col-3 center-text primary shadow inline-block" id="fixed">
-											<h3>Color</h3> 
-											<button class="bt sm" onclick="fixDiv(this)">Add Class Fixed</button>
+							<div class="codeDiv">
+								<button class="bt noStyle" onclick="toggleSlide(this)" data-target="#gridCode">Show Code <i class="fa fa-code"></i></button>
+								<pre class="prettyprint shadow hidden border border-info" id="gridCode"><code >
+								<div class="row ">
+									<div class="col-12">
+										<div class="row">
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
+											<div class="col-1 container">col-1</div>
 										</div>
 									</div>
-									<div class="row">
-										<div class="col-2 container border"><h3 class="primary">Border</h3></div>
-										<div class="col-2 container border double border-info"><h3 class="primary">Border Double</h3></div>
-										<div class="col-2 container border dotted border-event"><h3 class="primary">Border Dotted Color</h3></div>
-										<div class="col-2 container border outset border-primary"><h3 class="primary">Border Outset</h3></div>
-										<div class="col-2 container border grove border-black"><h3 class="primary">Border Groove</h3></div>
+								</div>
+							</div>
+							<div class="container demo">
+								<div class="row">
+									<div class="col-12">
+										<div class="row">
+											<div class="col-2 container">col-2</div>
+											<div class="col-2 container">col-2</div>
+											<div class="col-2 container">col-2</div>
+											<div class="col-2 container">col-2</div>
+											<div class="col-2 container">col-2</div>
+											<div class="col-2 container">col-2</div>
+										</div>
 									</div>
-									<hr>
-									<div class="centerDiv center-text" id="centerDiv">Center Div (size: 50%)</div>
-									<h2>Gradients</h2>
-									<div class="row center-text">
-										<div class="col-3 border gradient"><h3 class="primary">Default</h3></div>
-										<div class="col-3 border gradient primary"><h3 class="white">Primary</h3></div>
-										<div class="col-3 border gradient black"><h3 class="white">Black</h3></div>
-										<div class="col-3 border gradient error"><h3 class="white">Error</h3></div>
-										<div class="col-3 border gradient success"><h3 class="white">Success</h3></div>
-										<div class="col-3 border gradient info"><h3 class="white">Info</h3></div>
-										<div class="col-3 border gradient event"><h3 class="white">Event</h3></div>
+								</div>
+								<div class="row">
+									<div class="col-12">
+										<div class="row">
+											<div class="col-3 container">col-3</div>
+											<div class="col-3 container">col-3</div>
+											<div class="col-3 container">col-3</div>
+											<div class="col-3 container">col-3</div>
+										</div>
 									</div>
+								</div>
+								<div class="row">
+									<div class="col-12">
+										<div class="row">
+											<div class="col-4 container">col-4</div>
+											<div class="col-4 container">col-4</div>
+											<div class="col-4 container">col-4</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12">
+										<div class="row">
+											<div class="col-6 container">col-6</div>
+											<div class="col-6 container">col-6</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12">
+										<div class="row">
+											<div class="col-12 container">col-12</div>
+										</div>
+									</div>
+								</div>
 								</code>
-							</pre>
-						</div>
-						<div id="colors" >
-							<h2 class="primary">Colors</h2>
-							<hr class="primary">
+								</pre>
+							</div>
+							<h3>Offset Grid</h3>
+							<div class="container demo">
+								<div class="row ">
+									<div class="col-12">
+										<div class="row">
+											<div class="col-1 container offset-1">col-1</div>
+											<div class="col-1 container offset-1">col-1</div>
+											<div class="col-1 container offset-1">col-1</div>
+											<div class="col-1 container offset-1">col-1</div>
+											<div class="col-1 container offset-1">col-1</div>
+											<div class="col-1 container offset-1">col-1</div>
+										</div>
+									</div>
+								</div>
 
-						</div>
-						<div id="buttons" class="">
-							<h3 class="primary">Tab2</h3>
-						</div>
-						<div id="forms" class="">
-							<h3 class="primary">Tab2</h3>
-						</div>
-						<div id="images" class="">
-							<h3 class="primary">Tab2</h3>
-						</div>
-						<div id="navs" class="">
-							<h3 class="primary">Tab2</h3>
-						</div>
-						<div id="breadcrumbs" class="">
-							<h3 class="primary">Tab2</h3>
-						</div>
-						<div id="panel" class="">
-							<h3 class="primary">Tab2</h3>
-						</div>
-						<div id="tables" class="">
-							<h3 class="primary">Tab2</h3>
-						</div>
-						<div id="span" class="">
-							<h3 class="primary">Tab2</h3>
+								<div class="row">
+									<div class="col-12">
+										<div class="row">
+											<div class="col-2 offset-2 container">col-2</div>
+											<div class="col-2 offset-2 container">col-2</div>
+											<div class="col-2 offset-2 container">col-2</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-12">
+										<div class="row">
+											<div class="col-3 offset-3 container">col-3</div>
+											<div class="col-3 offset-3 container">col-3</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-12">
+										<div class="row">
+											<div class="col-4 offset-4 container">col-4</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12">
+										<div class="row">
+											<div class="col-6 offset-6 container">col-6</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="codeDiv">
+								<button class="bt noStyle" onclick="toggleSlide(this)" data-target="#gridCode2">Show Code <i class="fa fa-code"></i></button>
+								<pre class="prettyprint shadow hidden border border-info" id="gridCode2"><code >
+										<div class="row ">
+											<div class="col-12">
+												<div class="row">
+													<div class="col-1 container offset-1">col-1</div>
+													<div class="col-1 container offset-1">col-1</div>
+													<div class="col-1 container offset-1">col-1</div>
+													<div class="col-1 container offset-1">col-1</div>
+													<div class="col-1 container offset-1">col-1</div>
+													<div class="col-1 container offset-1">col-1</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-12">
+												<div class="row">
+													<div class="col-2 offset-2 container">col-2</div>
+													<div class="col-2 offset-2 container">col-2</div>
+													<div class="col-2 offset-2 container">col-2</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-12">
+												<div class="row">
+													<div class="col-3 offset-3 container">col-3</div>
+													<div class="col-3 offset-3 container">col-3</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-12">
+												<div class="row">
+													<div class="col-4 offset-4 container">col-4</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-12">
+												<div class="row">
+													<div class="col-6 offset-6 container">col-6</div>
+												</div>
+											</div>
+										</div>
+									</code>
+								</pre>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			<div id="colors" >
+				<h2 class="primary">Colors</h2>
+				<hr class="primary">
+
+			</div>
+			<div id="buttons" class="">
+				<h3 class="primary">Tab2</h3>
+			</div>
+			<div id="forms" class="">
+				<h3 class="primary">Tab2</h3>
+			</div>
+			<div id="images" class="">
+				<h3 class="primary">Tab2</h3>
+			</div>
+			<div id="navs" class="">
+				<h3 class="primary">Tab2</h3>
+			</div>
+			<div id="breadcrumbs" class="">
+				<h3 class="primary">Tab2</h3>
+			</div>
+			<div id="panel" class="">
+				<h3 class="primary">Tab2</h3>
+			</div>
+			<div id="tables" class="">
+				<h3 class="primary">Tab2</h3>
+			</div>
+			<div id="span" class="">
+				<h3 class="primary">Tab2</h3>
+			</div>
+		</div>
+		</div>
+		</div>
 		</div>
 	</body>
 </html>

@@ -34,7 +34,7 @@
 
 			function escapeHtml(){
 				var html=$("pre code").html();
-				var html=html.replace(/^\t\t\t\t\t\t\t\t/mg, "");
+				var html=html.replace(/^\t\t\t\t\t\t\t\t\t\t/mg, "");
 				var escaped=$("pre code").text(html).html();
 			}
 		</script>
@@ -145,75 +145,76 @@
 							<div class="codeDiv">
 								<button class="bt noStyle" onclick="toggleSlide(this)" data-target="#gridCode">Show Code <i class="fa fa-code"></i></button>
 								<pre class="prettyprint shadow hidden border border-info" id="gridCode"><code >
-								<div class="row ">
-									<div class="col-12">
-										<div class="row">
-											<div class="col-1 container">col-1</div>
-											<div class="col-1 container">col-1</div>
-											<div class="col-1 container">col-1</div>
-											<div class="col-1 container">col-1</div>
-											<div class="col-1 container">col-1</div>
-											<div class="col-1 container">col-1</div>
-											<div class="col-1 container">col-1</div>
-											<div class="col-1 container">col-1</div>
-											<div class="col-1 container">col-1</div>
-											<div class="col-1 container">col-1</div>
-											<div class="col-1 container">col-1</div>
-											<div class="col-1 container">col-1</div>
+										<div class="container ">
+											<div class="row ">
+												<div class="col-12">
+													<div class="row">
+														<div class="col-1 container">col-1</div>
+														<div class="col-1 container">col-1</div>
+														<div class="col-1 container">col-1</div>
+														<div class="col-1 container">col-1</div>
+														<div class="col-1 container">col-1</div>
+														<div class="col-1 container">col-1</div>
+														<div class="col-1 container">col-1</div>
+														<div class="col-1 container">col-1</div>
+														<div class="col-1 container">col-1</div>
+														<div class="col-1 container">col-1</div>
+														<div class="col-1 container">col-1</div>
+														<div class="col-1 container">col-1</div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-12">
+													<div class="row">
+														<div class="col-2 container">col-2</div>
+														<div class="col-2 container">col-2</div>
+														<div class="col-2 container">col-2</div>
+														<div class="col-2 container">col-2</div>
+														<div class="col-2 container">col-2</div>
+														<div class="col-2 container">col-2</div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-12">
+													<div class="row">
+														<div class="col-3 container">col-3</div>
+														<div class="col-3 container">col-3</div>
+														<div class="col-3 container">col-3</div>
+														<div class="col-3 container">col-3</div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-12">
+													<div class="row">
+														<div class="col-4 container">col-4</div>
+														<div class="col-4 container">col-4</div>
+														<div class="col-4 container">col-4</div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-12">
+													<div class="row">
+														<div class="col-6 container">col-6</div>
+														<div class="col-6 container">col-6</div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-12">
+													<div class="row">
+														<div class="col-12 container">col-12</div>
+													</div>
+												</div>
+											</div>
 										</div>
-									</div>
-								</div>
-							</div>
-							<div class="container demo">
-								<div class="row">
-									<div class="col-12">
-										<div class="row">
-											<div class="col-2 container">col-2</div>
-											<div class="col-2 container">col-2</div>
-											<div class="col-2 container">col-2</div>
-											<div class="col-2 container">col-2</div>
-											<div class="col-2 container">col-2</div>
-											<div class="col-2 container">col-2</div>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-12">
-										<div class="row">
-											<div class="col-3 container">col-3</div>
-											<div class="col-3 container">col-3</div>
-											<div class="col-3 container">col-3</div>
-											<div class="col-3 container">col-3</div>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-12">
-										<div class="row">
-											<div class="col-4 container">col-4</div>
-											<div class="col-4 container">col-4</div>
-											<div class="col-4 container">col-4</div>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-12">
-										<div class="row">
-											<div class="col-6 container">col-6</div>
-											<div class="col-6 container">col-6</div>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-12">
-										<div class="row">
-											<div class="col-12 container">col-12</div>
-										</div>
-									</div>
-								</div>
-								</code>
+									</code>
 								</pre>
 							</div>
+							<hr class="primary">
 							<h3>Offset Grid</h3>
 							<div class="container demo">
 								<div class="row ">
@@ -265,53 +266,9 @@
 							</div>
 							<div class="codeDiv">
 								<button class="bt noStyle" onclick="toggleSlide(this)" data-target="#gridCode2">Show Code <i class="fa fa-code"></i></button>
-								<pre class="prettyprint shadow hidden border border-info" id="gridCode2"><code >
-										<div class="row ">
-											<div class="col-12">
-												<div class="row">
-													<div class="col-1 container offset-1">col-1</div>
-													<div class="col-1 container offset-1">col-1</div>
-													<div class="col-1 container offset-1">col-1</div>
-													<div class="col-1 container offset-1">col-1</div>
-													<div class="col-1 container offset-1">col-1</div>
-													<div class="col-1 container offset-1">col-1</div>
-												</div>
-											</div>
-										</div>
+								<pre class="prettyprint shadow hidden border border-info" id="gridCode2">
+									<code >
 
-										<div class="row">
-											<div class="col-12">
-												<div class="row">
-													<div class="col-2 offset-2 container">col-2</div>
-													<div class="col-2 offset-2 container">col-2</div>
-													<div class="col-2 offset-2 container">col-2</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="row">
-											<div class="col-12">
-												<div class="row">
-													<div class="col-3 offset-3 container">col-3</div>
-													<div class="col-3 offset-3 container">col-3</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="row">
-											<div class="col-12">
-												<div class="row">
-													<div class="col-4 offset-4 container">col-4</div>
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-12">
-												<div class="row">
-													<div class="col-6 offset-6 container">col-6</div>
-												</div>
-											</div>
-										</div>
 									</code>
 								</pre>
 							</div>

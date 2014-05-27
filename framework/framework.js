@@ -564,7 +564,7 @@ function createZoom(img){
 			position = $(img)[0].getBoundingClientRect();
 			parentPos = $(img).parent()[0].getBoundingClientRect();
 			target.style.top=position.top+"px";
-			difY=positionHover.top-parentPos.top;
+			//difY=positionHover.top-parentPos.top;
 	});
 
 }

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Lang" content="en">
+		<meta name="author" content="">
+		<meta http-equiv="Reply-to" content="@.com">
+		<meta name="generator" content="PhpED 6.0">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="creation-date" content="06/01/2011">
+		<meta name="revisit-after" content="15 days">
+		<title>Tags</title>
+		<link rel="stylesheet" type="text/css" href="framework/framework.css">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="framework/framework.js"></script>
+		<style>
+
+		</style>
+
+		<script>
+			$(document).ready( function(){
+				$("#inputid").val("");
+			});
+			function tags(select){
+				var option = $(select).find("option:selected");
+				var input= $("#"+$(select).data("target"));
+
+				var inputVal=input.val();
+				input.val(inputVal+option.val()+",");
+
+				var span = document.createElement('span');
+				var att= document.createAttribute("data-value");
+				att.value=option.val();
+				span.setAttributeNode(att);
+				//span.data-value=option.val();
+				span.innerHTML = option.html();
+				span.className="tag";
+
+				var remove = document.createElement('span')
+				remove.className="fa fa-times-circle removeSpan";
+				remove.onclick=function(){
+					span.parentNode.removeChild(span);
+					var inputVal=input.val();
+					var value=$(span).attr("data-value");
+					console.log(inputVal);
+					console.log("Value: " +value);
+					inputVal=inputVal.replace(value+",", "");
+					console.log(inputVal);
+					input.val(inputVal);
+
+					if($(select)[0].hasAttribute("data-removeOnSelect")){
+						$(select).append("<option value='"+option.val()+"'>"+option.html()+"</option>");
+					}
+					$("#value").html(input.val());
+				}
+
+				span.appendChild(remove);
+
+				$(".tags .selection").append(span);
+
+				if($(select)[0].hasAttribute("data-removeOnSelect")){
+					$(select).find("option:selected").remove();
+				}
+
+				$("#value").html(input.val());
+			}
+		</script>
+
+	</head>
+	<body>
+		<div class="tags tag-primary ">
+			<div class="selection xs">
+
+			</div>
+			<select class="tag" onchange="tags(this)" data-target="inputid" data-removeOnSelect>
+				<option value=null selected="true">Elige opcion</option>
+				<option value="1">opcion1</option>
+				<option value="2">opcion2</option>
+				<option value="3">opcion3</option>
+				<option value="4">opcion4</option>
+			</select>
+			<input type="hidden" id="inputid">
+
+		</div>
+		<h3 class="primary">Input value: <span id="value" class="muted"></span></h3>
+	</body>
+</html>

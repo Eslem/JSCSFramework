@@ -29,13 +29,13 @@
 				Tabs();
 				ScrollVerticalNav();
 				navbarResponsiveVertical();
-				escapeHtml();
 			});
 
-			function escapeHtml(){
-				var html=$("pre code").html();
+			function escape(div){
+				var html=$(div).find("code").html();
+				console.log(html);
 				var html=html.replace(/^\t\t\t\t\t\t\t\t\t\t/mg, "");
-				var escaped=$("pre code").text(html).html();
+				var escaped=$(div).find("code").text(html).html();
 			}
 		</script>
 
@@ -144,7 +144,7 @@
 							</div>
 							<div class="codeDiv">
 								<button class="bt noStyle" onclick="toggleSlide(this)" data-target="#gridCode">Show Code <i class="fa fa-code"></i></button>
-								<pre class="prettyprint shadow hidden border border-info" id="gridCode"><code >
+								<pre class="prettyprint shadow hidden border border-info" id="gridCode" onload="escape(this)"><code >
 										<div class="container ">
 											<div class="row ">
 												<div class="col-12">

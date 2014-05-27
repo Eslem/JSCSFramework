@@ -216,8 +216,28 @@
 		<hr class="primary">
 
 		<div class="container">
+			<div class="tags tag-primary ">
+				<div class="selection sm">
+
+				</div>
+				<select class="tag" onchange="tags(this)" data-target="inputid" data-removeOnSelect>
+					<option value=null selected="true">Elige opcion</option>
+					<option value="1">opcion1</option>
+					<option value="2">opcion2</option>
+					<option value="3">opcion3</option>
+					<option value="4">opcion4</option>
+				</select>
+				<input type="hidden" id="inputid">
+
+			</div>
+			<h3 class="primary">Input value: <span id="valueTag" class="muted"></span></h3>		
+		</div>
+
+		<hr class="primary">
+
+		<div class="container">
 			<h2 class="primary"> AutoAdjust Grid</h2>
-			<div class="container">
+			<div class="container gridContainer">
 				<div class="grid" data-columns=4></div>
 				<div class="columns" style=" width:100%">
 					<div class="list" style="display: none;">
@@ -295,10 +315,13 @@
 
 		</div>
 
+
+
 		<hr class="primary">
 
-
-
+		<div class="container">
+			<h3>Image Zoom</h3>
+		</div>
 
 	</body>
 </html>

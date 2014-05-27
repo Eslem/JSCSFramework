@@ -15,43 +15,125 @@
 		<meta name="revisit-after" content="15 days">
 		<title>Canvas</title>
 		<link rel="stylesheet" type="text/css" href="framework/framework.css">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="framework/framework.js"></script>
 		<style>
-			[class*='col-']{
-			background-color: red;
-			border:1px solid blue;
-			height: 100%;
-			}
-			.col-20{
-			width:20%; 
-			}
-			.contenedor{
-			height:100%;
-			position: relative;
-			min-height: 100%;
-			}
-			.contenedor .row{
-			position:absolute;
-			}
-			html, body {
-				min-height:100%; 
+			.bodyContent{
+				position:absolute;
 				height:100%;
-				padding:0;
-				margin:0;
+			}
+
+			.contenedor{
+				height:100%;
+			}
+
+			.contenedor .row div{
+				height:100%;
+			}
+
+			.block{
+				border:1px solid #ddd;
+			}
+
+			.block.hover:hover{
+				border-color: #66AFE9;
+				box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+				background-color: #eee;
+			}
+
+			.col-20{
+				width:20%;
 			}
 		</style>
+		<script>
+			$(document).ready(function(){
+				windowResize();
+				responsive();
+				ScrollVerticalNav();
+				navbarResponsiveVertical();
+			});
+		</script>
 	</head>
 	<body>
+		<div class="row">
+		<div class="nav-col-1 navbar navbar-vertical responsive-vertical fixed inverse noBorderRadius" data-responsive=true data-max-width="20">
+			<div class="content ">
+				<ul class="center-text tabs">
+					<li ><a class="header primary" >Lean Canvas</a></li>
+					<li><hr class="primary"></li>
+					<li ><a href="#" class="active">Name</a></li>
+					<li><a href="#">Post-it</a></li>
+					<li><a href="#">My Canvas</a></li>
+					<li><hr class="primary"></li>
+					<li><a href="#">User</a></li>
+					<li><a href="#">Settings</a></li>
+
+				</ul>
+			</div>
+		</div>
+		<div class="col-11 offset-1 bodyContent">
 		<div class="contenedor">
 			<div class="row" style="height: 75%; width: 100%; position: relative;">
-				<div class="col-20">er</div>
-				<div class="col-20">er</div>
-				<div class="col-20">er</div>
-				<div class="col-20">er</div>
-				<div class="col-20">er</div>
+				<div class="col-20 block">
+					<div class="container">
+						<h3 class="primary center-text">Problemas</h3>
+					</div>
+				</div>
+				<div class="col-20">
+					<div class="row" style="height: 50%"> 
+						<div class="block">
+							<div class="container">
+								<h3 class="primary center-text">Soluciones</h3>
+							</div>
+						</div>
+					</div>
+					<div class="row" style="height: 50%"> 
+						<div class="block hover">
+							<div class="container">
+								<h3 class="primary center-text">Metricas Clave</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-20 block">
+					<div class="container">
+						<h3 class="primary center-text">Propuesta de valor unica</h3>
+					</div>
+				</div>
+				<div class="col-20">
+					<div class="row" style="height: 50%"> 
+						<div class="block">
+							<div class="container">
+								<h3 class="primary center-text">Ventaja Diferencial</h3>
+							</div>
+						</div>
+					</div>
+					<div class="row" style="height: 50%"> 
+						<div class="block">
+							<div class="container">
+								<h3 class="primary center-text">Canales</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-20">
+					<div class="container">
+						<h3 class="primary center-text">Segmento de Clientes</h3>
+					</div>
+				</div>
 			</div>
 			<div class="row" style="height: 25%; width: 100%;">
-				<div class="col-6" >fe</div>
-				<div class="col-6" >fe</div>
+				<div class="col-6 block" >
+					<div class="container">
+						<h3 class="primary center-text">Estructura de Costes</h3>
+					</div>
+				</div>
+				<div class="col-6 block" >
+					<div class="container">
+						<h3 class="primary center-text">Flujo de ingresos</h3>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>

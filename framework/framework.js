@@ -96,10 +96,10 @@ function resizeSlider(){
 	item_width = $('#slides li').outerWidth(); 
 	var left_value = (item_width) * (-1); 
 	$('.slides').css({'left' : left_value});
-	
+
 	var imgHeight=$('.slides li img').css("height");
-	
-	
+
+
 	var ulHeight=$('.slides').css("height");
 
 	console.log(imgHeight+" - "+ulHeight);
@@ -435,5 +435,49 @@ function ulpoadImage(idForm, url, img){
 			}
 		}
 	});
+}
+
+function tags(select){
+	var option = $(select).find("option:selected");
+	var input= $("#"+$(select).data("target"));
+
+	var inputVal=input.val();
+	input.val(inputVal+option.val()+",");
+
+	var span = document.createElement('span');
+	var att= document.createAttribute("data-value");
+	att.value=option.val();
+	span.setAttributeNode(att);
+	//span.data-value=option.val();
+	span.innerHTML = option.html();
+	span.className="tag";
+
+	var remove = document.createElement('span')
+	remove.className="fa fa-times-circle removeSpan";
+	remove.onclick=function(){
+		span.parentNode.removeChild(span);
+		var inputVal=input.val();
+		var value=$(span).attr("data-value");
+		console.log(inputVal);
+		console.log("Value: " +value);
+		inputVal=inputVal.replace(value+",", "");
+		console.log(inputVal);
+		input.val(inputVal);
+
+		if($(select)[0].hasAttribute("data-removeOnSelect")){
+			$(select).append("<option value='"+option.val()+"'>"+option.html()+"</option>");
+		}
+
+		$("#valueTag").html(input.val());
+	}
+
+	span.appendChild(remove);
+
+	$(".tags .selection").append(span);
+
+	if($(select)[0].hasAttribute("data-removeOnSelect")){
+		$(select).find("option:selected").remove();
+	}
+	$("#valueTag").html(input.val());
 }
 

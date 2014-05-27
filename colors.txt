@@ -1,0 +1,20 @@
+primary:#4992D1
+	border: #2E709F 
+
+error: #E12629 
+	border: #C22023 
+
+info: #1DADB8 
+	border: #248289 
+
+succes: #0DB571 
+	border: #0DB571 
+
+event: #E0603D 
+	border: #C94E2C 
+
+black: #222
+	border: #0f0f0f 
+
+gray: #eee
+	border: #ddd

@@ -540,10 +540,7 @@ function createZoom(img){
 			var posY=(mouseY-position.top)-(heightHover/2);
 
 			var positionHover = div.getBoundingClientRect();
-			console.log(mouseY);
-			console.log(position.top+(heightHover/2));
-			console.log(position.bottom-(heightHover/2));
-
+			
 			if((mouseX >= (position.left+(widthHover/2)) )  && (mouseX <= (position.right-(widthHover/2)) )  ){
 				div.style.left=posX+"px";
 				var difX=positionHover.left-parentPos.left;

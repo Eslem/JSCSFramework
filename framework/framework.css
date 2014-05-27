@@ -2338,3 +2338,33 @@ span.removeSpan{
 	font-size: 7px;
 }
 
+/*			ImageZoom		*/
+
+.imageNormal{
+	position:relative;
+	padding:0px;
+	margin:0px;
+}
+
+.hoverDiv{
+	position:absolute;
+	background-image: url('../images/hoverImageZoom.gif');
+	top:0;
+	left:0;
+}
+
+.imageZoom{
+	padding:0px; 
+	margin:0px;
+}
+
+.imgTarget{
+	overflow-x: hidden;	
+	overflow-y: hidden;	
+	position:fixed;
+	display:none;
+}
+
+.imgTarget img{
+	position:absolute;
+}

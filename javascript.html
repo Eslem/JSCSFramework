@@ -39,6 +39,7 @@
 				writeGridContent();
 				ScrollVerticalNav();
 				navbarResponsiveVertical();
+				imageZoom();
 			});
 		</script>
 	</head>
@@ -232,6 +233,20 @@
 			</div>
 			<h3 class="primary">Input value: <span id="valueTag" class="muted"></span></h3>		
 		</div>
+		<hr class="primary">
+
+		<div class="container">
+		
+		<h3 class="primary">Image Zoom</h3>
+		<div class="container">
+			<div class="row">
+				<div class="col-2 imageNormal">
+					<img class="fit imageZoom" src="images/skyrim.jpg" data-proporcion=2>
+				</div>
+
+			</div>
+		</div>
+
 
 		<hr class="primary">
 
@@ -317,11 +332,6 @@
 
 
 
-		<hr class="primary">
-
-		<div class="container">
-			<h3>Image Zoom</h3>
-		</div>
 
 	</body>
 </html>

@@ -407,7 +407,7 @@ function removeClassActiveTab(){
 }
 
 
-//Functions not in Framework  
+//Functions not in Demo  
 function toggleDisabled(elem){
 	if($(elem).is(":disabled")){
 		$(elem).removeAttr("disabled");
@@ -437,6 +437,7 @@ function ulpoadImage(idForm, url, img){
 	});
 }
 
+//--
 function tags(select){
 	var option = $(select).find("option:selected");
 	var input= $("#"+$(select).data("target"));

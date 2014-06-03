@@ -1,5 +1,6 @@
 primary:#4992D1
-	border: #2E709F 
+	border: #2E709F
+#2EBDFF 
 
 error: #E12629 
 	border: #C22023 

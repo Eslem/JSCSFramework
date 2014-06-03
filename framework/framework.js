@@ -203,18 +203,23 @@ function navbarResponsiveVertical(){
 
 	var maxWidth=$('.navbar-vertical').data("max-width");
 
+
 	if(percent>maxWidth){
-		SetWidthVerticalNav("0px");
-		$(".navbar-vertical").hide();
+		console.log("percent>");
 		var button='<button class="slideNavVertical bt" onclick="slideMenuVertical('+ulWidth+')"><i class="fa fa-bars"></i></button>';
 		if(($(".slideNavVertical").length)==0){
 			$("body").append(button);
 		}
+		$(".navbar-vertical").hide();
+		SetWidthVerticalNav("0px", false);		
 	}
 	else{
-		SetWidthVerticalNav(ulWidth);
+		console.log("percent<");
+		SetWidthVerticalNav(ulWidth, true);
 		$(".navbar-vertical").show();
-		if(($(".slideNavVertical").length)!=0){
+
+		if(!$(".navbar-vertical").is(":visible") && ($(".slideNavVertical").length)!=0){
+			console.log("button remove");
 			$(".slideNavVertical").remove();
 		}
 	}
@@ -223,22 +228,23 @@ function navbarResponsiveVertical(){
 
 function slideMenuVertical(width){
 	if($(".navbar-vertical").is(":visible")){
-		SetWidthVerticalNav("0px");
+		SetWidthVerticalNav("0px", false);
 		$(".navbar-vertical").hide();
+
 	}
 	else{
-		SetWidthVerticalNav(width);
+		SetWidthVerticalNav(width, false);
 		$(".navbar-vertical").show();
 	}
 }
 
 
-function SetWidthVerticalNav(width){
-	$(".navbar-vertical").width(width);
+function SetWidthVerticalNav(width, resizeNav){
+	if(resizeNav) $(".navbar-vertical").width(width);
 	$(".bodyContent").css("margin-left", width);
-	console.log("pantalla "+ screen.width);
-	
+
 	$(".bodyContent").width(screen.width-width);
+	if(width=="0px") $(".bodyContent").width(screen.width+"px");
 }
 
 function ScrollVerticalNav(){
@@ -544,7 +550,7 @@ function createZoom(img){
 			var posY=(mouseY-position.top)-(heightHover/2);
 
 			var positionHover = div.getBoundingClientRect();
-			
+
 			if((mouseX >= (position.left+(widthHover/2)) )  && (mouseX <= (position.right-(widthHover/2)) )  ){
 				div.style.left=posX+"px";
 				var difX=positionHover.left-parentPos.left;
@@ -564,10 +570,10 @@ function createZoom(img){
 	});
 
 	$(window).scroll(function(){
-			position = $(img)[0].getBoundingClientRect();
-			parentPos = $(img).parent()[0].getBoundingClientRect();
-			target.style.top=position.top+"px";
-			difY=positionHover.top-parentPos.top;
+		position = $(img)[0].getBoundingClientRect();
+		parentPos = $(img).parent()[0].getBoundingClientRect();
+		target.style.top=position.top+"px";
+		difY=positionHover.top-parentPos.top;
 	});
 
 }

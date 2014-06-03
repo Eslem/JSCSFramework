@@ -1442,6 +1442,18 @@ button.bt.slideNavVertical:hover{
 	width: 8.33333333% ;
 }
 
+.nav-offset-1  {margin-left: 8.33% "";}
+.nav-offset-2  {margin-left: 16.66% "";}
+.nav-offset-3  {margin-left: 25% "";}
+.nav-offset-4  {margin-left: 33.32% "";}
+.nav-offset-5  {margin-left: 41.65% "";}
+.nav-offset-6  {margin-left: 50% "";}
+.nav-offset-7  {margin-left: 58.31% "";}
+.nav-offset-8  {margin-left: 66.64% "";}
+.nav-offset-9  {margin-left: 75% "";}
+.nav-offset-10 {margin-left: 83.3% "";}
+.nav-offset-11 {margin-left: 91.67% "";}
+
 /*Responsive*/
 
 

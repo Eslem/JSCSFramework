@@ -236,6 +236,9 @@ function slideMenuVertical(width){
 function SetWidthVerticalNav(width){
 	$(".navbar-vertical").width(width);
 	$(".bodyContent").css("margin-left", width);
+	console.log("pantalla "+ screen.width);
+	
+	$(".bodyContent").width(screen.width-width);
 }
 
 function ScrollVerticalNav(){

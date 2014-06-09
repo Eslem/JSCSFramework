@@ -1167,11 +1167,10 @@ background-image: linear-gradient(to bottom, #ca4520, #9f3e23);filter:progid:DXI
 	background-color: #fcfcfc;
 	border:1px solid #eee;
 	color:#888;
-	border-radius:4px;
 	height:auto;
 }
 
-.navbar form{
+.navbar form, .navbar ul.form button{
 	margin:0.5em 0;
 }
 

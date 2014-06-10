@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Lang" content="en">
+		<meta name="author" content="">
+		<meta http-equiv="Reply-to" content="@.com">
+		<meta name="generator" content="PhpED 6.0">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="creation-date" content="06/01/2011">
+		<meta name="revisit-after" content="15 days">
+		<title>Editor</title>
+		<link rel="stylesheet" type="text/css" href="../WebFramework/framework/framework.css">
+		<link rel="stylesheet" type="text/css" href="css/editor.css">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+		<style type="text/css">
+			
+		</style>
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="../WebFramework/framework/framework.js"></script>
+		<script src="js/editor.js"></script>
+		<script type="text/javascript">
+
+
+			
+
+
+		</script>
+	</head>
+	<body>
+		<div class="row">
+			<div class="nav-col-1 navbar navbar-vertical responsive-vertical fixed inverse noBorderRadius" data-responsive=true data-max-width="20">
+				<div class="content ">
+					<ul class="center-text tabs">
+						<li ><a class="header primary" >Vertical Responsive Menu</a></li>
+						<li><hr class="primary"></li>
+						<li>
+							<div class="container" id="elements"><h3 class="primary">Elements</h3>
+								<div class="element" draggable="true" data-function="header">Header</div>
+								<div class="element" draggable="true" data-function="p">Text</div>
+								<div class="element" draggable="true" data-function="img">Image</div>
+								<div class="element" draggable="true" data-function="row">Row</div>
+								<div class="element" draggable="true" data-function="col">Col</div>
+							</div>
+						</li>
+
+						<li><hr class="primary"></li>
+
+						<li class="properties active active">
+							<h3 class="primary">Properties</h3>
+							<div id="properties">
+								<div class="tag">
+									Tag
+								</div>
+								<div class="form inverse ">
+
+								</div>								
+							</div>
+						</li>
+
+						<li><hr class="primary"></li>
+
+						<li><button class="bt event" onclick="savePage(this)"><span id="spanSave">Save</span> <div id="loaderSave" class="loader">Loading...</div></button></li>
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="nav-col-11 nav-offset-1 bodyContent">
+				<div class="page" id="page">
+
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

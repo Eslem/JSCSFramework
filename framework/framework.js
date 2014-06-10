@@ -631,8 +631,6 @@ function rtfEditor(elem){
 			}
 
 	});
-
-
 }
 function loadRtf(elem){
 	var div= document.createElement("div");
@@ -680,8 +678,8 @@ function showRtf(elem){
 		var x=pos[0]+widthParent-widthDiv;
 		var y=pos[1]-heightDiv-30;
 
-		var check=y+heightDiv+30;
-		if(check<=0){
+		//var check=y-heightDiv;
+		if(y<=0){
 			y=pos[1]+30+heightElem;
 			if($(".editorRtf").hasClass("top"))  $(".editorRtf").removeClass("top");
 			if(!$(".editorRtf").hasClass("bottom"))  $(".editorRtf").addClass("bottom");

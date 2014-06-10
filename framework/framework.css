@@ -2465,27 +2465,19 @@ ul.parraf li:first-child{
 	box-shadow: 0 0 0 1px #aaa inset; 
 }
 
-.editorRtf.top:after, .editorRtf.top:before { 
+.editorRtf.top:after{ 
 	top: 100%;
 	left: 50%;
-	border: solid transparent;
+	border: none;
 	content: " ";
 	height: 0; 
 	width: 0; 
 	position: absolute; 
 	pointer-events: none; 
-}
-.editorRtf.top:after {
-	border-color: rgba(39, 39, 39, 0); 
+	border-color: rgba(0, 0, 0, 0); 
 	border-top-color: #272727;
-	border-width: 15px; 
+	border-width: 0; 
 	margin-left: -15px; 
-} 
-.editorRtf.top:before { 
-	border-color: rgba(255, 255, 255, 0);
-	border-top-color: #eee;
-	border-width: 21px; 
-	margin-left: -21px; 
 }
 
 .parentRtf{
@@ -2494,7 +2486,7 @@ ul.parraf li:first-child{
 }
 
 
-.editorRtf.bottom:after, .editorRtf.bottom:before { 
+.editorRtf.bottom:after{ 
 	bottom: 100%;
 	left: 50%;
 	border: solid transparent;
@@ -2503,16 +2495,7 @@ ul.parraf li:first-child{
 	width: 0; 
 	position: absolute; 
 	pointer-events: none; 
-}
-.editorRtf.bottom:after {
 	border-color: rgba(39, 39, 39, 0); 
-	border-bottom-color: #272727;
 	border-width: 15px; 
 	margin-left: -15px; 
-} 
-.editorRtf.bottom:before { 
-	border-color: rgba(255, 255, 255, 0);
-	border-bottom-color: #eee;
-	border-width: 21px; 
-	margin-left: -21px; 
 }

@@ -2391,3 +2391,128 @@ span.removeSpan{
 .imgTarget img{
 	position:absolute;
 }
+
+
+/*			Rtf Editor  */
+
+div.editorRtf{
+	padding:5px;
+	background-color: #272727;
+	width:auto;
+	display: none;
+	border-radius:3px;		
+	position: relative;		
+	font-size: 0.9em;
+	z-index:999;
+}
+
+div.editorRtf > ul{
+	list-style: none;
+	display:table;
+	float:left;
+	margin:5px;
+	padding:0px;
+}
+div.editorRtf > ul > li{
+	padding:5px 8px 5px 8px;
+	display:table-cell;
+	float:left;
+	color: #fff;
+	opacity:0.6;
+	cursor:pointer;
+}
+
+div.editorRtf > ul > li > a{
+	color: #fff;
+}
+
+div.editorRtf > ul > li:hover{
+	opacity:1;
+}
+
+ul.textStyle{
+	clear:both;
+	position:relative;
+}
+
+ul.extra{
+	float:right !important;
+}
+ul.parraf li:first-child{
+	margin-left: 20px;
+}
+
+.editorRtf .dropdown-menu{
+	background-color: #272727;
+}
+
+.editorRtf .dropdown-menu > li > a{
+	color:#fff;
+	opacity:0.6;
+}
+
+.editorRtf .dropdown-menu > li:hover{
+	background-color: #111;
+}
+.editorRtf .dropdown-menu  li:hover a{
+	opacity:1;
+}
+
+.selected{
+	color:#4992D1 !important;
+	opacity:1 !important;
+	border-radius: 3px;
+	box-shadow: 0 0 0 1px #aaa inset; 
+}
+
+.editorRtf.top:after, .editorRtf.top:before { 
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0; 
+	width: 0; 
+	position: absolute; 
+	pointer-events: none; 
+}
+.editorRtf.top:after {
+	border-color: rgba(39, 39, 39, 0); 
+	border-top-color: #272727;
+	border-width: 15px; 
+	margin-left: -15px; 
+} 
+.editorRtf.top:before { 
+	border-color: rgba(255, 255, 255, 0);
+	border-top-color: #eee;
+	border-width: 21px; 
+	margin-left: -21px; 
+}
+
+.parentRtf{
+	position:absolute;
+	width:auto;
+}
+
+
+.editorRtf.bottom:after, .editorRtf.bottom:before { 
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0; 
+	width: 0; 
+	position: absolute; 
+	pointer-events: none; 
+}
+.editorRtf.bottom:after {
+	border-color: rgba(39, 39, 39, 0); 
+	border-bottom-color: #272727;
+	border-width: 15px; 
+	margin-left: -15px; 
+} 
+.editorRtf.bottom:before { 
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: #eee;
+	border-width: 21px; 
+	margin-left: -21px; 
+}

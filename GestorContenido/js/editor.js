@@ -19,20 +19,55 @@ function loadEditor(){
 	});
 }
 
+function addBotones(elem){
+	var div=document.createElement("div");
+	div.className="botonesElem";
+	document.body.appendChild(div);
+	div.innerHTML="<button class='bt xs'><i class='fa fa-arrows' 'moveElem("+div+")'></i></button><button class='bt xs' onclick='editElem("+div+")'><i class='fa fa-edit'></i></button><button class='bt xs' 'removeElem("+div+")'><i class='fa fa-trash-o'></i></button>";
+	var pos=findPos(elem);
+	var width=$(elem).width();
+	var height=$(elem).height();
+
+
+
+	var x=pos[0]+width-$(div).width();
+	var y=pos[1]+height;
+
+	var newPos=[x,y];
+
+	setPos(div,newPos);
+}
+
+function editElem(elem){
+	console.log($(elem).html());
+}
+
 function loadFunctions(){
 
 	$("#page p, #page :header, #page img, #page div").click(function(ev){
 		ev.stopPropagation();
+		$("body").find(".botonesElem").remove();
 		$(".selection").removeClass("selection");
 		var div=$(this);
 		$(this).addClass("selection");
 		properties(div);
+		var pos=$(this).css("position");
+
+		$(this).css("position", "relative");
+
+		addBotones(this);
+
+		$(this).attr("draggable", true);
+		/*elem=this;
+		this.addEventListener('dragstart', dragEvent);*/
 		$(document).mouseup(function()
 			{
 				$(div).removeClass("selection");
+				$(this).css("position", pos);
 				$(".selection").removeClass("selection");
 				$(".properties .tag").text("Tag");
 				$("#properties .form").html("");
+				$("body").find(".botonesElem").remove();
 		});
 		$(this).mouseup(function()
 			{
@@ -41,6 +76,9 @@ function loadFunctions(){
 		$(".navbar-vertical").mouseup(function()
 			{
 				return false;
+		});
+		$(".botonesElem").bind('click mousedown mouseup',function(){
+			return false;
 		});
 	});
 
@@ -192,54 +230,68 @@ function changeHeader(){
 }
 
 //--Dragg Drop
+var elem;
+
+function dragEvent(e){
+
+	e.dataTransfer.effectAllowed = 'move';
+	e.dataTransfer.setData('text', $(this).data("function"));
+	elementDragged = this;
+	var type=$(this).data("function");
+
+	if(type=="header"){
+		elem='<h3 class="elemento">Header</h3>'; 
+	}else if(type=="img"){
+		elem='<img class="elemento" src="images/angel.jpg">'; 
+	}else if(type=="p"){
+		elem='<p class="elemento">Text</h3>'; 
+	}else if(type=="row"){
+		elem='<div class="elemento row"><div class="col-4 elemento"><p>col-4</p></div><div class="col-4 elemento"><p>col-4</p></div><div class="col-4 elemento"><p>col-4</p></div></div>'; 
+	}else if(type=="col"){
+		elem='<div class="elemento col-4"></div>'; 
+	}
+}
 
 function prepareDrag(){
 	var dropZone= document.querySelectorAll('#page *');
 	var dragElements = document.querySelectorAll('#elements .element');
-	var elementDragged = null;
 
-	var elem;
+
 
 	for (var i = 0; i < dragElements.length; i++) {
-
 		// Event Listener for when the drag interaction starts.
-		dragElements[i].addEventListener('dragstart', function(e) {
-			e.dataTransfer.effectAllowed = 'move';
-			e.dataTransfer.setData('text', $(this).data("function"));
-			elementDragged = this;
-			var type=$(this).data("function");
-
-			if(type=="header"){
-				elem='<h3 class="elemento">Header</h3>'; 
-			}else if(type=="img"){
-				elem='<img class="elemento" src="images/angel.jpg">'; 
-			}else if(type=="p"){
-				elem='<p class="elemento">Text</h3>'; 
-			}else if(type=="row"){
-
-			}else if(type=="col"){
-
-			}
-		});
-
+		dragElements[i].addEventListener('dragstart', dragEvent);
 		// Event Listener for when the drag interaction finishes.
 		dragElements[i].addEventListener('dragend', function(e) {
 			//elementDragged.className="";
-			elementDragged = null;
 		});
 
 	};
 
 	for (var i = 0; i < dropZone.length; i++) {
 		dropZone[i].addEventListener('dragover', function(e) {
-			if (e.preventDefault) {
-				e.preventDefault();
-			}
+			if (e.preventDefault) e.preventDefault(); 
+			if (e.stopPropagation) e.stopPropagation();
 
 			e.dataTransfer.dropEffect = 'move';
 			$(this).addClass("over");
-			if(!$(this).find(".elemento").length !=0){
-				$(this).append(elem);
+			if(!$("#page").find(".elemento").length !=0){
+				var x=e.clientX;
+				var y=e.clientY;
+				var posEl=findPos(this);
+				var width=$(this).width();
+				var height=$(this).height();
+				if( (x<(posEl[0]+(width/4)))  || (y<(posEl[1]+(height/4)))){
+					$(elem).insertBefore(this);
+				}
+				else if( (x>(posEl[0]+width-(width/4)))	||		(y>(posEl[1]+height-(height/4)))){
+					$(elem).insertAfter(this);
+				}
+				else{
+					$(this).append(elem);
+				}
+
+				//$(this).append(elem);
 			}
 
 			return false;
@@ -256,21 +308,37 @@ function prepareDrag(){
 		// Event Listener for when the dragged element leaves the drop zone.
 		dropZone[i].addEventListener('dragleave', function(e) {
 			$(this).removeClass("over");
-			if($(this).find(".elemento").length !=0){
-				$(this).children(".elemento").remove();
+			if($("#page").find(".elemento").length !=0){
+				$("#page").find(".elemento").remove();
 			}
 		});
 
 		dropZone[i].addEventListener('drop', function(e) {
 			if (e.preventDefault) e.preventDefault(); 
 			if (e.stopPropagation) e.stopPropagation();
-			if($(this).find(".elemento").length !=0){
-				$(this).children(".elemento").remove();
+
+
+			if($("#page").find(".elemento").length !=0){
+				$("#page").find(".elemento").remove();
 			}
-			//$(elem).insertBefore(this);
-			$(this).append(elem);
+
+			var x=e.clientX;
+			var y=e.clientY;
+			var posEl=findPos(this);
+			var width=$(this).width();
+			var height=$(this).height();
+			if( (x<(posEl[0]+(width/4)))  || (y<(posEl[1]+(height/4)))){
+				$(elem).insertBefore(this);
+			}
+			else if( (x>(posEl[0]+width-(width/4)))	||		(y>(posEl[1]+height-(height/4)))){
+				$(elem).insertAfter(this);
+			}
+			else{
+				$(this).append(elem);
+			}
 
 			$(".over").removeClass("over");
+			$(".elemento").removeClass("elemento");
 			loadFunctions();
 			return false;
 		});

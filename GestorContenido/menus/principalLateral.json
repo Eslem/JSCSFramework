@@ -1,0 +1,10 @@
+[
+{"name":"principal", "clase":"navbar inverse", "left":[
+		{"text":"Home", "link":"inicio.html", "type":"texto", "clase":""},
+		{"text":"Demo", "link":"inicio.html", "type":"texto", "clase":""},
+		{"text":"dw", "link":"inicio.html", "type":"texto", "clase":""},
+		{"text":"Dedwqdqwmo", "link":"inicio.html", "type":"texto", "clase":""},
+		{"text":"Contact", "link":"inicio.html", "type":"boton", "clase":""}
+	]
+}
+]

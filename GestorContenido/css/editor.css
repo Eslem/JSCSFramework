@@ -187,4 +187,28 @@ div.divHover{
 	-webkit-transform: rotate(360deg);
 	transform: rotate(360deg);
 }
-			}
+}
+
+div.botonesElem{
+	background-color: #272727;
+	width:auto;
+	height:auto;
+	position:absolute;
+}
+div.botonesElem button{
+	color:#999;
+	background-color: #222;
+	margin:2px;
+	border:none;
+	border-radius:2px;
+}
+div.botonesElem button:hover{
+	color:#fff;
+	background-color: #272727;
+}
+div.botonesElem button.active{
+	color:#4992D1 !important;
+	background-color: #272727;
+	border-radius: 3px;
+	box-shadow: 0 0 0 1px #aaa inset; 
+}

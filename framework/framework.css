@@ -1170,8 +1170,13 @@ background-image: linear-gradient(to bottom, #ca4520, #9f3e23);filter:progid:DXI
 	height:auto;
 }
 
-.navbar form, .navbar ul.form button{
+.navbar form, .navbar ul.form button, .navbar ul li a button, .navbar ul li button{
 	margin:0.5em 0;
+}
+
+.navbar ul li a.button{
+	padding:0px;
+	margin:0px;
 }
 
 

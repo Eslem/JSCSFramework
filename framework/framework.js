@@ -312,7 +312,11 @@ function modal(esconder){
 	if(esconder){
 		$(document).mouseup(function()
 			{
-				$(".modal").fadeOut();
+				$(".modal").each(function(){
+					var modal=$(this).attr('data-autoClose');
+					console.log(modal);
+					if(modal!= 'false')	$(this).fadeOut();
+				});
 		});
 		$(".modal-content").mouseup(function()
 			{

@@ -1,9 +1,9 @@
-#page p:hover, #page .row:hover, #page img:hover, #page div.container:hover,  #page div.row:hover, #page div.module:hover, #page h1:hover, #page h2:hover, #page h3:hover, #page h4:hover, #page h5:hover, #page h6:hover{
+#page p:hover, #page .row:hover, #page img:hover, #page [class*='col-']:hover,  #page div.row:hover, #page div.module:hover, #page h1:hover, #page h2:hover, #page h3:hover, #page h4:hover, #page h5:hover, #page h6:hover{
 	box-shadow: 0px 0px 0px 1px rgba(73,146,209, 0.3);
 	border-radius:2px;
 	position: relative;
 }
-#page p:hover:after, #page img:hover:after, #page div.container:hover:after, #page div.row:hover:after,  #page div.module:hover:after, #page h1:hover:after, #page h2:hover:after, #page h3:hover:after, #page h4:hover:after, #page h5:hover:after, #page h6:hover,#page p.selection:after, #page img.selection:after, #page div.container.selection:after, #page div.row.selection:after, #page div.module.selection:after, #page h1.selection:after, #page h2.selection:after, #page h3.selection:after, #page h4.selection:after, #page h5.selection:after, #page h6.selection´{
+#page p:hover:after, #page img:hover:after, #page [class*='col-']:hover:after, #page div.row:hover:after,  #page div.module:hover:after, #page h1:hover:after, #page h2:hover:after, #page h3:hover:after, #page h4:hover:after, #page h5:hover:after, #page h6:hover,#page p.selection:after, #page img.selection:after, #page div.container.selection:after, #page div.row.selection:after, #page div.module.selection:after, #page h1.selection:after, #page h2.selection:after, #page h3.selection:after, #page h4.selection:after, #page h5.selection:after, #page h6.selection´{
 	background: #4992D1;
 	opacity:0.8;
 	border-radius: 0px 0px 5px 5px ;
@@ -24,8 +24,8 @@
 }
 
 
-#page div.container:hover:after, #page div.container.selection:after{
-	content:"Container"
+#page div[class*='col-']:hover:after, #page  div[class*='col-'].selection:after{
+	content:"Col"
 }
 
 #page div.row:hover:after, #page div.row.selection:after{

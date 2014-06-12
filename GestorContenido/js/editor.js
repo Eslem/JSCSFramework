@@ -15,6 +15,7 @@ function getParameterByName(name) {
 
 function loadEditor(){
 	name=getParameterByName("page");
+	$("#linkPage").attr("href", "pages/"+name+".html");
 	$( "#page" ).load( "pages/"+name+".html", function() {
 		loadFunctions();
 	});
@@ -167,6 +168,16 @@ function changeImg(){
 	$(".selection").attr("src", link);
 }
 
+function chageClass(elem){
+	tags(elem, function(option){
+		$(".selection").addClass(option);
+		},
+		function(option){
+			$(".selection").removeClass(option);
+		}
+	);
+}
+
 function properties(div){
 	var tagName=$(div).prop("tagName");
 	var tag=$("#properties").attr("data-target", div);
@@ -180,34 +191,56 @@ function properties(div){
 		'<div class="tags tag-primary ">'+
 		'<div class="selection sm">'+
 		'</div>'+
-		'<select class="tag" onchange="tags(this)" onselect="tags(this)" data-target="inputid" data-removeOnSelect>'+
+		'<select id="clasesImg" class="tag" onchange="chageClass(this)" onselect="chageClass(this)" data-target="inputid" data-removeOnSelect>'+
 		'<option value=null selected="true">Elige opcion</option>'+
 		'<option value="rounded">rounded</option>'+
-		'<option value="thumbnail">thumbnail</option>'+
+		'<option value="hover">hover</option>'+
+		'<option value="border">border</option>'+
+		'<option value="border-double">border-double</option>'+
+		'<option value="border-grove">border-grove</option>'+
 		'<option value="circle">circle</option>'+
 		'</select>'+
 		'<input type="hidden" id="inputid" >'+
 		'</div>'+
 		'</div>';
 		$("#properties .form").append(html);
-		var classList = $(div)[0].className;
-		if(classList.indexOf("thumbnail") > -1){
-			$('#properties .tag').val('thumbnail');
-		}
-		if(classList.indexOf("rounded") > -1){
-			alert("thumb");
-		}
-		if(classList.indexOf("circle") > -1){
-			alert("thumb");
-		}
+		var classList =$(div).attr('class').split(/\s+/);
+		$.each( classList, function(index, item){
+			addSelectionTag(item, "#clasesImg", function(option){
+				$(".selection").removeClass(option);
+			});
+		});
 
 	}else if(tagName=="DIV"){
-		if($(div).hasClass("row")){
-			$(".properties .tag").text("Row");
-			console.log($(div).children("div").length);
-			$(div).children("div").each(function(index, child){
-				console.log($(this).attr("class"));
+
+		var html='<div class="tags tag-primary ">'+
+		'<div class="selection sm">'+
+		'</div>'+
+		'<select id="clasesDiv" class="tag" onchange="chageClass(this)" onselect="chageClass(this)" data-target="inputid" data-removeOnSelect>'+
+		'<option value=null selected="true">Elige opcion</option>'+
+		'<option value="rounded">rounded</option>'+
+		'<option value="hover">hover</option>'+
+		'<option value="border">border</option>'+
+		'<option value="border-double">border-double</option>'+
+		'<option value="border-grove">border-grove</option>'+
+		'<option value="circle">circle</option>'+
+		'</select>'+
+		'<input type="hidden" id="inputid" >'+
+		'</div>';
+		$("#properties .form").append(html);
+
+		var classList =$(div).attr('class').split(/\s+/);
+		$.each( classList, function(index, item){
+			addSelectionTag(item, "#clasesDiv", function(option){
+				$(".selection").removeClass(option);
 			});
+		});
+
+		if($(div).hasClass("row")){
+			$(".properties div.tag").text("Row");
+		}
+		if($(div).is('[class*="col-"]')){
+			$(".properties div.tag").text("Col");
 		}
 
 	}

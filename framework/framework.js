@@ -444,7 +444,7 @@ function ulpoadImage(idForm, url, img){
 	});
 }
 
-//--
+//--		Tags
 function tags(select){
 	var option = $(select).find("option:selected");
 	var input= $("#"+$(select).data("target"));
@@ -485,6 +485,93 @@ function tags(select){
 	}
 	$("#valueTag").html(input.val());
 }
+function tags(select, funcion, funcionRemove){
+	var option = $(select).find("option:selected");
+	var input= $("#"+$(select).data("target"));
+	funcion(option.val());
+
+	var inputVal=input.val();
+	input.val(inputVal+option.val()+",");
+
+	var span = document.createElement('span');
+	var att= document.createAttribute("data-value");
+	att.value=option.val();
+	span.setAttributeNode(att);
+	//span.data-value=option.val();
+	span.innerHTML = option.html();
+	span.className="tag";
+
+	var remove = document.createElement('span')
+	remove.className="fa fa-times-circle removeSpan";
+	remove.onclick=function(){
+		span.parentNode.removeChild(span);
+		var inputVal=input.val();
+		var value=$(span).attr("data-value");
+		inputVal=inputVal.replace(value+",", "");
+		input.val(inputVal);
+
+		if($(select)[0].hasAttribute("data-removeOnSelect")){
+			$(select).append("<option value='"+option.val()+"'>"+option.html()+"</option>");
+		}
+		funcionRemove(value);
+
+	}
+
+	span.appendChild(remove);
+
+	$(".tags .selection").append(span);
+
+	if($(select)[0].hasAttribute("data-removeOnSelect")){
+		$(select).find("option:selected").remove();
+	}
+	$("#valueTag").html(input.val());
+}
+
+function addSelectionTag(value, select, functionRemove){
+	var option = $(select).find("option[value='"+ value +"']");
+	if(option.length!=0){
+		var input= $("#"+$(select).data("target"));
+		//funcion(option.val());
+
+		var inputVal=input.val();
+		input.val(inputVal+option.val()+",");
+
+		var span = document.createElement('span');
+		var att= document.createAttribute("data-value");
+		att.value=option.val();
+		span.setAttributeNode(att);
+		//span.data-value=option.val();
+		span.innerHTML = option.html();
+		span.className="tag";
+
+		var remove = document.createElement('span')
+		remove.className="fa fa-times-circle removeSpan";
+		remove.onclick=function(){
+			span.parentNode.removeChild(span);
+			var inputVal=input.val();
+			var value=$(span).attr("data-value");
+			inputVal=inputVal.replace(value+",", "");
+			input.val(inputVal);
+
+			if($(select)[0].hasAttribute("data-removeOnSelect")){
+				$(select).append("<option value='"+option.val()+"'>"+option.html()+"</option>");
+			}
+			functionRemove(value);
+
+		}
+
+		span.appendChild(remove);
+
+		$(".tags .selection").append(span);
+
+		if($(select)[0].hasAttribute("data-removeOnSelect")){
+			$(select).find("option:selected").remove();
+		}
+		$("#valueTag").html(input.val());
+	}
+}
+
+//--Image Zoom
 
 function imageZoom(){
 	$("img.imageZoom").each(function(){
@@ -573,6 +660,8 @@ function createZoom(img){
 	});
 
 }
+
+//--Position Helper functions
 
 function findPos(obj){
 	var curleft = 0;

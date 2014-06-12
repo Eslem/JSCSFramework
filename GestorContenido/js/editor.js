@@ -3,8 +3,8 @@ $(document).ready(function(){
 	responsive();
 	ScrollVerticalNav();
 	loadEditor();
-	modal();
 	navbarResponsiveVertical();
+	modal();
 });
 var name;
 
@@ -28,7 +28,7 @@ function addBotones(element){
 	edit.className="bt xs";
 	edit.innerHTML="<i class='fa fa-edit'></i>";
 	$(edit).click(function(){
-	
+
 		if($(element).attr("draggable")=="true"){
 			$(element).attr("draggable", false);
 			$(".active").removeClass("active");
@@ -61,7 +61,7 @@ function addBotones(element){
 	move.innerHTML="<i class='fa fa-arrows'></i>";
 	$(move).click(function(){
 		if(!$(this).hasClass("active")){
-		
+
 			if($(element).attr("contenteditable")=="true"){
 				$(element).attr("contenteditable", false);
 				$(".editorRtf").fadeOut();
@@ -482,4 +482,12 @@ function loadRtf(elem){
 
 		showRtf(elem);
 	});
+}
+
+function preview(){
+	var iframe = document.getElementById('mobileIframe'),
+	iframedoc = iframe.contentDocument || iframe.contentWindow.document;
+
+	iframedoc.body.innerHTML = $("#page").html();
+	showModal("responsivePrev");
 }

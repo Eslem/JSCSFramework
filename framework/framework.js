@@ -313,7 +313,6 @@ function modal(){
 		{
 			$(".modal").each(function(){
 				var modal=$(this).attr('data-autoClose');
-				console.log(modal);
 				if(modal != 'false')	$(this).fadeOut();
 			});
 	});
@@ -751,6 +750,38 @@ function fadeOnScroll(){
 			a = $(this).offset().top + $(this).height();
 			b = $(window).scrollTop() + $(window).height();
 			if (a < b) $(this).fadeTo(700,1);
+		});
+	});
+}
+
+function onScroll(elem, funcion){
+	$(window).scroll(function() {
+		$(elem).each(	function(){
+			a = $(this).offset().top; //+ $(elem).height();
+			b = $(window).scrollTop() + $(window).height();
+			if (a < b) {
+				funcion(this);
+			}
+		});
+	});
+}
+
+function scrollToTop(){
+	$("html, body").animate({ scrollTop: 0 }, "slow");
+	return false;
+}
+
+function scrollToElement(elem){
+	$('html, body').animate({
+		scrollTop: $(elem).offset().top
+		}, "slow");
+	return false;
+}
+
+function scrollTo(){
+	$(".scrollTo li").each(function(){
+		$(this).click(function(){
+			scrollToElement($(this).find("a").attr("href"));
 		});
 	});
 }

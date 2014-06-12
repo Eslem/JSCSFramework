@@ -434,20 +434,31 @@ function prepareDrag(){
 function savePage(button){
 	$("#spanSave").text("");
 	$("#loaderSave").slideDown();
-	$.ajax({
-		type:"POST",
-		url:"php/pagesRequests.php",
-		data:{
-			name:name,
-			wth:'save',
-			html:$("#page").html()
-		},
-		success:function(data){
-			$("#spanSave").text("Saved");
-			$("#loaderSave").slideUp();
-			setTimeout(function(){$("#spanSave").text("Save");}, 5000);
+	$(".selection").removeClass("selection");
+	var imagen="";
+	html2canvas($("#page")[0], {
+		onrendered: function(canvas) {
+			imagen = canvas.toDataURL("image/png");
+
+			$.ajax({
+				type:"POST",
+				url:"php/pagesRequests.php",
+				data:{
+					name:name,
+					img:imagen,
+					wth:'save',
+					html:$("#page").html()
+					
+				},
+				success:function(data){
+					$("#spanSave").text("Saved");
+					$("#loaderSave").slideUp();
+					setTimeout(function(){$("#spanSave").text("Save");}, 5000);
+				}
+			});
 		}
 	});
+
 }
 
 function changeSrcImg(){

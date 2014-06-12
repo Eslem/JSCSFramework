@@ -112,7 +112,7 @@ li.properties{
 }
 
 
-[draggable] {
+[draggable=true] {
 	cursor: -webkit-grab; cursor: -moz-grab;
 }
 
@@ -194,6 +194,7 @@ div.botonesElem{
 	width:auto;
 	height:auto;
 	position:absolute;
+	border-radius:3px;	
 }
 div.botonesElem button{
 	color:#999;

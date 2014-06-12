@@ -23,10 +23,12 @@
 				min-height: 15px;
 				border:1px solid #1DADB8;
 			}
-			
+
 			div.row, div.container{
 				min-height:30px;
 			}
+
+
 		</style>
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -36,7 +38,7 @@
 		<script type="text/javascript">
 
 
-			
+
 
 
 		</script>
@@ -74,7 +76,8 @@
 
 						<li><hr class="primary"></li>
 
-						<li><button class="bt event" onclick="savePage(this)"><span id="spanSave">Save</span> <div id="loaderSave" class="loader">Loading...</div></button></li>
+						<li><button class="bt event" onclick="savePage(this)"><span id="spanSave">Save</span> <div id="loaderSave" class="loader">Loading...</div></button>
+						<button class="bt info" data-function="launchModal" data-modalId="responsivePrev">Preview <i class="fa fa-mobile xl"></i></button></li>
 
 
 					</ul>
@@ -85,6 +88,14 @@
 
 				</div>
 			</div>
+			
+			<div class="modal sm" id="responsivePrev" data-autoClose="true">
+			<div class="modal-content">
+				<iframe width="360px" height="640" src="http://eslem.github.io/SlemFramework/javascript.html"></iframe>
+
+				</div>
+			</div>
+		</div>
 		</div>
 	</body>
 </html>

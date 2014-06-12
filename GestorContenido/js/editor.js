@@ -3,6 +3,7 @@ $(document).ready(function(){
 	responsive();
 	ScrollVerticalNav();
 	loadEditor();
+	modal();
 	navbarResponsiveVertical();
 });
 var name;
@@ -19,27 +20,79 @@ function loadEditor(){
 	});
 }
 
-function addBotones(elem){
+function addBotones(element){
 	var div=document.createElement("div");
 	div.className="botonesElem";
+
+	var edit=document.createElement("button");
+	edit.className="bt xs";
+	edit.innerHTML="<i class='fa fa-edit'></i>";
+	$(edit).click(function(){
+	
+		if($(element).attr("draggable")=="true"){
+			$(element).attr("draggable", false);
+			$(".active").removeClass("active");
+		}
+
+		if(!$(this).hasClass("active")){
+			$(this).addClass("active")
+			$(element).attr("contenteditable", true);
+			showRtf(element);
+		}
+		else {
+			$(this).removeClass("active")
+			$(element).attr("contenteditable", false);
+			$(".editorRtf").fadeOut();
+		}
+
+	});
+
+	var remove=document.createElement("button");
+	remove.className="bt xs";
+	remove.innerHTML="<i class='fa fa-trash-o'></i>";
+	$(remove).click(function(){
+		$(".editorRtf").fadeOut();
+		$(div).fadeOut();
+		$(element).remove();
+	});
+
+	var move=document.createElement("button");
+	move.className="bt xs";
+	move.innerHTML="<i class='fa fa-arrows'></i>";
+	$(move).click(function(){
+		if(!$(this).hasClass("active")){
+		
+			if($(element).attr("contenteditable")=="true"){
+				$(element).attr("contenteditable", false);
+				$(".editorRtf").fadeOut();
+				$(".active").removeClass("active");
+			}		
+
+			elem=element;
+			$(this).addClass("active");			
+			$(element).attr("draggable", true);
+			element.addEventListener('dragstart', dragEvent);
+		}
+		else {
+			$(this).removeClass("active");
+		}
+	});
+
+
+	div.appendChild(edit);
+	div.appendChild(move);
+	div.appendChild(remove);
 	document.body.appendChild(div);
-	div.innerHTML="<button class='bt xs'><i class='fa fa-arrows' 'moveElem("+div+")'></i></button><button class='bt xs' onclick='editElem("+div+")'><i class='fa fa-edit'></i></button><button class='bt xs' 'removeElem("+div+")'><i class='fa fa-trash-o'></i></button>";
-	var pos=findPos(elem);
-	var width=$(elem).width();
-	var height=$(elem).height();
 
-
-
+	var pos=findPos(element);
+	var width=$(element).width();
+	var height=$(element).height();
 	var x=pos[0]+width-$(div).width();
 	var y=pos[1]+height;
 
 	var newPos=[x,y];
 
 	setPos(div,newPos);
-}
-
-function editElem(elem){
-	console.log($(elem).html());
 }
 
 function loadFunctions(){
@@ -57,9 +110,7 @@ function loadFunctions(){
 
 		addBotones(this);
 
-		$(this).attr("draggable", true);
-		/*elem=this;
-		this.addEventListener('dragstart', dragEvent);*/
+
 		$(document).mouseup(function()
 			{
 				$(div).removeClass("selection");
@@ -68,6 +119,8 @@ function loadFunctions(){
 				$(".properties .tag").text("Tag");
 				$("#properties .form").html("");
 				$("body").find(".botonesElem").remove();
+				$(div).attr("draggable", false);
+				$(div).attr("contenteditable", false);
 		});
 		$(this).mouseup(function()
 			{
@@ -81,24 +134,24 @@ function loadFunctions(){
 			return false;
 		});
 	});
-
+	/*
 	$("#page p, #page :header").dblclick(function(){
-		var div=$(this);
-		$(this).attr("contenteditable", "true");
-		$(document).mouseup(function()
-			{
-				$(div).attr("contenteditable", "false");
-		});
-		$(this).mouseup(function()
-			{
-				return false;
-		});
-		$(".navbar-vertical").mouseup(function()
-			{
-				return false;
-		});
-		showRtf(this);
+	var div=$(this);
+	$(this).attr("contenteditable", "true");
+	$(document).mouseup(function()
+	{
+	$(div).attr("contenteditable", "false");
 	});
+	$(this).mouseup(function()
+	{
+	return false;
+	});
+	$(".navbar-vertical").mouseup(function()
+	{
+	return false;
+	});
+	showRtf(this);
+	});*/
 
 	$(".colors div").click(function(){
 		$(".selection").addClass($(this).attr("class"));

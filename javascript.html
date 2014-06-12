@@ -23,6 +23,63 @@
 				width: 100%;
 				display:block;
 			}
+			#sec1{
+				height: 1000px;
+				margin: 0px;
+				width: 100%;
+				max-width: 1920px;
+				position: relative; 
+				color:#fff;
+				padding:50px;
+			}
+			#sec2{
+				background-color:#000;
+				height: 250px;
+				margin: 0 auto;
+				width: 100%;
+				max-width: 1920px;
+				position: relative; 
+				color:#fff;
+				padding:50px;
+			}
+
+			#sec3{
+				min-height: 100%;
+				margin: 0 auto;
+				width: 100%;
+				max-width: 1920px;
+				position: relative; 
+				color:#fff;
+				padding:50px;
+				height: 1000px;
+			}
+			#sec4{
+				height: 1000px;
+				margin: 0 auto;
+				width: 100%;
+				max-width: 1920px;
+				position: relative; 
+				color:#fff;
+				padding:50px;
+
+			}
+			#sec5{
+				height: 1000px;
+				margin: 0 auto;
+				width: 100%;
+				max-width: 1920px;
+				position: relative; 
+				color:#fff;
+				padding:50px;
+
+			}
+			
+			#parallaxBg{
+				/*display:none;*/
+			}
+
+
+
 
 		</style>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -41,6 +98,8 @@
 				navbarResponsiveVertical();
 				imageZoom();
 				rtfEditor(".rtf");
+				pxBackground();
+				fadeOnScroll();
 			});
 		</script>
 	</head>
@@ -246,6 +305,53 @@
 				</div>
 
 			</div>
+		</div>
+
+		<hr class="primary">
+
+		<div class="container">
+
+			<h3 class="primary">Parallax Background && Fade on Scroll</h3>
+			<div class="container">
+				<button class="bt primary" onclick="$('#parallaxBg').slideToggle()">See Demo</button>
+			</div>
+
+		</div>
+		<div class="parallaxBg" id="parallaxBg">
+			<section id="sec1" data-type="background" data-speed="15" data-bgImage="images/skyrim.jpg">
+				<h2  class="fadeOnScroll">Titulo de la pagina</h2>
+			</section>
+			<section id="sec2" data-type="background" data-speed="15" data-bgImage="images/eye.jpg">
+				<article>
+					<div class="container row fadeOnScroll">
+						<div class="col-md-4">texto</div>
+						<div class="col-md-4">texto</div>
+						<div class="col-md-4">texto</div>
+					</div>
+				</article>
+			</section>
+			<section id="sec3" data-type="background" data-speed="15"  data-bgImage="images/eye.jpg">
+				<article>
+					<div class="container row fadeOnScroll">
+						<div class="col-md-4 col-md-offset-7">
+							<h3>Seccion</h3>
+							<p>texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext</p>
+						</div>
+					</div>
+				</article>
+			</section>
+			<section id="sec4" data-type="background" data-speed="15"  data-bgImage="images/cat.jpg">
+				<article  class="fadeOnScroll">
+					<h3>Header</h3>
+					<img src="images/pc.png" width="250">
+				</article>
+			</section>
+			<section id="sec5" data-type="background" data-speed="15"  data-bgImage="images/angel.jpg">
+				<article  class="fadeOnScroll">
+					<h3>GoodBye!</h3>
+					<img src="images/skyrim.jpg" width="100">
+				</article>
+			</section>
 		</div>
 
 		<hr class="primary">

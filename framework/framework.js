@@ -568,6 +568,7 @@ function createZoom(img){
 	});
 
 	$(window).scroll(function(){
+		var positionHover = div.getBoundingClientRect();
 		position = $(img)[0].getBoundingClientRect();
 		parentPos = $(img).parent()[0].getBoundingClientRect();
 		target.style.top=position.top+"px";
@@ -671,7 +672,6 @@ function loadRtf(elem){
 function showRtf(elem){
 	if($(".editorRtf").length == 0){
 		loadRtf(elem);
-
 	}else{
 		$(".editorRtf").fadeIn().css("display","inline-block");
 		var pos=findPos(elem);
@@ -725,4 +725,34 @@ function formatRtf(format, editor, value){
 	}
 	document.execCommand(format, false, value);
 	$(editor).focus();
+}
+
+function pxBackground(){
+	//Need data-type=background	data-bgImage=image, [data-speed]
+	$('section[data-type="background"]').each(function(){
+		var $bgobj = $(this); 
+		var img =$bgobj.attr("data-bgImage");
+		$bgobj.css({background:" url('"+img+"') 50% 0 repeat fixed"});
+
+		$(window).scroll(function() {
+			var speed=null;
+			speed=$bgobj.data('speed');
+			if(speed==null) speed=15;
+			var yPos = -($(window).scrollTop() /speed);
+
+			var coords = '50% '+ yPos + 'px';
+
+			$bgobj.css({ backgroundPosition: coords });
+		});
+	});   
+}
+
+function fadeOnScroll(){
+	$(window).scroll(function() {
+		$(".fadeOnScroll").each(function(){
+			a = $(this).offset().top + $(this).height();
+			b = $(window).scrollTop() + $(window).height();
+			if (a < b) $(this).fadeTo(700,1);
+		});
+	});
 }

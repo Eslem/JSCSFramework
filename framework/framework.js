@@ -757,7 +757,7 @@ function fadeOnScroll(){
 function onScroll(elem, funcion){
 	$(window).scroll(function() {
 		$(elem).each(	function(){
-			a = $(this).offset().top; //+ $(elem).height();
+			a = $(this).offset().top + $(this).height();
 			b = $(window).scrollTop() + $(window).height();
 			if (a < b) {
 				funcion(this);

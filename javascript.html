@@ -73,9 +73,9 @@
 				padding:50px;
 
 			}
-			
-			#parallaxBg{
-				/*display:none;*/
+
+			.grid_block{
+				opacity:0.1;
 			}
 
 
@@ -100,11 +100,36 @@
 				rtfEditor(".rtf");
 				pxBackground();
 				fadeOnScroll();
+				scrollTo();
+
+				onScroll(".grid_block", function(el){
+					$(el).animate({opacity:1}, 1000);
+				});
+
 			});
+
+
 		</script>
 	</head>
 	<body>
+		<hr>
 		<div class="container">
+			<h2 class="primary">Scroll To</h2>
+			<div class="container">
+				<ul class="nav nav-pills scrollTo">
+					<li><a href="#slider">Slider</a></li>
+					<li><a href="#dropdown">DropDown</a></li>
+					<li><a href="#modal">Modal</a></li>
+					<li><a href="#slide">Slide</a></li>
+					<li><a href="#tags">Tags</a></li>
+					<li><a href="#imagezoom">Image Zoom</a></li>
+					<li><a href="#pxbg">PXBG AutoFade</a></li>
+					<li><a href="#rtfeditor">Rtf Editor</a></li>
+					<li><a href="#autogrid">AutoGrid</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="container" id="slider">
 			<h2 class="primary">Slider</h2>
 			<div class="container border-black">
 				<div class="slider" data-time="5"> 
@@ -164,7 +189,7 @@
 			</div>
 		</div>
 		<hr>
-		<div class="container">
+		<div class="container" id="dropdown">
 			<h2 class="primary">Dropdown</h2>
 			<div class="border container padding" >
 				<ul class="nav nav-pills">
@@ -191,15 +216,15 @@
 
 		</div>
 		<hr class="primary">
-		<div class="container">
+		<div class="container" id="modal">
 			<h2 class="primary">Modal</h2>
 			<div class="container">
 				<ul class="nav nav-pills">
-					<li class="padding"  data-function="launchModal" data-modalId="modal"><button class="bt primary">Modal</button></li>
-					<li class="padding"  data-function="launchModal" data-modalId="modal"><button class="bt primary">Modal small</button></li>
+					<li class="padding"  data-function="launchModal" data-modalId="modal1"><button class="bt primary">Modal</button></li>
+					<li class="padding"  data-function="launchModal" data-modalId="modalSm"><button class="bt primary">Modal small</button></li>
 				</ul>
 			</div>
-			<div class="modal" id="modal">
+			<div class="modal" id="modal1">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="bt modal-close noStyle" data-function="closeModal">&times;</button>
@@ -240,7 +265,7 @@
 		</div>
 		<hr class="primary">
 
-		<div class="container">
+		<div class="container" id="slide">
 			<h2 class="primary"> Slide</h2>
 			<div class="panel">
 				<div class="panel-header"><h3 class="pointer" href="#" data-function="slide" data-target="#panel1" onclick="toggleSlide(this)">Panel header</h3></div>
@@ -251,7 +276,7 @@
 		</div>
 		<hr class="primary">
 
-		<div class="container">
+		<div class="container" id="tabs">
 			<h2 class="primary">Tabs</h2>
 			<div class="container">
 				<ul class="nav nav-pills tabs">
@@ -275,8 +300,8 @@
 			</div>
 		</div>
 		<hr class="primary">
-
-		<div class="container">
+		<div class="container" id="tags">
+			<h2 class="primary">Tags Select</h2>
 			<div class="tags tag-primary ">
 				<div class="selection sm">
 
@@ -297,7 +322,7 @@
 
 		<div class="container">
 
-		<h3 class="primary">Image Zoom</h3>
+		<h2 class="primary" id="imagezoom">Image Zoom</h2>
 		<div class="container">
 			<div class="row">
 				<div class="col-2 imageNormal">
@@ -309,9 +334,9 @@
 
 		<hr class="primary">
 
-		<div class="container">
+		<div class="container" id="pxbg">
 
-			<h3 class="primary">Parallax Background && Fade on Scroll</h3>
+			<h2 class="primary">Parallax Background && Fade on Scroll</h2>
 			<div class="container">
 				<button class="bt primary" onclick="$('#parallaxBg').slideToggle()">See Demo</button>
 			</div>
@@ -356,8 +381,8 @@
 
 		<hr class="primary">
 
+		<h2 class="primary" id="rtfeditor">Rich Text Editor</h2>
 		<div class="container">
-			<h3 class="primary">Rich Text Editor</h3>
 			<div class="rtf container padding border border-primary borderRadius">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut posuere est eget neque accumsan, vitae tristique libero facilisis. Curabitur posuere tristique magna, eget consequat leo egestas sit amet. Phasellus sed iaculis quam, et lobortis sapien. Maecenas mollis pretium interdum. Aenean congue at magna in blandit. Vestibulum vel tempor sapien. Donec elementum turpis in dui eleifend, posuere consequat tortor mollis. Nullam fringilla, tortor sed rhoncus vulputate, lacus tortor feugiat nisl, sed facilisis elit massa quis risus. Pellentesque eleifend quam eu nulla viverra, vitae gravida tellus rhoncus. Quisque arcu elit, hendrerit non euismod quis, mollis vitae mi. Fusce ornare adipiscing egestas. Quisque massa ligula, venenatis vel nibh sed, pharetra convallis elit. Aenean mollis neque eu nisi rutrum, id iaculis enim volutpat. Vivamus vulputate ipsum vel mauris ultrices, ac blandit turpis pretium. Fusce eu turpis vitae justo molestie faucibus et eget nibh. 
 			</div>
@@ -365,7 +390,7 @@
 
 		<hr class="primary">
 
-		<div class="container">
+		<div class="container" id="autogrid">
 			<h2 class="primary"> AutoAdjust Grid</h2>
 			<div class="container gridContainer">
 				<div class="grid" data-columns=4></div>
@@ -444,9 +469,6 @@
 			</div>
 
 		</div>
-
-
-
-
+		<button class="bt opacity black" style="position: fixed; right: 15px; bottom:15px;" onclick="scrollToTop()"><i class="fa fa-arrow-up"></i></button>
 	</body>
 </html>

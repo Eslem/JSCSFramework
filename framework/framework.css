@@ -559,6 +559,14 @@ span.helper.primary, span.helper.error, span.helper.success, span.helper.info, s
 	box-shadow:none;
 }
 
+bt.opacity{
+	opacity:0.4;
+}
+
+bt.opacity:hover{
+	opacity:1;
+}
+
 .bt.transparent{
 	border:1px solid #eee;
 	color:#eee;

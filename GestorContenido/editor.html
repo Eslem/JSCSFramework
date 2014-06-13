@@ -15,7 +15,6 @@
 		<meta name="revisit-after" content="15 days">
 		<title>Editor</title>
 		<link rel="stylesheet" type="text/css" href="../WebFramework/framework/framework.css">
-		<link rel="stylesheet" type="text/css" href="../framework/framework.css">
 		<link rel="stylesheet" type="text/css" href="css/editor.css">
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 		<style type="text/css">
@@ -33,20 +32,21 @@
 				padding:0px;
 				overflow: hidden;
 			}
+			#responsivePrevDesktop .modal-content{
+				width:1280px !important;
+				height:600px !important;
+				padding:0px;
+				overflow: hidden;
+			}
 
 
 		</style>
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script src="../WebFramework/framework/framework.js"></script>
-		<script src="../framework/framework.js"></script>
 		<script src="../WebFramework/framework/html2canvas.js"></script>
 		<script src="js/editor.js"></script>
 		<script type="text/javascript">
-
-
-
-
 
 		</script>
 	</head>
@@ -85,7 +85,7 @@
 
 						<li><button class="bt event" onclick="savePage(this)"><span id="spanSave">Save</span> <div id="loaderSave" class="loader">Loading...</div></button></li>
 						<li><button class="bt info" onclick="preview()">Preview <i class="fa fa-mobile xl"></i></button></li>
-						<li><a href="" id="linkPage" target="blank"><button class="bt info">Preview <i class="fa fa-laptop xl"></i></button></a></li>
+						<li><button class="bt info" onclick="previewDesktop()">Preview <i class="fa fa-laptop xl"></i></button></a></li>
 						
 
 					</ul>
@@ -103,7 +103,12 @@
 
 				</div>
 			</div>
-		</div>
+			<div class="modal sm" id="responsivePrevDesktop">
+			<div class="modal-content">
+				<iframe width="1280px" height="600px" id="mobileIframeDesktop"></iframe>
+
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

@@ -4,7 +4,7 @@ $(document).ready(function(){
 	ScrollVerticalNav();
 	loadEditor();
 	navbarResponsiveVertical();
-	modal();
+	modal();	
 });
 var name;
 
@@ -17,6 +17,7 @@ function loadEditor(){
 	name=getParameterByName("page");
 	$("#linkPage").attr("href", "pages/"+name+".html");
 	$( "#page" ).load( "pages/"+name+".html", function() {
+		changeSrcImg();
 		loadFunctions();
 	});
 }
@@ -160,7 +161,7 @@ function loadFunctions(){
 
 	prepareDrag();
 
-	changeSrcImg();
+	//changeSrcImg();
 }
 
 function changeImg(){
@@ -439,7 +440,7 @@ function savePage(button){
 	html2canvas($("#page")[0], {
 		onrendered: function(canvas) {
 			imagen = canvas.toDataURL("image/png");
-
+			resetSrcImg();
 			$.ajax({
 				type:"POST",
 				url:"php/pagesRequests.php",
@@ -453,6 +454,7 @@ function savePage(button){
 				success:function(data){
 					$("#spanSave").text("Saved");
 					$("#loaderSave").slideUp();
+					loadEditor();
 					setTimeout(function(){$("#spanSave").text("Save");}, 5000);
 				}
 			});
@@ -465,6 +467,14 @@ function changeSrcImg(){
 	$("#page img").each(function(){
 		var src=$(this).attr("src");
 		src="pages/"+src;
+		console.log(src);
+		$(this).attr("src", src);
+	});
+}
+function resetSrcImg(){
+	$("#page img").each(function(){
+		var src=$(this).attr("src");
+		src=src.replace("pages/", "");
 		console.log(src);
 		$(this).attr("src", src);
 	});
@@ -534,4 +544,12 @@ function preview(){
 
 	iframedoc.body.innerHTML = $("#page").html();
 	showModal("responsivePrev");
+}
+
+function previewDesktop(){
+	var iframe = document.getElementById('mobileIframeDesktop'),
+	iframedoc = iframe.contentDocument || iframe.contentWindow.document;
+
+	iframedoc.body.innerHTML = $("#page").html();
+	showModal("responsivePrevDesktop");
 }

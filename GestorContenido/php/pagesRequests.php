@@ -14,7 +14,9 @@
 
 		// decode the image data and save it to file
 		file_put_contents($file, base64_decode($uri));
-		echo $html;
+		
+		
+		file_put_contents("../pages/".$name. '.html', $html);
 	}
 
 	function remove(){

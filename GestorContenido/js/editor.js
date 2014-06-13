@@ -487,7 +487,7 @@ function loadRtf(elem){
 	var div= document.createElement("div");
 	div.className="parentRtf";
 	document.body.appendChild(div);
-	$(div).load("../WebFramework/framework/rtf.html", function(){
+	$(div).load("framework/rtf.html", function(){
 		$(".editorRtf ul li").click(function(ev){
 			$("li.selected").removeClass("selected");
 			$(this).addClass("selected");

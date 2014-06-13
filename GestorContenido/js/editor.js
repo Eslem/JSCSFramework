@@ -5,6 +5,7 @@ $(document).ready(function(){
 	loadEditor();
 	navbarResponsiveVertical();
 	modal();	
+
 });
 var name;
 
@@ -19,6 +20,7 @@ function loadEditor(){
 	$( "#page" ).load( "pages/"+name+".html", function() {
 		changeSrcImg();
 		loadFunctions();
+
 	});
 }
 
@@ -81,6 +83,7 @@ function loadFunctions(){
 		var newPos=[x,y];
 
 		setPos(elem,newPos);
+		prepareDrag();
 	});
 
 	/*
@@ -106,7 +109,7 @@ function loadFunctions(){
 		$(".selection").addClass($(this).attr("class"));
 	});
 
-	prepareDrag();
+
 
 	//changeSrcImg();
 }
@@ -263,6 +266,7 @@ var elem;
 var parent;
 var html;
 var dropped;
+var where=null;
 
 function addBotones(element){
 	var div=document.createElement("div");
@@ -316,7 +320,7 @@ function addBotones(element){
 			elem=element;
 			$(this).addClass("active");			
 			$(element).attr("draggable", true);
-			element.addEventListener('dragstart', dragEvent);
+			element.addEventListener('dragstart', dragStart);
 		}
 		else {
 			$(this).removeClass("active");
@@ -340,10 +344,10 @@ function addBotones(element){
 	setPos(div,newPos);
 }
 
-function dragEvent(e){
+function dragStart(e){
 	e.dataTransfer.effectAllowed = 'move';
 	e.dataTransfer.setData('text', $(this).data("function"));
-	
+
 	dropped=false;
 	elementDragged = this;
 	var width=$(elementDragged).width();
@@ -378,11 +382,14 @@ function prepareDrag(){
 
 	for (var i = 0; i < dragElements.length; i++) {
 
-		dragElements[i].addEventListener('dragstart', dragEvent);
+		dragElements[i].addEventListener('dragstart', dragStart);
 
 		dragElements[i].addEventListener('dragend', function(e) {
 			if (e.preventDefault) e.preventDefault(); 
 			if (e.stopPropagation) e.stopPropagation();
+
+			$(".bordeBefore").removeClass("bordeBefore");	
+			$(".bordeAfter").removeClass("bordeAfter");	
 
 			if($("#page").find(".elemento").length !=0){
 				$("#page").find(".elemento").remove();
@@ -400,6 +407,9 @@ function prepareDrag(){
 			if (e.preventDefault) e.preventDefault(); 
 			if (e.stopPropagation) e.stopPropagation();
 
+			$(".bordeBefore").removeClass("bordeBefore");	
+			$(".bordeAfter").removeClass("bordeAfter");	
+
 			e.dataTransfer.dropEffect = 'move';
 			$(this).addClass("over");
 			if(!$("#page").find(".elemento").length !=0){
@@ -408,14 +418,24 @@ function prepareDrag(){
 				var posEl=findPos(this);
 				var width=$(this).width();
 				var height=$(this).height();
-				if( (x<(posEl[0]+(width/4)))  || (y<(posEl[1]+(height/4)))){
-					$(elem).insertBefore(this);
+				var partX=width/4;
+				var partY=height/4;
+
+
+				if( (x<(posEl[0]+partX)) && (y<(posEl[1]+(partY*2))))
+				{
+					//$(elem).insertBefore(this);
+					$(this).addClass("bordeBefore");	
+					where="before";				
 				}
-				else if( (x>(posEl[0]+width-(width/4)))	||		(y>(posEl[1]+height-(height/4)))){
-					$(elem).insertAfter(this);
+				else if( (x>(posEl[0]+width-partX))	||	(y>(posEl[1]+height-partY*2)))
+				{
+					$(this).addClass("bordeAfter");	
+					where="after";
 				}
 				else{
 					$(this).append(elem);
+					where="in";
 				}
 			}
 
@@ -444,20 +464,16 @@ function prepareDrag(){
 
 			dropped=true;
 
-
-			if($("#page").find(".elemento").length !=0){
-				$("#page").find(".elemento").remove();
-			}
-
 			var x=e.clientX;
 			var y=e.clientY;
 			var posEl=findPos(this);
 			var width=$(this).width();
 			var height=$(this).height();
-			if( (x<(posEl[0]+(width/4)))  || (y<(posEl[1]+(height/4)))){
+
+			if(where=="before"){
 				$(elem).insertBefore(this);
 			}
-			else if( (x>(posEl[0]+width-(width/4)))	||		(y>(posEl[1]+height-(height/4)))){
+			else if( where=="after"){
 				$(elem).insertAfter(this);
 			}
 			else{

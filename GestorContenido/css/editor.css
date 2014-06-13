@@ -227,3 +227,11 @@ div.botonesElem button.active{
 	border-radius: 3px;
 	box-shadow: 0 0 0 1px #aaa inset; 
 }
+
+
+.bordeBefore{
+	box-shadow: -3px -3px 0px 0px red;
+}
+.bordeAfter{
+	box-shadow: 3px 3px 0px 0px red;
+}

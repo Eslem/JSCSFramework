@@ -22,81 +22,6 @@ function loadEditor(){
 	});
 }
 
-function addBotones(element){
-	var div=document.createElement("div");
-	div.className="botonesElem";
-
-	var edit=document.createElement("button");
-	edit.className="bt xs";
-	edit.innerHTML="<i class='fa fa-edit'></i>";
-	$(edit).click(function(){
-
-		if($(element).attr("draggable")=="true"){
-			$(element).attr("draggable", false);
-			$(".active").removeClass("active");
-		}
-
-		if(!$(this).hasClass("active")){
-			$(this).addClass("active")
-			$(element).attr("contenteditable", true);
-			showRtf(element);
-		}
-		else {
-			$(this).removeClass("active")
-			$(element).attr("contenteditable", false);
-			$(".editorRtf").fadeOut();
-		}
-
-	});
-
-	var remove=document.createElement("button");
-	remove.className="bt xs";
-	remove.innerHTML="<i class='fa fa-trash-o'></i>";
-	$(remove).click(function(){
-		$(".editorRtf").fadeOut();
-		$(div).fadeOut();
-		$(element).remove();
-	});
-
-	var move=document.createElement("button");
-	move.className="bt xs";
-	move.innerHTML="<i class='fa fa-arrows'></i>";
-	$(move).click(function(){
-		if(!$(this).hasClass("active")){
-
-			if($(element).attr("contenteditable")=="true"){
-				$(element).attr("contenteditable", false);
-				$(".editorRtf").fadeOut();
-				$(".active").removeClass("active");
-			}		
-
-			elem=element;
-			$(this).addClass("active");			
-			$(element).attr("draggable", true);
-			element.addEventListener('dragstart', dragEvent);
-		}
-		else {
-			$(this).removeClass("active");
-		}
-	});
-
-
-	div.appendChild(edit);
-	div.appendChild(move);
-	div.appendChild(remove);
-	document.body.appendChild(div);
-
-	var pos=findPos(element);
-	var width=$(element).width();
-	var height=$(element).height();
-	var x=pos[0]+width-$(div).width();
-	var y=pos[1]+height;
-
-	var newPos=[x,y];
-
-	setPos(div,newPos);
-}
-
 function loadFunctions(){
 
 	$("#page p, #page :header, #page img, #page div").click(function(ev){
@@ -136,6 +61,22 @@ function loadFunctions(){
 			return false;
 		});
 	});
+
+	$("#page p, #page :header, #page img, #page div").mouseover(function(ev){
+		var tag=$("this").prop("tagName");
+		ev.stopPropagation();
+		var elem=document.getElementById("tagName");
+		var pos=findPos(this);
+		var width=$(this).width();
+		var height=$(this).height();
+		var x=pos[0]+width-$(elem).width()-20;
+		var y=pos[1]+height;
+
+		var newPos=[x,y];
+
+		setPos(elem,newPos);
+	});
+
 	/*
 	$("#page p, #page :header").dblclick(function(){
 	var div=$(this);
@@ -162,11 +103,6 @@ function loadFunctions(){
 	prepareDrag();
 
 	//changeSrcImg();
-}
-
-function changeImg(){
-	var link=$("#imgSrc").val();
-	$(".selection").attr("src", link);
 }
 
 function chageClass(elem){
@@ -260,6 +196,8 @@ function properties(div){
 		'</select>'+
 
 		'<div class="colors center-text">'+
+		'	<div class="black">&nbsp;'+
+		'	</div>'+
 		'	<div class="primary">&nbsp;'+
 		'	</div>'+
 		'	<div class="error">&nbsp;'+
@@ -301,8 +239,6 @@ function properties(div){
 		});
 
 	}
-
-
 }
 
 
@@ -318,12 +254,96 @@ function changeHeader(){
 
 //--Dragg Drop
 var elem;
+var parent;
+
+function addBotones(element){
+	var div=document.createElement("div");
+	div.className="botonesElem";
+
+	var edit=document.createElement("button");
+	edit.className="bt xs";
+	edit.innerHTML="<i class='fa fa-edit'></i>";
+	$(edit).click(function(){
+
+		if($(element).attr("draggable")=="true"){
+			$(element).attr("draggable", false);
+			$(".active").removeClass("active");
+		}
+
+		if(!$(this).hasClass("active")){
+			$(this).addClass("active")
+			$(element).attr("contenteditable", true);
+			showRtf(element);
+		}
+		else {
+			$(this).removeClass("active")
+			$(element).attr("contenteditable", false);
+			$(".editorRtf").fadeOut();
+		}
+
+	});
+
+	var remove=document.createElement("button");
+	remove.className="bt xs";
+	remove.innerHTML="<i class='fa fa-trash-o'></i>";
+	$(remove).click(function(){
+		$(".editorRtf").fadeOut();
+		$(div).fadeOut();
+		$(element).remove();
+	});
+
+	var move=document.createElement("button");
+	move.className="bt xs";
+	move.innerHTML="<i class='fa fa-arrows'></i>";
+	$(move).click(function(){
+		parent=$(element).parent();
+		if(!$(this).hasClass("active")){
+			if($(element).attr("contenteditable")=="true"){
+				$(element).attr("contenteditable", false);
+				$(".editorRtf").fadeOut();
+				$(".active").removeClass("active");
+			}		
+
+			elem=element;
+			$(this).addClass("active");			
+			$(element).attr("draggable", true);
+			element.addEventListener('dragstart', dragEvent);
+		}
+		else {
+			$(this).removeClass("active");
+		}
+	});
+
+
+	div.appendChild(edit);
+	div.appendChild(move);
+	div.appendChild(remove);
+	document.body.appendChild(div);
+
+	var pos=findPos(element);
+	var width=$(element).width();
+	var height=$(element).height();
+	var x=pos[0]+width-$(div).width();
+	var y=pos[1]+height;
+
+	var newPos=[x,y];
+
+	setPos(div,newPos);
+}
 
 function dragEvent(e){
-
 	e.dataTransfer.effectAllowed = 'move';
 	e.dataTransfer.setData('text', $(this).data("function"));
 	elementDragged = this;
+	var width=$(elementDragged).width();
+	var height=$(elementDragged).height();
+
+	if($(elementDragged).prop("tagName")=="IMG"){
+		$(elementDragged).width(width);
+		$(parent).width(width);
+		$(parent).height(height); 
+	}
+
 	var type=$(this).data("function");
 
 	if(type=="header"){
@@ -341,16 +361,18 @@ function dragEvent(e){
 
 function prepareDrag(){
 	var dropZone= document.querySelectorAll('#page *');
-	var dragElements = document.querySelectorAll('#elements .element');
+	var dragElements = document.querySelectorAll('#elements .element, #page *');
 
 
 
 	for (var i = 0; i < dragElements.length; i++) {
-		// Event Listener for when the drag interaction starts.
+
 		dragElements[i].addEventListener('dragstart', dragEvent);
-		// Event Listener for when the drag interaction finishes.
+
 		dragElements[i].addEventListener('dragend', function(e) {
-			//elementDragged.className="";
+			if($("#page").find(".elemento").length !=0){
+				$("#page").find(".elemento").remove();
+			}
 		});
 
 	};
@@ -377,8 +399,6 @@ function prepareDrag(){
 				else{
 					$(this).append(elem);
 				}
-
-				//$(this).append(elem);
 			}
 
 			return false;
@@ -432,36 +452,7 @@ function prepareDrag(){
 	}
 }
 
-function savePage(button){
-	$("#spanSave").text("");
-	$("#loaderSave").slideDown();
-	$(".selection").removeClass("selection");
-	var imagen="";
-	html2canvas($("#page")[0], {
-		onrendered: function(canvas) {
-			imagen = canvas.toDataURL("image/png");
-			resetSrcImg();
-			$.ajax({
-				type:"POST",
-				url:"php/pagesRequests.php",
-				data:{
-					name:name,
-					img:imagen,
-					wth:'save',
-					html:$("#page").html()
-					
-				},
-				success:function(data){
-					$("#spanSave").text("Saved");
-					$("#loaderSave").slideUp();
-					loadEditor();
-					setTimeout(function(){$("#spanSave").text("Save");}, 5000);
-				}
-			});
-		}
-	});
-
-}
+//--Src Images
 
 function changeSrcImg(){
 	$("#page img").each(function(){
@@ -538,6 +529,8 @@ function loadRtf(elem){
 	});
 }
 
+//--Save & Preview
+
 function preview(){
 	var iframe = document.getElementById('mobileIframe'),
 	iframedoc = iframe.contentDocument || iframe.contentWindow.document;
@@ -552,4 +545,35 @@ function previewDesktop(){
 
 	iframedoc.body.innerHTML = $("#page").html();
 	showModal("responsivePrevDesktop");
+}
+
+function savePage(button){
+	$("#spanSave").text("");
+	$("#loaderSave").slideDown();
+	$(".selection").removeClass("selection");
+	var imagen="";
+	html2canvas($("#page")[0], {
+		onrendered: function(canvas) {
+			imagen = canvas.toDataURL("image/png");
+			resetSrcImg();
+			$.ajax({
+				type:"POST",
+				url:"php/pagesRequests.php",
+				data:{
+					name:name,
+					img:imagen,
+					wth:'save',
+					html:$("#page").html()
+
+				},
+				success:function(data){
+					$("#spanSave").text("Saved");
+					$("#loaderSave").slideUp();
+					loadEditor();
+					setTimeout(function(){$("#spanSave").text("Save");}, 5000);
+				}
+			});
+		}
+	});
+
 }

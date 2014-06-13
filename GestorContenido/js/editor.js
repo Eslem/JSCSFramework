@@ -68,7 +68,7 @@ function loadFunctions(){
 			if($(this).hasClass("row")) tag="row";
 			if($(this).is('[class*="col-"]')) tag="col";
 		}
-		
+
 		ev.stopPropagation();
 		var elem=document.getElementById("tagName");
 		elem.innerHTML=tag;
@@ -262,7 +262,7 @@ function changeHeader(){
 var elem;
 var parent;
 var html;
-var dropped=false;
+var dropped;
 
 function addBotones(element){
 	var div=document.createElement("div");
@@ -305,6 +305,7 @@ function addBotones(element){
 	move.innerHTML="<i class='fa fa-arrows'></i>";
 	$(move).click(function(){
 		parent=$(element).parent();
+		html=$("#page").html();
 		if(!$(this).hasClass("active")){
 			if($(element).attr("contenteditable")=="true"){
 				$(element).attr("contenteditable", false);
@@ -344,9 +345,7 @@ function dragEvent(e){
 	e.dataTransfer.setData('text', $(this).data("function"));
 	
 	dropped=false;
-	html=$("#page").html();
 	elementDragged = this;
-	
 	var width=$(elementDragged).width();
 	var height=$(elementDragged).height();
 
@@ -382,10 +381,16 @@ function prepareDrag(){
 		dragElements[i].addEventListener('dragstart', dragEvent);
 
 		dragElements[i].addEventListener('dragend', function(e) {
+			if (e.preventDefault) e.preventDefault(); 
+			if (e.stopPropagation) e.stopPropagation();
+
 			if($("#page").find(".elemento").length !=0){
 				$("#page").find(".elemento").remove();
-			}			
-			if(!dropped) $("#page").html(html); loadFunctions();
+			}
+			if(!dropped){
+				$("#page").html(html);
+				loadFunctions();
+			}
 		});
 
 	};
@@ -434,9 +439,10 @@ function prepareDrag(){
 		});
 
 		dropZone[i].addEventListener('drop', function(e) {
-			dropped=true;
 			if (e.preventDefault) e.preventDefault(); 
 			if (e.stopPropagation) e.stopPropagation();
+
+			dropped=true;
 
 
 			if($("#page").find(".elemento").length !=0){

@@ -17,11 +17,23 @@ function getParameterByName(name) {
 function loadEditor(){
 	name=getParameterByName("page");
 	$("#linkPage").attr("href", "pages/"+name+".html");
-	$( "#page" ).load( "pages/"+name+".html", function() {
+	$.ajax({
+		url:"pages/"+name+".html",
+		cache:false,
+		success:function(data){
+		$("#page").html(data);
 		changeSrcImg();
 		loadFunctions();
-
+		prepareDrag();
+		}
 	});
+	
+	/*$( "#page" ).load( "pages/"+name+".html", function() {
+		changeSrcImg();
+		loadFunctions();
+		prepareDrag();
+
+	});*/
 }
 
 function loadFunctions(){
@@ -34,12 +46,11 @@ function loadFunctions(){
 		$(this).addClass("selection");
 		properties(div);
 		var pos=$(this).css("position");
-
 		$(this).css("position", "relative");
 
 		addBotones(this);
 
-
+		//Handle Clicks
 		$(document).mouseup(function()
 			{
 				$(div).removeClass("selection");
@@ -64,14 +75,14 @@ function loadFunctions(){
 		});
 	});
 
+	//--Show of TagName
 	$("#page p, #page :header, #page img, #page div").mouseover(function(ev){
+		ev.stopPropagation();
 		var tag=$(this).prop("tagName");
 		if(tag=="DIV"){
 			if($(this).hasClass("row")) tag="row";
 			if($(this).is('[class*="col-"]')) tag="col";
-		}
-
-		ev.stopPropagation();
+		}		
 		var elem=document.getElementById("tagName");
 		elem.innerHTML=tag;
 		var pos=findPos(this);
@@ -79,38 +90,17 @@ function loadFunctions(){
 		var height=$(this).height();
 		var x=pos[0];
 		var y=pos[1]-$(elem).height()-5;
-
+		
 		var newPos=[x,y];
-
+		
 		setPos(elem,newPos);
-		prepareDrag();
-	});
 
-	/*
-	$("#page p, #page :header").dblclick(function(){
-	var div=$(this);
-	$(this).attr("contenteditable", "true");
-	$(document).mouseup(function()
-	{
-	$(div).attr("contenteditable", "false");
 	});
-	$(this).mouseup(function()
-	{
-	return false;
-	});
-	$(".navbar-vertical").mouseup(function()
-	{
-	return false;
-	});
-	showRtf(this);
-	});*/
 
 	$(".colors div").click(function(){
 		$(".selection").addClass($(this).attr("class"));
 	});
-
-
-
+	//prepareDrag();
 	//changeSrcImg();
 }
 
@@ -124,6 +114,7 @@ function chageClass(elem){
 	);
 }
 
+//--Properties of the element in the left menu
 function properties(div){
 	var tagName=$(div).prop("tagName");
 	var tag=$("#properties").attr("data-target", div);
@@ -250,15 +241,11 @@ function properties(div){
 	}
 }
 
-
 function changeHeader(){
 	var header=$("#headerSelection").val();
 	var clases=$(".selection")[0].className;
 	$(".selection").replaceWith($('<'+header+' class="'+clases+'">' + $(".selection").html() + '</'+header+'>'));
-
-	//Reload Clicks
 	loadFunctions();
-
 }
 
 //--Dragg Drop
@@ -364,7 +351,7 @@ function dragStart(e){
 	if(type=="header"){
 		elem='<h3 class="elemento">Header</h3>'; 
 	}else if(type=="img"){
-		elem='<img class="elemento" src="images/angel.jpg">'; 
+		elem='<img class="elemento" src="pages/images/angel.jpg">'; 
 	}else if(type=="p"){
 		elem='<p class="elemento">Text</h3>'; 
 	}else if(type=="row"){
@@ -374,117 +361,114 @@ function dragStart(e){
 	}
 }
 
+function dragEnd(e){
+	e.preventDefault(); 
+	e.stopPropagation();
+
+	$(".bordeBefore").removeClass("bordeBefore");	
+	$(".bordeAfter").removeClass("bordeAfter");	
+
+	if($("#page").find(".elemento").length !=0){
+		$("#page").find(".elemento").remove();
+	}
+	if(!dropped){
+		$("#page").html(html);
+		loadFunctions();
+	}
+}
+
+function dragOver(e){
+	e.preventDefault(); 
+	e.stopPropagation();
+
+	$(".bordeBefore").removeClass("bordeBefore");	
+	$(".bordeAfter").removeClass("bordeAfter");	
+
+	e.dataTransfer.dropEffect = 'move';
+	$(this).addClass("over");
+	if(!$("#page").find(".elemento").length !=0){
+		var x=e.clientX;
+		var y=e.clientY;
+		var posEl=findPos(this);
+		var width=$(this).width();
+		var height=$(this).height();
+		var partX=width/4;
+		var partY=height/4;
+
+
+		if( (x<(posEl[0]+partX)) && (y<(posEl[1]+(partY*2))))
+		{
+			//$(elem).insertBefore(this);
+			$(this).addClass("bordeBefore");	
+			where="before";				
+		}
+		else if( (x>(posEl[0]+width-partX))	||	(y>(posEl[1]+height-partY*2)))
+		{
+			$(this).addClass("bordeAfter");	
+			where="after";
+		}
+		else{
+			$(this).append(elem);
+			where="in";
+		}
+	}
+
+	return false;
+}
+
+function dragLeave(e){
+	$(this).removeClass("over");
+	if($("#page").find(".elemento").length !=0){
+		$("#page").find(".elemento").remove();
+	}
+}
+
+function dropEvent(e){
+	e.preventDefault(); 
+	e.stopPropagation();
+
+	dropped=true;
+
+	var x=e.clientX;
+	var y=e.clientY;
+	var posEl=findPos(this);
+	var width=$(this).width();
+	var height=$(this).height();
+
+	if(where=="before"){
+		$(elem).insertBefore(this);
+	}
+	else if( where=="after"){
+		$(elem).insertAfter(this);
+	}
+	else{
+		$(this).append(elem);
+	}
+
+	$(".over").removeClass("over");
+	$(".elemento").removeClass("elemento");
+	loadFunctions();
+
+	$(elem)[0].addEventListener('dragstart', dragStart);
+	$(elem)[0].addEventListener('dragend', dragEnd);
+	$(elem)[0].addEventListener('dragover', dragOver);
+	$(elem)[0].addEventListener('dragleave', dragLeave);
+	$(elem)[0].addEventListener('drop', dropEvent);
+}
+
 function prepareDrag(){
 	var dropZone= document.querySelectorAll('#page *');
 	var dragElements = document.querySelectorAll('#elements .element, #page *');
 
-
-
 	for (var i = 0; i < dragElements.length; i++) {
-
 		dragElements[i].addEventListener('dragstart', dragStart);
-
-		dragElements[i].addEventListener('dragend', function(e) {
-			if (e.preventDefault) e.preventDefault(); 
-			if (e.stopPropagation) e.stopPropagation();
-
-			$(".bordeBefore").removeClass("bordeBefore");	
-			$(".bordeAfter").removeClass("bordeAfter");	
-
-			if($("#page").find(".elemento").length !=0){
-				$("#page").find(".elemento").remove();
-			}
-			if(!dropped){
-				$("#page").html(html);
-				loadFunctions();
-			}
-		});
-
+		dragElements[i].addEventListener('dragend', dragEnd);
 	};
 
 	for (var i = 0; i < dropZone.length; i++) {
-		dropZone[i].addEventListener('dragover', function(e) {
-			if (e.preventDefault) e.preventDefault(); 
-			if (e.stopPropagation) e.stopPropagation();
-
-			$(".bordeBefore").removeClass("bordeBefore");	
-			$(".bordeAfter").removeClass("bordeAfter");	
-
-			e.dataTransfer.dropEffect = 'move';
-			$(this).addClass("over");
-			if(!$("#page").find(".elemento").length !=0){
-				var x=e.clientX;
-				var y=e.clientY;
-				var posEl=findPos(this);
-				var width=$(this).width();
-				var height=$(this).height();
-				var partX=width/4;
-				var partY=height/4;
-
-
-				if( (x<(posEl[0]+partX)) && (y<(posEl[1]+(partY*2))))
-				{
-					//$(elem).insertBefore(this);
-					$(this).addClass("bordeBefore");	
-					where="before";				
-				}
-				else if( (x>(posEl[0]+width-partX))	||	(y>(posEl[1]+height-partY*2)))
-				{
-					$(this).addClass("bordeAfter");	
-					where="after";
-				}
-				else{
-					$(this).append(elem);
-					where="in";
-				}
-			}
-
-			return false;
-		});
-
-		/*dropZone[i].addEventListener('dragenter', function(e) {
-		$(this).addClass("over");
-		if(!$(this).find(".elemento").length !=0){
-		$(this).append(elem);
-		}
-
-		});*/
-
-		// Event Listener for when the dragged element leaves the drop zone.
-		dropZone[i].addEventListener('dragleave', function(e) {
-			$(this).removeClass("over");
-			if($("#page").find(".elemento").length !=0){
-				$("#page").find(".elemento").remove();
-			}
-		});
-
-		dropZone[i].addEventListener('drop', function(e) {
-			if (e.preventDefault) e.preventDefault(); 
-			if (e.stopPropagation) e.stopPropagation();
-
-			dropped=true;
-
-			var x=e.clientX;
-			var y=e.clientY;
-			var posEl=findPos(this);
-			var width=$(this).width();
-			var height=$(this).height();
-
-			if(where=="before"){
-				$(elem).insertBefore(this);
-			}
-			else if( where=="after"){
-				$(elem).insertAfter(this);
-			}
-			else{
-				$(this).append(elem);
-			}
-
-			$(".over").removeClass("over");
-			$(".elemento").removeClass("elemento");
-			loadFunctions();
-			return false;
-		});
+		dropZone[i].addEventListener('dragover', dragOver);
+		dropZone[i].addEventListener('dragleave', dragLeave);
+		dropZone[i].addEventListener('drop', dropEvent);
 	}
 }
 
@@ -514,7 +498,7 @@ function loadRtf(elem){
 	var div= document.createElement("div");
 	div.className="parentRtf";
 	document.body.appendChild(div);
-	$(div).load("framework/rtf.html", function(){
+	$(div).load("../WebFramework/framework/rtf.html", function(){
 		$(".editorRtf ul li").click(function(ev){
 			$("li.selected").removeClass("selected");
 			$(this).addClass("selected");
@@ -600,7 +584,6 @@ function savePage(button){
 					img:imagen,
 					wth:'save',
 					html:$("#page").html()
-
 				},
 				success:function(data){
 					$("#spanSave").text("Saved");

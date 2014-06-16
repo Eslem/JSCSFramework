@@ -21,17 +21,17 @@ function loadEditor(){
 		url:"pages/"+name+".html",
 		cache:false,
 		success:function(data){
-		$("#page").html(data);
-		changeSrcImg();
-		loadFunctions();
-		prepareDrag();
+			$("#page").html(data);
+			changeSrcImg();
+			loadFunctions();
+			prepareDrag();
 		}
 	});
-	
+
 	/*$( "#page" ).load( "pages/"+name+".html", function() {
-		changeSrcImg();
-		loadFunctions();
-		prepareDrag();
+	changeSrcImg();
+	loadFunctions();
+	prepareDrag();
 
 	});*/
 }
@@ -90,9 +90,9 @@ function loadFunctions(){
 		var height=$(this).height();
 		var x=pos[0];
 		var y=pos[1]-$(elem).height()-5;
-		
+
 		var newPos=[x,y];
-		
+
 		setPos(elem,newPos);
 
 	});
@@ -378,6 +378,25 @@ function dragEnd(e){
 }
 
 function dragOver(e){
+
+
+	var tag=$(this).prop("tagName");
+	if(tag=="DIV"){
+		if($(this).hasClass("row")) tag="row";
+		if($(this).is('[class*="col-"]')) tag="col";
+	}		
+	var tagElem=document.getElementById("tagName");
+	tagElem.innerHTML=tag;
+	var pos=findPos(this);
+	var width=$(this).width();
+	var height=$(this).height();
+	var x=pos[0];
+	var y=pos[1]-$(tagElem).height()-5;
+
+	var newPos=[x,y];
+
+	setPos(tagElem,newPos);
+
 	e.preventDefault(); 
 	e.stopPropagation();
 

@@ -485,7 +485,8 @@ function tags(select){
 	}
 	$("#valueTag").html(input.val());
 }
-function tags(select, funcion, funcionRemove){
+
+function tagsFunction(select, funcion, funcionRemove){
 	var option = $(select).find("option:selected");
 	var input= $("#"+$(select).data("target"));
 	funcion(option.val());
@@ -664,27 +665,46 @@ function createZoom(img){
 //--Position Helper functions
 
 function findPos(obj){
-	var curleft = 0;
+	/*var curleft = 0;
 	var curtop = 0;
 	if(obj.offsetLeft) curleft += parseInt(obj.offsetLeft);
 	if(obj.offsetTop) curtop += parseInt(obj.offsetTop);
 	if(obj.scrollTop && obj.scrollTop > 0) curtop -= parseInt(obj.scrollTop);
 	if(obj.offsetParent) {
-		var pos = findPos(obj.offsetParent);
-		curleft += pos[0];
-		curtop += pos[1];
+	var pos = findPos(obj.offsetParent);
+	curleft += pos[0];
+	curtop += pos[1];
 	} else if(obj.ownerDocument) {
-		var thewindow = obj.ownerDocument.defaultView;
-		if(!thewindow && obj.ownerDocument.parentWindow)
-			thewindow = obj.ownerDocument.parentWindow;
-		if(thewindow) {
-			if(thewindow.frameElement) {
-				var pos = findPos(thewindow.frameElement);
-				curleft += pos[0];
-				curtop += pos[1];
-			}
+	var thewindow = obj.ownerDocument.defaultView;
+	if(!thewindow && obj.ownerDocument.parentWindow)
+	thewindow = obj.ownerDocument.parentWindow;
+	if(thewindow) {
+	if(thewindow.frameElement) {
+	var pos = findPos(thewindow.frameElement);
+	curleft += pos[0];
+	curtop += pos[1];
+	}
+	}
+	}/*
+	var off=$(obj).offset();
+	curleft=off.left;
+	curtop=off.top;*/
+
+
+	if (typeof obj === 'string')
+		obj = document.querySelector(obj);
+
+	var curleft = 0;
+	var curtop = 0;
+
+	var findPos = function(obj) {
+		curleft += obj.offsetLeft;
+		curtop += obj.offsetTop;
+		if(obj.offsetParent) {
+			findPos(obj.offsetParent);
 		}
 	}
+	findPos(obj);
 
 	return [curleft, curtop];
 }
@@ -726,7 +746,7 @@ function rtfEditor(elem){
 function loadRtf(elem){
 	var div= document.createElement("div");
 	div.className="parentRtf";
-	document.body.appendChild(div);
+
 	$(div).load("framework/rtf.html", function(){
 		$(".editorRtf ul li").click(function(ev){
 			$("li.selected").removeClass("selected");
@@ -753,6 +773,7 @@ function loadRtf(elem){
 
 		showRtf(elem);
 	});
+	document.body.appendChild(div);
 }
 
 function showRtf(elem){

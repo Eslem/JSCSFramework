@@ -1246,7 +1246,7 @@ background-image: linear-gradient(to bottom, #ca4520, #9f3e23);filter:progid:DXI
 .navbar.inverse a{
 	color:#999;
 }
-.navbar.inverse a.active, .navbar li.active a{
+.navbar.inverse a.active, .navbar.inverse li.active a{
 	background-color: #080808;
 	color:#fff
 }
@@ -1342,7 +1342,6 @@ background-image: linear-gradient(to bottom, #ca4520, #9f3e23);filter:progid:DXI
 
 .navbar-vertical ul li a{
 	position:relative;
-	color: #fff;
 	text-decoration: none;
 	font-size: 16px;
 	display: block;

@@ -887,6 +887,13 @@ function scrollToElement(elem){
 		}, "slow");
 	return false;
 }
+function changeActive(){
+	$(".changeActive a, .changeActive li").click(function(){
+		$(this).parent().find(".active").removeClass("active");
+		$(this).addClass("active");
+	});
+}
+
 
 function scrollTo(){
 	$(".scrollTo li").each(function(){

@@ -1,0 +1,81 @@
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>jQuery UI Draggable + Sortable</title>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+		<link rel="stylesheet" type="text/css" href="http://eslem.github.io/SlemFramework/framework/framework.css">
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		<link rel="stylesheet" href="../resources/demos/style.css">
+		<style>
+			ul { list-style-type: none; margin: 0; padding: 0; margin-bottom: 10px; }
+			li { margin: 5px; padding: 5px; width: 150px; }
+			
+			.toDrop{
+				outline:1px dashed #4992D1;
+				width:100%;
+				height:250px;
+			}
+
+
+			[draggable] {
+				cursor: -webkit-grab; cursor: -moz-grab;
+			}
+
+			.element{
+				background: none;
+				padding: 6px 12px;
+				border:1px solid #ccc;
+				background-color: white;
+				border-radius:5px;
+				font-size:16px;
+				font-weight: 500;
+				font-style: inherit;
+				width:80px;
+			}
+
+			.over{
+				background-color:#eee;
+			}
+		</style>
+		<script>
+			$(function() {
+				$( "#sortable" ).sortable({
+					revert: true
+				});
+				$( "#draggable" ).draggable({
+					connectToSortable: "#sortable",
+					helper: "clone",
+					revert: "invalid"
+				});
+				$( "ul, li" ).disableSelection();
+			});
+		</script>
+	</head>
+	<body>
+		<div class="module container">
+			<div class="container" id="draggable"><h3 class="primary">Elements</h3>
+				<div class="element" draggable="true" data-function="image">Element</div>
+			</div>
+		</div>
+
+		<hr class="primary">
+		<div class="container body">
+			<div class="container row" id="sortable">
+				<h2>Colums</h2>
+				<div class="col-4 container">
+					<h3 class="primary">Title1</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pulvinar augue vitae metus gravida, tristique sodales ligula fringilla. Suspendisse pellentesque eleifend fermentum. Quisque eget urna eget nisl vehicula sodales. Curabitur auctor gravida metus, eu pretium risus volutpat vel. </p>
+				</div>
+				<div class="col-4 container">
+					<h3>Title2</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pulvinar augue vitae metus gravida, tristique sodales ligula fringilla. Suspendisse pellentesque eleifend fermentum. Quisque eget urna eget nisl vehicula sodales. Curabitur auctor gravida metus, eu pretium risus volutpat vel. </p>
+				</div>
+				<div class="col-4 container">
+					<h3>Title3</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pulvinar augue vitae metus gravida, tristique sodales ligula fringilla. Suspendisse pellentesque eleifend fermentum. Quisque eget urna eget nisl vehicula sodales. Curabitur auctor gravida metus, eu pretium risus volutpat vel. </p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

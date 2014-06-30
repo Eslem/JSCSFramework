@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Lang" content="en">
+		<meta name="author" content="">
+		<meta http-equiv="Reply-to" content="@.com">
+		<meta name="generator" content="PhpED 6.0">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="creation-date" content="06/01/2011">
+		<meta name="revisit-after" content="15 days">
+		<title>Untitled</title>
+		<link rel="stylesheet" type="text/css" href="http://eslem.github.io/SlemFramework/framework/framework.css">
+		<link rel="stylesheet" type="text/css" href="css/editor.css">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="http://eslem.github.io/SlemFramework/framework/framework.js"></script>
+		<style>
+			.buttons{
+				width:auto;
+				margin-left:auto;
+				margin-right:auto;
+				text-align:center;
+			}
+			.buttons button{
+				margin:5px;
+			}
+
+			#leftUl li a {
+				max-width:100%;
+				word-wrap: break-word;
+				white-space: pre-wrap;      /* CSS3 */   
+				white-space: -moz-pre-wrap; /* Firefox */    
+				white-space: -pre-wrap;     /* Opera <7 */   
+				white-space: -o-pre-wrap;   /* Opera 7 */    
+			}
+		</style>
+		<script>
+			$(document).ready(function(){
+				windowResize();
+				responsive();
+				loadMenus();
+				modal(true);
+				$("#newMenu").find("input").val("");
+			});
+
+			function loadMenus(){
+				$.ajax({
+					url:"php/menus.php",
+					data:{
+						wth:'loadMenus',
+					},
+					type:"POST",
+					success: function(data){
+						displayMenus(data);
+					}
+				});
+
+				function displayMenus(json){
+					var span				= document.getElementById("total");
+					span.innerHTML		="Total: "+json.length;
+					var row 				= document.createElement("div");
+					row.className		="row";
+					$.each(json, function(i, obj){
+						var name				=obj.name;
+						var file				="menus/"+name+".json";
+						var tipoTxt			=obj.tipo;
+						var active			=obj.active;
+						var id				=obj.id;
+
+						var block			=document.createElement("div");
+						block.className	="col-4 container";
+
+						var div=				document.createElement("div");
+						div.className		="container border borderRadius border-primary";
+
+						var header			=document.createElement("h3");
+						header.className	="primary center-text";
+						var txt				=document.createTextNode(name);
+						header.appendChild(txt);
+						var hr				=document.createElement("hr");
+						hr.className		="primary";
+
+						var tipo				=document.createElement("p");
+						tipo.className		="info";
+						tipo.innerHTML		="Tipo: <span class='muted'>"+tipoTxt+"</span>";
+
+						var buttons=document.createElement("div");
+						buttons.className="buttons";
+
+						$.getJSON(file, function( data ) {
+							$.each( data, function( key, val ) {
+								var clase					=document.createElement("p");
+								clase.className			="info";
+								clase.innerHTML			="Clase: <span class='muted'>"+val.clase+"</span>";
+								div.appendChild(clase);
+								
+								if(val.hasOwnProperty('left')){
+									var elements				=document.createElement("p");
+									elements.className		="info";
+									elements.innerHTML		="Elementos Izquierda:";
+									div.appendChild(elements);
+
+									var elemdiv					=document.createElement("div");
+									elemdiv.className			="container";
+
+									var ul						= document.createElement("ul");
+									ul.className				="nav nav-pills";
+									$.each(val.left, function(x, elem){
+										var li					= document.createElement("li");
+										if(elem.type=="texto")	li.innerHTML			="<a href='"+elem.link+"' title='"+elem.link+"'>"+elem.text+"</a>";
+										else	li.innerHTML		="<a href='"+elem.link+"' title='"+elem.link+"'><buttton class='bt'>"+elem.text+"</button></a>";
+										ul.appendChild(li);									
+									});
+									elemdiv.appendChild(ul);
+									div.appendChild(elemdiv);	
+								}							
+
+
+								if(val.hasOwnProperty('right')){
+									var elemdivR					=document.createElement("div");
+									elemdivR.className			="container";
+
+									var derecha					=document.createElement("p");
+									derecha.className			="info";
+									derecha.innerHTML			="Elementos Drecha:";
+
+									var ulr						= document.createElement("ul");
+									ulr.className				="nav nav-pills";
+									$.each(val.right, function(x, elem){
+										var li					= document.createElement("li");
+										if(elem.type=="texto")	li.innerHTML			="<a href='"+elem.link+"' title='"+elem.link+"'>"+elem.text+"</a>";
+										else	li.innerHTML		="<a href='"+elem.link+"' title='"+elem.link+"'><buttton class='bt'>"+elem.text+"</button></a>";
+										ulr.appendChild(li);									
+									});
+									elemdivR.appendChild(ulr);
+									div.appendChild(derecha);
+									div.appendChild(elemdivR);
+								}
+
+							});
+							div.appendChild(buttons);
+						});
+
+						var ver						=document.createElement("button");
+						ver.className				="bt primary shadow sm";
+						ver.innerHTML				='Ver <i class="fa fa-folder-open"></i>';
+
+						var eliminar				=document.createElement("button");
+						eliminar.className		="bt error shadow sm";
+						eliminar.innerHTML		='Eliminar <i class="fa fa-trash-o"></i>';
+
+						var editar				=document.createElement("button");
+						editar.className		="bt info shadow sm";
+						editar.innerHTML		='Editar <i class="fa fa-edit"></i>';
+
+
+						buttons.appendChild(ver);
+						buttons.appendChild(editar);
+						buttons.appendChild(eliminar);
+
+						div.appendChild(header);
+						div.appendChild(hr);
+						div.appendChild(tipo);
+						block.appendChild(div);
+						row.appendChild(block);
+
+					});
+					document.getElementById("menus").appendChild(row);
+				}
+			}	
+
+
+			function nuevoElementoLeft(){
+				var name=$("#nombreEl").val();
+				var link=$("#linkEl").val();
+				var val=$('#elementsLeft').val();
+				var clase=$('#classEl').val();
+				var tipo=$('#typeLeft').val();
+
+				if(val!='')		$('#elementsLeft').val(val+","+name+"|"+link+"|"+tipo+"|"+clase);
+				else				$('#elementsLeft').val(name+"|"+link+"|"+tipo+"|"+clase);
+
+				if(tipo=='boton') $('#leftUl').append("<li><a href='#'><button class='bt'>"+name+" ("+link+")</button></a></li>");
+				else	$('#leftUl').append("<li><a href='#'>"+name+" ("+link+")</a></li>");
+			}
+			function nuevoElementoRight(){
+				var name=$("#nombreEl2").val();
+				var link=$("#linkEl2").val();
+				var val=$('#elementsRight').val();
+				var tipo=$('#typeRight').val();
+				var clase=$('#classEl2').val();
+
+				if(val!='')		$('#elementsRight').val(val+","+name+"|"+link+"|"+tipo+"|"+clase);
+				else				$('#elementsRight').val(name+"|"+link+"|"+tipo+"|"+clase);
+
+				if(tipo=='boton') $('#leftUl2').append("<li><a href='#'><button class='bt'>"+name+" ("+link+")</button></a></li>");
+				else	$('#leftUl2').append("<li><a href='#'>"+name+" ("+link+")</a></li>");
+			}
+
+			function createHtmlMenu(){
+				var clases=$("#clases").val();
+				clases=clases.replace(/\,/g," ");
+
+				var tipo=$("#tipoMenu").val(); 
+				var izquierda=$('#elementsLeft').val();
+				var derecha=$('#elementsRight').val();
+				var menu='<div class="navbar '+clases+'"><div class="container"><ul>'				
+
+				if(izquierda != ''){
+					var eliz=izquierda.split(',');
+					$.each(eliz, function(i, obj){
+						var elem=eliz[i].split("|");
+						if(elem[2] =="boton"){
+							var li='<li><a href="'+elem[1]+'" class="button"><button class="bt '+elem[3]+'">'+elem[0]+'</button></a></li>';
+						}
+						else{
+							var li='<li class="'+elem[3]+'"><a href="'+elem[1]+'">'+elem[0]+'</a></li>';
+						}
+						menu +=li;
+					});
+				}
+
+				if(derecha != ''){
+					menu +="</ul><ul class='right'>";
+					var elde=derecha.split(',');
+					$.each(elde, function(i, obj){
+						var elem=elde[i].split("|");
+						if(elem[2] =="boton"){
+							var li='<li><a href="'+elem[1]+'" class="button"><button class="bt '+elem[3]+'">'+elem[0]+'</button></a></li>';
+						}
+						else{
+							var li='<li class="'+elem[3]+'"><a href="'+elem[1]+'">'+elem[0]+'</a></li>';
+						}
+						menu +=li;
+					});	
+				}		
+
+
+				menu +="</ul></div></div>";
+				return menu;
+			}
+
+			function verMenu(){
+				var menu=createHtmlMenu();
+				$("#modalMenu").html(menu);
+				$("#modalMenu").fadeIn();
+			}
+
+			function guardarMenu(){
+				var clases=$("#clases").val();
+				clases=clases.replace(/\,/g," ");
+
+				var tipo=$("#tipoMenu").val(); 
+				var izquierda=$('#elementsLeft').val();
+				var derecha=$('#elementsRight').val();
+				var nombre=$('#name').val();
+
+
+				$.ajax({
+					url: "php/menus.php",
+					type:"post",
+					data:{
+						nombre: nombre,
+						html: createHtmlMenu(),
+						wth: 'saveMenu',
+						left: izquierda,
+						right: derecha,
+						tipo:tipo,
+						clase:clases
+					}, 
+					success: function(data){
+						console.log(data);
+					}
+
+				});
+			}
+		</script>
+	</head>
+	<body>
+		<div class="navbar responsive inverse">
+			<div class="container">
+				<ul>
+					<li class="header"><a href="index.html">Gestor Contenido</a></li>
+					<li class=""><a href="pages.html">Paginas</a></li>
+					<li class="active"><a href="#">Menu</a></li>
+					<li class=""><a href="#">Social <i class="fa fa-share-alt"></i></a></li>
+					<li class=""><a href="#">Blog</a></li>
+				</ul>
+				<ul class="form right">
+					<li class=""><a herf="#">Login</a></li>
+					<li class=""><button class="bt transparent">Salir  <i class="fa fa-sign-out"></i></button></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="container" id="menus">
+			<h3 class="primary center-text">Menus <span class="xs muted" id="total"></span> <button class="bt primary xs" data-function="launchModal" data-modalId="modalNuevo">Nuevo <i class="fa fa-plus"></i></button></h3>
+			<hr class="primary">
+		</div>
+
+
+		<div class="modal" id="modalNuevo" data-autoClose="false">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="bt modal-close noStyle" data-function="closeModal">&times;</button>
+				<h3 class="primary">Menu Nuevo</h3>
+			</div>
+			<div class="modal-body">
+				<form class="form form-horizontal" id="newMenu">
+					<div class="form-group">
+						<label class="col-2">Nombre:</label>
+						<input id="name" class="col-9" type="text" placeholder="Nombre" name="name">
+					</div>
+					<div class="form-group">
+						<label class="col-2">Tipo:</label>
+						<select name="tipo" id="tipoMenu" class="col-9">
+							<option value="normal">Normal</option>
+							<option value="lateral">Lateral</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label class="col-2">Clases:</label>
+						<div class="tags tag-primary col-9">
+							<div class="selection sm">
+							</div>
+							<select class="tag" onchange="tags(this)" data-target="clases" data-removeOnSelect>
+								<option value=null selected="true">Elige opcion</option>
+								<option value="inverse">inverse</option>
+								<option value="transparent">transparent</option>
+								<option value="responsive">responsive</option>
+								<option value="expand">expand</option>
+								<option value="expand">fixed</option>
+							</select>
+							<input type="hidden" id="clases" name="clases">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-2">Elements:</label>
+					</div>
+					<div class="form-group">
+						<div class="col-6 container">
+							<div class="border container border-primary borderRadius" style="padding: 5px;">
+								<input type="hidden" name="elementsLeft" id="elementsLeft" value="">
+								<h4 class="primary center-text">Izquierda</h4>
+								<hr class="primary">
+								<div class="elementos" id="elementosList" style="min-height: 20px; width:100%; position: relative;	display: inline-block;">
+									<ul class="nav nav-list" id="leftUl">
+
+									</ul>
+								</div>
+								<hr class="primary">
+								<input class="sm" name="nombreEl" id="nombreEl" placeholder="titulo">
+								<input class="sm" name="linkEl" id="linkEl" placeholder="link">
+								<input class="sm" name="classEl" id="classEl" placeholder="Clase (ejemplo: clase.otraclase.otraclase)">
+								<select id="typeLeft">
+									<option value="texto">Texto</option>
+									<option value="boton">Boton</option>
+								</select>
+								<button class="bt info xs" type="button" onclick="nuevoElementoLeft()">Nuevo <i class="fa fa-plus"></i></button>
+							</div>
+						</div>
+						<div class="col-6 container">
+							<div class="border container border-primary borderRadius" style="padding: 5px;">
+								<input type="hidden" name="elementsRight" id="elementsRight" value="">
+								<h4 class="primary center-text">Derecha</h4>
+								<hr class="primary">
+								<div class="elementos" id="elementosList" style="min-height: 20px; width:100%; position: relative;	display: inline-block;">
+									<ul class="nav nav-list" id="leftUl2">
+
+									</ul>
+								</div>
+								<hr class="primary">
+								<input class="sm" name="nombreEl2" id="nombreEl2" placeholder="titulo">
+								<input class="sm" name="linkEl2" id="linkEl2" placeholder="link">
+								<input class="sm" name="classEl2" id="classEl2" placeholder="Clase (ejemplo: clase.otraclase.otraclase)">
+								<select id="typeRight">
+									<option value="texto">Texto</option>
+									<option value="boton">Boton</option>
+								</select>
+								<button class="bt info xs" type="button" onclick="nuevoElementoRight()">Nuevo <i class="fa fa-plus"></i></button>
+							</div>
+						</div>
+					</div>
+
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="bt" data-function="closeModal" >Close</button>
+				<button type="button" class="bt info" onclick="verMenu()" >Ver</button>
+				<button type="button" class="bt primary" onclick="guardarMenu()">Save changes</button>
+			</div>
+		</div>
+
+		<div class="modal" id="modalMenu">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="bt modal-close noStyle" data-function="closeModal">&times;</button>
+					<h3 class="primary">Ver menu</h3>
+				</div>
+				<div class="modal-body">
+
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>

@@ -896,16 +896,14 @@ function scrollTo(){
 	});
 }
 
-
-//---XSL Function
-
+//XSLT function
 function loadXMLDoc(filename)
 {
 	if (window.ActiveXObject)
 	{
 		xhttp = new ActiveXObject("Msxml2.XMLHTTP");
 	}
-	else
+	else 
 	{
 		xhttp = new XMLHttpRequest();
 	}
@@ -914,14 +912,15 @@ function loadXMLDoc(filename)
 	xhttp.send("");
 	return xhttp.responseXML;
 }
+
 function XMLyXSL(xml, xslFile, elem){
 
 	xsl = loadXMLDoc(xslFile);
 	// code for IExpl
 	if (window.ActiveXObject || xhttp.responseType == "msxml-document")
 	{
-		ex = xml.transformNode(xsl);
-		document.getElementById(elem).innerHTML = ex;
+		var content =transformXml(xml, xslFile);
+		document.getElementById(elem).innerHTML = content;
 	}
 	// code for Chrome, Firefox, Opera, etc.
 	else if (document.implementation && document.implementation.createDocument)
@@ -931,4 +930,58 @@ function XMLyXSL(xml, xslFile, elem){
 		resultDocument = xsltProcessor.transformToFragment(xml, document);
 		document.getElementById(elem).appendChild(resultDocument);
 	}
+
+
+}
+
+function transformXml(xml, xslt)
+{
+
+	var loadedXslt = loadXSLTDocumentInIE(xslt);
+
+	// Load the XML Document
+	var xmlDoc = new ActiveXObject("Msxml2.DOMDocument.3.0");
+	xmlDoc.async = false;
+	xmlDoc.resolveExternals = false;
+	xmlDoc.loadXML((new XMLSerializer()).serializeToString(xml));
+	console.log(xmlDoc.parseError.reason); // for debugging, to make sure there is no errors after loading the document.
+
+	// Load the XSL file
+	var xslt = new ActiveXObject("Msxml2.XSLTemplate");
+	var xslDoc = new ActiveXObject("Msxml2.FreeThreadedDOMDocument");
+	xslDoc.async = false;
+	xslDoc.loadXML(loadedXslt.responseText);
+	xslt.stylesheet = xslDoc;
+
+	var xslProc = xslt.createProcessor();
+	xslProc.input = xmlDoc;
+	xslProc.transform();
+	return xslProc.output;
+
+}
+
+function loadXSLTDocumentInIE(fileName) {
+	xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	try {
+		xhttp.responseType = "msxml-document";
+	} catch (e) {
+		//console.log("couldn't set the response type msxml in IE");
+	}
+	xhttp.open("GET", fileName, false);
+	xhttp.send("");
+	return xhttp; 
+}
+
+
+//Send data by URL
+
+function getUrlVariable(variable)
+{
+	var query = window.location.search.substring(1);
+	var vars = query.split("&");
+	for (var i=0;i<vars.length;i++) {
+		var pair = vars[i].split("=");
+		if(pair[0] == variable){return pair[1];}
+	}
+	return(false);
 }

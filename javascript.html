@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Lang" content="en">
+		<meta name="author" content="">
+		<meta http-equiv="Reply-to" content="@.com">
+		<meta name="generator" content="PhpED 6.0">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="creation-date" content="06/01/2011">
+		<meta name="revisit-after" content="15 days">
+		<title>Framework JavaScript View</title>
+		<link rel="stylesheet" type="text/css" href="framework/framework.css">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		<style type="text/css">
+
+			.grid_block img{
+				width: 100%;
+				display:block;
+			}
+			#sec1{
+				height: 1000px;
+				margin: 0px;
+				width: 100%;
+				max-width: 1920px;
+				position: relative; 
+				color:#fff;
+				padding:50px;
+			}
+			#sec2{
+				background-color:#000;
+				height: 250px;
+				margin: 0 auto;
+				width: 100%;
+				max-width: 1920px;
+				position: relative; 
+				color:#fff;
+				padding:50px;
+			}
+
+			#sec3{
+				min-height: 100%;
+				margin: 0 auto;
+				width: 100%;
+				max-width: 1920px;
+				position: relative; 
+				color:#fff;
+				padding:50px;
+				height: 1000px;
+			}
+			#sec4{
+				height: 1000px;
+				margin: 0 auto;
+				width: 100%;
+				max-width: 1920px;
+				position: relative; 
+				color:#fff;
+				padding:50px;
+
+			}
+			#sec5{
+				height: 1000px;
+				margin: 0 auto;
+				width: 100%;
+				max-width: 1920px;
+				position: relative; 
+				color:#fff;
+				padding:50px;
+
+			}
+
+			.grid_block{
+				opacity:0.1;
+			}
+
+
+
+
+		</style>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="framework/framework.js"></script>
+		<script>
+			$(document).ready(function(){
+				windowResize();
+				slider();
+				responsive();
+				dropDown();
+				modal();
+				RadioProgress();
+				Tabs();
+				writeGridContent();
+				ScrollVerticalNav();
+				navbarResponsiveVertical();
+				imageZoom();
+				rtfEditor(".rtf");
+				pxBackground();
+				fadeOnScroll();
+				scrollTo();
+
+				onScroll(".grid_block", function(el){
+					$(el).animate({opacity:1}, 1000);
+				});
+
+			});
+			
+			
+
+function onScrollUp(elem, funcion){
+	$(window).scroll(function() {
+		$(elem).each(	function(){
+			a = $(this).offset().top + $(this).height();
+			b = $(window).scrollTop() + $(window).height();
+			if (a > b) {
+				funcion(this);
+			}
+		});
+	});
+}
+
+
+		</script>
+	</head>
+	<body>
+		<hr>
+		<div class="container">
+			<h2 class="primary">Scroll To</h2>
+			<div class="container">
+				<ul class="nav nav-pills scrollTo">
+					<li><a href="#slider">Slider</a></li>
+					<li><a href="#dropdown">DropDown</a></li>
+					<li><a href="#modal">Modal</a></li>
+					<li><a href="#slide">Slide</a></li>
+					<li><a href="#tags">Tags</a></li>
+					<li><a href="#imagezoom">Image Zoom</a></li>
+					<li><a href="#pxbg">PXBG AutoFade</a></li>
+					<li><a href="#rtfeditor">Rtf Editor</a></li>
+					<li><a href="#autogrid">AutoGrid</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="container" id="slider">
+			<h2 class="primary">Slider</h2>
+			<div class="container border-black">
+				<div class="slider" data-time="5"> 
+					<div class="indicators container indicators-hover ">
+						<div class="prev ">
+							<button class="bt noStyle xl prev "><span class="fa fa-angle-left" ></span></button>
+						</div>
+						<div class="right next">
+							<button class="bt noStyle xl next"><span class="fa fa-angle-right "></span></button>
+						</div>
+					</div>
+					<div class="content img-fit">
+						<ul class="slides">
+							<li class="active">
+								<img src="images/skyrim.jpg" />
+								<div class="description">
+									<div class="description-text">
+										<h2>Slideshow Title 1</h2>
+										<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<img src="images/eye.jpg" >
+								<div class="description full description-hover">
+
+									<div class="description-text">
+										<h2>Slideshow Title 3</h2>
+										<p>Lorem ipsum dolor sit amet,  eirmod tempor invidunt ut</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<img src="images/white.jpg" />
+								<div class="description ">
+
+									<div class="description-text">
+										<h2>Slideshow Title 3</h2>
+										<p>Lorem ipsum dolor sit amet,  eirmod tempor invidunt ut</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<img src="images/angel.jpg" />
+								<div class="description">
+
+									<div class="description-text">
+										<h2>Slideshow Title 4</h2>
+										<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut</p>
+									</div>
+								</div>
+							</li>
+
+						</ul>
+					</div>
+				</div> <!-- Slider -->
+			</div>
+		</div>
+		<hr>
+		<div class="container" id="dropdown">
+			<h2 class="primary">Dropdown</h2>
+			<div class="border container padding" >
+				<ul class="nav nav-pills">
+					<li class="active"><a href="#">Option</a></li>
+					<li class="dropdown"><a href="#">Option <i class="fa fa-caret-down"></i></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Something else</a></li>
+						</ul>
+					</li>
+					<li class="dropdown hover"><a href="null">Option 2 <i class="fa fa-caret-down"></i></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Something else</a></li>
+						</ul></li>
+				</ul>
+			</div>
+
+		</div>
+		<hr class="primary">
+		<div class="container" id="modal">
+			<h2 class="primary">Modal</h2>
+			<div class="container">
+				<ul class="nav nav-pills">
+					<li class="padding"  data-function="launchModal" data-modalId="modal1"><button class="bt primary">Modal</button></li>
+					<li class="padding"  data-function="launchModal" data-modalId="modalSm"><button class="bt primary">Modal small</button></li>
+				</ul>
+			</div>
+			<div class="modal" id="modal1">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="bt modal-close noStyle" data-function="closeModal">&times;</button>
+						<h3 class="primary">Modal title</h3>
+					</div>
+					<div class="modal-body">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rutrum velit ut condimentum facilisis. Aenean faucibus, ligula vitae interdum mollis, sapien risus hendrerit eros, ut elementum odio ligula varius libero. Integer eu fringilla metus. Aliquam sagittis, quam vel gravida aliquam, sem lacus sagittis sapien, eget elementum sem nunc nec justo. Vestibulum sodales vitae quam in pulvinar. Vestibulum tellus nunc, mollis tristique ipsum in, viverra lobortis ante. Nam mauris purus, laoreet mattis tincidunt nec, congue nec libero. Pellentesque a felis nec mauris tincidunt placerat. Vivamus egestas iaculis justo a fermentum. Morbi non turpis tellus. Vivamus dui magna, tristique non iaculis quis, venenatis et eros. Curabitur non erat gravida, tincidunt massa ut, cursus ante. Praesent dictum vehicula velit.
+
+						Duis imperdiet ultrices orci, vel luctus nisl consectetur vitae. Vestibulum lobortis sodales sem a interdum. Curabitur ut orci interdum, convallis dolor in, vulputate ante. Aliquam adipiscing est vel sem bibendum pharetra. Integer bibendum magna nisl, ut auctor arcu ultrices eu. Nulla a iaculis lectus. Duis vel dictum ligula, et consequat arcu. Proin consectetur quis elit varius lobortis. Nam consectetur sem non lacinia bibendum. Ut in vulputate odio, ultrices elementum nulla. Aliquam erat volutpat. Duis vitae nulla urna. Phasellus sollicitudin et lectus et varius.
+
+						Etiam porttitor gravida lectus, quis posuere nunc dignissim in. Cras sagittis purus sit amet consectetur interdum. Sed arcu erat, elementum eu erat non, interdum mattis lectus. Pellentesque ac odio convallis, ultrices lacus aliquet, vestibulum quam. Etiam pretium congue mauris, et mollis magna congue sit amet. Nulla et arcu eleifend, dictum massa nec, volutpat lorem. Vivamus lacus odio, cursus sit amet convallis eget, imperdiet a nisl. Sed leo arcu, facilisis vitae volutpat vel, tristique eu libero. Curabitur pellentesque massa nec tellus commodo, nec posuere nisi iaculis. Nullam sed molestie nisl. Quisque eget vehicula turpis. In ultrices posuere dignissim. Ut placerat risus sed arcu euismod rutrum a quis nunc. Etiam dapibus, mi nec dictum consequat, leo est iaculis ante, eget aliquet nisl urna dapibus sem. 
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="bt" data-function="closeModal" >Close</button>
+						<button type="button" class="bt primary">Save changes</button>
+					</div>
+				</div>
+			</div>
+			<div class="modal sm" id="modalSm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="bt modal-close noStyle" data-function="closeModal">&times;</button>
+						<h3 class="primary">Modal title</h3>
+					</div>
+					<div class="modal-body">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rutrum velit ut condimentum facilisis. Aenean faucibus, ligula vitae interdum mollis, sapien risus hendrerit eros, ut elementum odio ligula varius libero. Integer eu fringilla metus. Aliquam sagittis, quam vel gravida aliquam, sem lacus sagittis sapien, eget elementum sem nunc nec justo. Vestibulum sodales vitae quam in pulvinar. Vestibulum tellus nunc, mollis tristique ipsum in, viverra lobortis ante. Nam mauris purus, laoreet mattis tincidunt nec, congue nec libero. Pellentesque a felis nec mauris tincidunt placerat. Vivamus egestas iaculis justo a fermentum. Morbi non turpis tellus. Vivamus dui magna, tristique non iaculis quis, venenatis et eros. Curabitur non erat gravida, tincidunt massa ut, cursus ante. Praesent dictum vehicula velit.
+
+						Duis imperdiet ultrices orci, vel luctus nisl consectetur vitae. Vestibulum lobortis sodales sem a interdum. Curabitur ut orci interdum, convallis dolor in, vulputate ante. Aliquam adipiscing est vel sem bibendum pharetra. Integer bibendum magna nisl, ut auctor arcu ultrices eu. Nulla a iaculis lectus. Duis vel dictum ligula, et consequat arcu. Proin consectetur quis elit varius lobortis. Nam consectetur sem non lacinia bibendum. Ut in vulputate odio, ultrices elementum nulla. Aliquam erat volutpat. Duis vitae nulla urna. Phasellus sollicitudin et lectus et varius.
+
+						Etiam porttitor gravida lectus, quis posuere nunc dignissim in. Cras sagittis purus sit amet consectetur interdum. Sed arcu erat, elementum eu erat non, interdum mattis lectus. Pellentesque ac odio convallis, ultrices lacus aliquet, vestibulum quam. Etiam pretium congue mauris, et mollis magna congue sit amet. Nulla et arcu eleifend, dictum massa nec, volutpat lorem. Vivamus lacus odio, cursus sit amet convallis eget, imperdiet a nisl. Sed leo arcu, facilisis vitae volutpat vel, tristique eu libero. Curabitur pellentesque massa nec tellus commodo, nec posuere nisi iaculis. Nullam sed molestie nisl. Quisque eget vehicula turpis. In ultrices posuere dignissim. Ut placerat risus sed arcu euismod rutrum a quis nunc. Etiam dapibus, mi nec dictum consequat, leo est iaculis ante, eget aliquet nisl urna dapibus sem. 
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="bt" data-function="closeModal" >Close</button>
+						<button type="button" class="bt primary">Save changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr class="primary">
+
+		<div class="container" id="slide">
+			<h2 class="primary"> Slide</h2>
+			<div class="panel">
+				<div class="panel-header"><h3 class="pointer" href="#" data-function="slide" data-target="#panel1" onclick="toggleSlide(this)">Panel header</h3></div>
+				<div class="panel-body hidden" id="panel1">
+					Default Panel
+				</div>
+			</div>
+		</div>
+		<hr class="primary">
+
+		<div class="container" id="tabs">
+			<h2 class="primary">Tabs</h2>
+			<div class="container">
+				<ul class="nav nav-pills tabs">
+					<li ><a href="#" data-target="#tab1" class="active">Tab 1</a></li>
+					<li><a href="#tab2"  data-target="#tab2">Tab 2</a></li>
+					<li ><a href="#tab3" data-target="#tab3">Tab 3</a></li>
+				</ul>
+
+				<div class="tabs">
+					<div id="tab1" class="active padding border border-primary shadow borderRadius">
+						<h3 class="primary">Tab1</h3>
+					</div>
+					<div id="tab2" class="padding border border-primary shadow borderRadius">
+						<h3 class="primary">Tab2</h3>
+					</div>
+					<div id="tab3" class="padding border border-primary shadow borderRadius">
+						<h3 class="primary">Tab3</h3>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<hr class="primary">
+		<div class="container" id="tags">
+			<h2 class="primary">Tags Select</h2>
+			<div class="tags tag-primary ">
+				<div class="selection sm">
+
+				</div>
+				<select class="tag" onchange="tags(this)" data-target="inputid" data-removeOnSelect>
+					<option value=null selected="true">Elige opcion</option>
+					<option value="1">opcion1</option>
+					<option value="2">opcion2</option>
+					<option value="3">opcion3</option>
+					<option value="4">opcion4</option>
+				</select>
+				<input type="hidden" id="inputid">
+
+			</div>
+			<h3 class="primary">Input value: <span id="valueTag" class="muted"></span></h3>		
+		</div>
+		<hr class="primary">
+
+		<div class="container">
+
+		<h2 class="primary" id="imagezoom">Image Zoom</h2>
+		<div class="container">
+			<div class="row">
+				<div class="col-2 imageNormal">
+					<img class="fit imageZoom" src="images/skyrim.jpg" data-proporcion=3>
+				</div>
+
+			</div>
+		</div>
+
+		<hr class="primary">
+
+		<div class="container" id="pxbg">
+
+			<h2 class="primary">Parallax Background && Fade on Scroll</h2>
+		</div>
+		<div class="parallaxBg" id="parallaxBg">
+			<section id="sec1" data-type="background" data-speed="15" data-bgImage="images/skyrim.jpg">
+				<h2  class="fadeOnScroll">Titulo de la pagina</h2>
+			</section>
+			<section id="sec2" data-type="background" data-speed="15" data-bgImage="images/eye.jpg">
+				<article>
+					<div class="container row fadeOnScroll">
+						<div class="col-md-4">texto</div>
+						<div class="col-md-4">texto</div>
+						<div class="col-md-4">texto</div>
+					</div>
+				</article>
+			</section>
+			<section id="sec3" data-type="background" data-speed="15"  data-bgImage="images/eye.jpg">
+				<article>
+					<div class="container row fadeOnScroll">
+						<div class="col-md-4 col-md-offset-7">
+							<h3>Seccion</h3>
+							<p>texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext</p>
+						</div>
+					</div>
+				</article>
+			</section>
+			<section id="sec4" data-type="background" data-speed="15"  data-bgImage="images/cat.jpg">
+				<article  class="fadeOnScroll">
+					<h3>Header</h3>
+					<img src="images/pc.png" width="250">
+				</article>
+			</section>
+			<section id="sec5" data-type="background" data-speed="15"  data-bgImage="images/angel.jpg">
+				<article  class="fadeOnScroll">
+					<h3>GoodBye!</h3>
+					<img src="images/skyrim.jpg" width="100">
+				</article>
+			</section>
+		</div>
+
+		<hr class="primary">
+
+		<h2 class="primary" id="rtfeditor">Rich Text Editor</h2>
+		<div class="container">
+			<div class="rtf container padding border border-primary borderRadius">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut posuere est eget neque accumsan, vitae tristique libero facilisis. Curabitur posuere tristique magna, eget consequat leo egestas sit amet. Phasellus sed iaculis quam, et lobortis sapien. Maecenas mollis pretium interdum. Aenean congue at magna in blandit. Vestibulum vel tempor sapien. Donec elementum turpis in dui eleifend, posuere consequat tortor mollis. Nullam fringilla, tortor sed rhoncus vulputate, lacus tortor feugiat nisl, sed facilisis elit massa quis risus. Pellentesque eleifend quam eu nulla viverra, vitae gravida tellus rhoncus. Quisque arcu elit, hendrerit non euismod quis, mollis vitae mi. Fusce ornare adipiscing egestas. Quisque massa ligula, venenatis vel nibh sed, pharetra convallis elit. Aenean mollis neque eu nisi rutrum, id iaculis enim volutpat. Vivamus vulputate ipsum vel mauris ultrices, ac blandit turpis pretium. Fusce eu turpis vitae justo molestie faucibus et eget nibh. 
+			</div>
+		</div>
+
+		<hr class="primary">
+
+		<div class="container" id="autogrid">
+			<h2 class="primary"> AutoAdjust Grid</h2>
+			<div class="container gridContainer">
+				<div class="grid" data-columns=4></div>
+				<div class="columns" style=" width:100%">
+					<div class="list" style="display: none;">
+						<ul>
+							<li>
+								<div class="grid_block noPadding" >
+								<div class="imgWrap ">
+									<img src="images/skyrim.jpg">
+									<div class="description">
+										<p>Sometext</p>
+									</div>
+								</div>
+							</li>
+
+							<li>
+								<div class="grid_block noPadding" >
+								<img src="images/anonymous.jpg">
+							</li>
+
+							<li>
+								<div class="grid_block noPadding" >
+								<img src="images/cat.jpg">
+							</li>
+
+							<li>
+								<div class="grid_block noPadding" >
+								<img src="images/img1.png">
+							</li>
+
+							<li>
+								<div class="grid_block noPadding" >
+								<img src="images/angel.jpg">
+							</li>
+
+							<li>
+								<div class="grid_block noPadding" >
+								<img src="images/img2.jpg">
+							</li>
+
+							<li>
+								<div class="grid_block noPadding" >
+								<img src="images/white.jpg">
+							</li>
+
+							<li>
+								<div class="grid_block noPadding" >
+								<img src="images/eye.jpg">
+							</li>
+
+							<li>
+								<div class="grid_block noPadding" >
+								<img src="images/img3.png">
+							</li>
+
+							<li>
+								<div class="grid_block noPadding" >
+								<img src="images/img4.jpg">
+							</li>
+
+							<li>
+								<div class="grid_block noPadding" >
+								<img src="images/img5.jpg">
+							</li>
+
+							<li>
+								<div class="grid_block noPadding" >
+								<img src="images/img6.jpg">
+							</li>
+
+						</ul>
+					</div>
+					<div class="content"></div>
+				</div>
+			</div>
+
+		</div>
+		<button class="bt opacity black" style="position: fixed; right: 15px; bottom:15px;" onclick="scrollToTop()"><i class="fa fa-arrow-up"></i></button>
+	</body>
+</html>

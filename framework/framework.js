@@ -1026,7 +1026,7 @@ function getUrlVariable(variable)
 	return(false);
 }
 
-
+//AutoSlideUp
 function slideAuto(elem, time){
 	elem.slideDown();
 	setTimeout(function(){

@@ -1,0 +1,2 @@
+Log: 2014-06-11_08:06
+Errormessage (query): %s

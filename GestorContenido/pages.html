@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale="1>
+		<meta http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Lang" content="en">
+		<meta name="author" content="">
+		<meta http-equiv="Reply-to" content="@.com">
+		<meta name="generator" content="PhpED 6.0">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="creation-date" content="06/01/2011">
+		<meta name="revisit-after" content="15 days">
+		<title>Paginas</title>
+		<link rel="stylesheet" type="text/css" href="http://eslem.github.io/SlemFramework/framework/framework.css">
+		<link rel="stylesheet" type="text/css" href="css/editor.css">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+		<style>
+			img{
+				width:100%;
+				height:350px;
+				max-width: 100% !important;
+			}
+
+			.content{
+				padding:10px;
+			}
+
+			.buttons{
+				width:auto;
+				margin-left:auto;
+				margin-right:auto;
+				text-align:center;
+			}
+			.buttons button{
+				margin:5px;
+			}
+			
+			.box{
+				margin-top: 10px;
+			}
+
+		</style>
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="http://eslem.github.io/SlemFramework/framework/framework.js"></script>
+		<script>
+			$(document).ready(function(){
+				windowResize();
+				responsive();
+				getPages();
+
+			});
+
+			function getPages(){
+				$.ajax({
+					url:"php/listPages.php",
+					success:function(data){
+						displayList(data);
+					}
+				});
+			}
+
+			function displayList(data){
+				var span=document.getElementById("total");
+				span.innerHTML ="Total: "+data.length;
+				$.each(data, function(i, obj){
+					var name=obj;
+					var row=document.getElementById("listPages");
+					var div=document.createElement("div");
+					div.id="div_"+name;
+					div.className="col-4 container box";
+					var content=document.createElement("div");
+					content.className="border border-primary borderRadius container content";
+
+					//--Header
+					var header=document.createElement("h3");
+					header.className="primary center-text";
+					var txt=document.createTextNode(obj);
+					header.appendChild(txt);
+					var hr=document.createElement("hr");
+					hr.className="primary";
+
+					var image=document.createElement("img");
+					image.src="pages/thumbnails/"+name+".png";
+
+					//---Botones
+					var ver=document.createElement("button");
+					ver.className="bt primary shadow sm";
+					var icon=document.createElement("i");
+					icon.className='fa fa-folder-open';
+					var verTxt=document.createTextNode("Abrir ");
+					var link=document.createElement("a");
+					link.href="pages/"+name+".html";
+					link.appendChild(ver);
+					ver.appendChild(verTxt);
+					ver.appendChild(icon);
+
+					var eliminar=document.createElement("button");
+					eliminar.className="bt error shadow sm";
+					var iconEliminar=document.createElement("i");
+					iconEliminar.className='fa fa-trash-o';
+					var eliminarTxt=document.createTextNode("Eliminar ");
+					eliminar.appendChild(eliminarTxt);
+					eliminar.appendChild(iconEliminar);
+					$(eliminar).click(function(){
+
+						if(confirm("Seguro deseas eliminar la pagina "+name+"?")){
+							$.ajax({
+								url:"php/pagesRequests.php",
+								data:{
+									wth:'remove',
+									name:name
+								},
+								type:"POST",
+								success:function(data){
+									console.log(data);
+									$("#div_"+name).slideUp();
+								}
+							});
+						}
+					});
+
+					var editar=document.createElement("button");
+					editar.className="bt info shadow sm";
+					var iconEditar=document.createElement("i");
+					iconEditar.className='fa fa-edit';
+					var editarTxt=document.createTextNode("Editar ");
+					var linkEd=document.createElement("a");
+					linkEd.href="editor.html?page="+name;
+					linkEd.appendChild(editar);
+					editar.appendChild(editarTxt);
+					editar.appendChild(iconEditar);
+
+					var buttons=document.createElement("div");
+					buttons.className="buttons";
+					buttons.appendChild(link);
+					buttons.appendChild(linkEd);
+					buttons.appendChild(eliminar);
+
+					//--Append
+					content.appendChild(header);
+					content.appendChild(hr);
+					content.appendChild(image);
+					content.appendChild(buttons);
+					div.appendChild(content);
+					row.appendChild(div);
+				});
+			}
+		</script>
+	</head>
+	<body>
+		<div class="navbar responsive inverse">
+			<div class="container">
+				<ul>
+					<li class="header"><a href="index.html">Gestor Contenido</a></li>
+					<li class="active"><a href="#">Paginas</a></li>
+					<li class=""><a href="menus.html">Menu</a></li>
+					<li class=""><a href="#">Social <i class="fa fa-share-alt"></i></a></li>
+					<li class=""><a href="#">Blog</a></li>
+				</ul>
+				<ul class="form right">
+					<li class=""><a herf="#">Login</a></li>
+					<li class=""><button class="bt transparent">Salir  <i class="fa fa-sign-out"></i></button></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="container">
+			<h1 class="primary center-text">Paginas <span class="muted sm" id="total">Total: </span></h1>
+			<hr class="primary">
+			<div class="row container" id="listPages">
+
+			</div>
+		</div>
+
+	</body>
+</html>

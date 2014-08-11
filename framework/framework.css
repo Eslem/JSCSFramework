@@ -1326,7 +1326,7 @@ background-image: linear-gradient(to bottom, #ca4520, #9f3e23);filter:progid:DXI
 .navbar-vertical ul, .navbar-vertical li{
 	margin:0px;
 	padding:0px;
-	overflow-y:
+	overflow-y:hidden;
 }
 
 .navbar-vertical.right{
@@ -1367,6 +1367,16 @@ background-image: linear-gradient(to bottom, #ca4520, #9f3e23);filter:progid:DXI
 	border-bottom: 10px solid transparent;
 	border-right: 15px solid #fff;
 }
+
+.navbar-vertical, .bodyContent{
+	float: left;
+	word-wrap: break-word;
+	min-height: 1px;
+	margin-left: auto ;
+	margin-right: auto ;
+}
+
+
 
 .navbar.withVertical{
 	right: 0px !important;
@@ -1470,7 +1480,13 @@ button.bt.slideNavVertical:hover{
 
 
 .bodyContent{
+	clear:none !important;
+	
+}
 
+.bodyContent *{
+	overflow-y: auto;
+	max-height:100%;
 }
 
 .bodyContent-responsive{
@@ -2179,6 +2195,10 @@ a.thumbnail:hover img{
 
 }
 
+.dropdown{
+	position:relative;
+}
+
 .dropdown-menu {
 	background-clip: padding-box;
 	background-color: #FFFFFF;
@@ -2194,8 +2214,28 @@ a.thumbnail:hover img{
 	padding: 5px 0;
 	position: absolute;
 	top: 100%;
-	z-index: 500;
+	z-index: 1000;
 	display:none;
+}
+
+.dropdown-menu.list {
+	background-color: transparent;
+	border: none;
+	border-radius: 0px;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+	float: right;
+	list-style: none outside none;
+	margin: 0px;
+	min-width: 0px;
+	font-size: 0.8em;
+	position: relative;
+	top: 100%;
+	z-index: 1000;
+	display:none;
+}
+
+.dropdown-menu.list li{
+	margin:0px !important;
 }
 
 .dropdown-menu li{
@@ -2216,6 +2256,9 @@ a.thumbnail:hover img{
 
 .dropdown-menu li:hover{
 	background-color: #f6f6f6;
+}
+.dropdown-menu.list li:hover{
+	background-color: transparent;
 }
 
 

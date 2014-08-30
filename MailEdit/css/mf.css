@@ -171,7 +171,37 @@ div.botonesElem button.active{
 }
 
 .txtTable > tbody > tr >td:empty {
-    width: 100%;
-    height: 20px;
-    background: #ff0000;
+	width: 100%;
+	height: 20px;
+	background: #ff0000;
 }
+
+.propiedades{
+	margin-top: 5px;
+	border-bottom: 1px solid #111010;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.15) inset;
+	background-color: #222;
+}
+
+.propiedades li{
+	padding-left:25px !important;
+	font-weight: bold;
+
+}
+
+.propiedades .btnat{
+	background-color: #eee;
+	border:1px solid #999;
+	border-radius: 5px;
+	box-shadow: 0 1px #737373 inset;
+}
+
+.propiedades .btnat:hover{
+	background-color: #656465;
+	border-color:#2EBDFF;
+}
+
+.propiedades select, .propiedades input{
+	padding:1px !important;
+}
+

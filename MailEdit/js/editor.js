@@ -524,7 +524,9 @@ function loadRtf(elem){
 			var formato=$(this).data("function");
 
 			if(formato!=null){
-				if(formato=='fontname') formatRtf(formato, elem, $(this).find("a").html());
+				if(formato=='fontname'){ 
+					formatRtf(formato, elem, $(this).find("a").html());
+				}
 				formatRtf(formato, elem)
 			}else{
 				if($(this).hasClass("dropdown")) dropDownClick(this);

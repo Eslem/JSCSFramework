@@ -38,7 +38,7 @@
 	<body>
 		<div class="navbar inverse navbar-vertical responsive-vertical noBorderRadius fixed" id="contenido" data-responsive=true data-max-width="none" data-resizable="true">
 			<div class="content">
-				<ul >
+				<ul>
 					<li class=""><a class="header center-text" style="text-align:center" >Elementos <i class="fa fa-cubes"></i></a></li>
 					<li><hr class=""></li>
 					<li>
@@ -63,17 +63,34 @@
 							</div>
 						</div>
 					</li>
-
+					<li><hr></li>
+					<li><a class=" header center-text" style="text-align:center" >Propiedades <i class="fa fa-cog"></i></a></li>
+				</ul>
+				<ul class="propiedades">
+					<li>Tipo: <span id="tipo">tipo</span></li>
+					<li class="form inline">Background:<select class="sm">
+							<option>primary</option>
+							<option>primary</option>
+							<option>primary</option>
+							<option>primary</option>
+						</select>
+					</li>
+					<li class="form inline">Margin <button class="bt sm btnat" onclick="margin('up')"><i class="fa fa-toggle-up"></i></button><button class="bt sm btnat" onclick="margin('down')"><i class="fa fa-toggle-down"></i></button></li>
+					<li class="form inline">Padding <button class="bt sm btnat" onclick="padding('up')"><i class="fa fa-toggle-up"></i></button><button class="bt sm btnat" onclick="padding('down')"><i class="fa fa-toggle-down"></i></button></li>
+					<li class="form inline">Src <input type="text" id="src" class="sm">
+					</li>
 				</ul>
 			</div>
+
+		</div>
 		</div>
 		<div class="" style="min-height: 100%;">
 			<div class="centerDiv" id="backMail">
 				<table id="mailBody" class="centerDiv">
 					<tbody>
-						<tr class="tableRow selection" data-type="Text">
+						<tr class="tableRow" data-type="Text">
 							<td>
-								<table class="txtTable " >
+								<table class="txtTable prop" >
 									<tbody>
 										<tr>
 											<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget aliquet ante. Vivamus congue fringilla semper. Praesent rutrum neque tortor, eget convallis libero blandit sed. Aenean nec libero quis mauris lobortis sodales quis non tellus. Vestibulum congue iaculis pellentesque. Pellentesque nec enim sit amet risus facilisis mollis. Phasellus bibendum pellentesque erat fermentum lobortis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed dignissim ipsum at eros vestibulum, quis blandit tellus placerat. Praesent ultricies diam mattis ipsum cursus tempor. Aenean vel metus a velit hendrerit faucibus non non purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed nec tristique nisi. Proin mollis sit amet lorem ut volutpat.</td>
@@ -88,7 +105,7 @@
 								<table  border="0" cellpadding="0" cellspacing="0" align="left" width="49%">
 									<tbody>
 										<tr class="tableRow" data-type="Text">
-											<td><table class="txtTable " >
+											<td><table class="txtTable prop" >
 													<tbody>
 														<tr>
 															<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget aliquet ante. Vivamus congue fringilla semper. Praesent rutrum neque tortor, eget convallis libero blandit sed. Aenean nec libero quis mauris lobortis sodales quis non tellus. Vestibulum congue iaculis pellentesque. Pellentesque nec enim sit amet risus facilisis mollis. Phasellus bibendum pellentesque erat fermentum lobortis</td>
@@ -102,7 +119,7 @@
 								<table  border="0" cellpadding="0" cellspacing="0" align="left" width="49%">
 									<tbody>
 										<tr class="tableRow" data-type="Text">
-											<td><table class="txtTable ">
+											<td><table class="txtTable prop ">
 													<tbody>
 														<tr>
 															<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget aliquet ante. Vivamus congue fringilla semper. Praesent rutrum neque tortor, eget convallis libero blandit sed. Aenean nec libero quis mauris lobortis sodales quis non tellus. Vestibulum congue iaculis pellentesque. Pellentesque nec enim sit amet risus facilisis mollis. Phasellus bibendum pellentesque erat fermentum lobortis</td>

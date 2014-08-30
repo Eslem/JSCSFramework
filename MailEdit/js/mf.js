@@ -115,7 +115,6 @@ function loadFunctions(){
 		if($(".botonesElem").length!=0){
 			$(".botonesElem").remove();
 		}
-
 		$(".selection").removeClass("selection");
 		var div=$(this);
 		$(this).addClass("selection");
@@ -123,7 +122,7 @@ function loadFunctions(){
 		$(this).css("position", "relative");
 
 		addBotones(this);
-
+		$("#tipo").html($(this).data("type"));		
 
 		//Handle Clicks
 
@@ -149,8 +148,8 @@ function loadFunctions(){
 				$(".botonesElem").remove();
 			}
 			if($(".editorRtf").is(":visible")){
-					$(".editorRtf").fadeOut();
-				}
+				$(".editorRtf").fadeOut();
+			}
 
 	});
 
@@ -247,32 +246,32 @@ function dragOver(e){
 	divDrop.className="tableRow divDrop";
 	divDrop.innerHTML='<td><table class="divDrop"><tbody><tr><td>Drop Here</td></tr></tbody></table></td>';
 	var scroll=$(window).scrollTop();
-	
+
 	var x=e.clientX;
 	var y=e.clientY+scroll;
-	
+
 	var posEl=findPos(this);
 	var width=$(this).width();
 	var height=$(this).height();
 	var partX=width/4;
 	var partY=height/2;
-	
+
 	//console.log("Height:"+partY+"  -pos"+posEl[0]);
 
 	/*if(!$(".divDrop").length !=0){
 
-		if( (x<(posEl[0]+partX)) && (y<(posEl[1]+(partY*2))))
-		{
-			//$(divDrop).insertBefore(this);	
-			where="before";				
-			$(this).addClass("bordeBefore");	
-		}
-		else if( (x>(posEl[0]+width-partX))	||	(y>(posEl[1]+height-partY)))
-		{
-			//$(divDrop).insertAfter(this);
-			where="after";
-			$(this).addClass("bordeAfter");	
-		}
+	if( (x<(posEl[0]+partX)) && (y<(posEl[1]+(partY*2))))
+	{
+	//$(divDrop).insertBefore(this);	
+	where="before";				
+	$(this).addClass("bordeBefore");	
+	}
+	else if( (x>(posEl[0]+width-partX))	||	(y>(posEl[1]+height-partY)))
+	{
+	//$(divDrop).insertAfter(this);
+	where="after";
+	$(this).addClass("bordeAfter");	
+	}
 	}*/
 	if(!$(".divDrop").length !=0){
 
@@ -323,58 +322,25 @@ function dropEvent(e){
 	prepareDrag();
 }
 
-/*/-Sobre Carga RTF
-function loadRtf(elem){
-	var div= document.createElement("div");
-	div.className="parentRtf";
-	document.body.appendChild(div);
-	$(div).load("js/rtf.html", function(){
-		$(".editorRtf ul li").click(function(ev){
-			$("li.selected").removeClass("selected");
-			$(this).addClass("selected");
-			var formato=$(this).data("function");
 
-			if(formato!=null){
-				if(formato=='fontname') formatRtf(formato, elem, $(this).find("a").html());
-				formatRtf(formato, elem)
-			}else{
-				if($(this).hasClass("dropdown")) dropDownClick(this);
-			}	
-		});
-		$(".editorRtf").click(function(ev){
-			ev.stopPropagation()
-			ev.preventDefault()
-		});
+//-----Propiedades
 
-		//dont hide on click in editor
+function padding(type){
+	var padding=$(".selection").innerWidth() - $('.selection').width();	
+	if(type=="up"){
+		padding+=1;
+	}else{
+		padding-=1;
+	}
+	console.log(padding);
+	$(".selection ").css("padding",padding+"px");
+}
+function margin(type){
+	var margin=$(".selection td table").css("margin");
+	console.log(margin);
+	//console.log($(".selection td table").html());
+	if(type=="up"){
 
-		$(".editorRtf").bind('click mousedown mouseup',function(){
-			return false;
-		});
+	}
+}
 
-		$(elem).click(function(){
-			var elem=this;
-			$(this).attr("contenteditable", "true");
-			showRtf(elem);
-			return 
-		});
-
-		$(elem).mouseup(function(ev){
-			return false;
-		});
-
-
-
-		$(document).mouseup(function()
-			{
-				if($(".editorRtf").length != 0){
-					if($(".editorRtf").is(":visible")){
-						$(".editorRtf").fadeOut();
-					}
-				}
-
-		});
-
-		showRtf(elem);
-	});
-}*/

@@ -857,9 +857,15 @@ function loadRtf(elem, dir){
 			var formato=$(this).data("function");
 
 			if(formato!=null){
-				if(formato=='fontname') formatRtf(formato, elem, $(this).find("a").html());
-				if(formato=='fontsize') formatRtf(formato, elem, $(this).data('size') );
-				formatRtf(formato, elem)
+				if(formato=='fontname'){ 
+					formatRtf(formato, elem, $(this).find("a").html());
+				}
+				else if(formato=='fontsize') {
+					formatRtf(formato, elem, $(this).data('size') );
+				}
+				else{				
+					formatRtf(formato, elem);
+				}
 			}else{
 				if($(this).hasClass("dropdown")) dropDownClick(this);
 			}	
@@ -938,22 +944,14 @@ function showRtf(elem, dir){
 }
 
 
-function formatRtf(format, editor){
-	if(format=="createlink"  || format=="insertImage"){
-		var value=prompt("Introduce el enlace");
-	}
-	document.execCommand(format, false, link);
-	$(editor).focus();
-}
 
 function formatRtf(format, editor, value){
+
 	if(format=="createlink"  || format=="insertImage"){
 		value=prompt("Introduce el enlace");
 	}
-	if(value){
-		document.execCommand(format, false, value);
+	document.execCommand(format, false, value);
 
-	}
 	$(editor).focus();
 }
 

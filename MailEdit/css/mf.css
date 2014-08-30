@@ -39,6 +39,7 @@ table {
 
 .elementContainer .element{
 	padding:10px;
+	font-size:0.5em;
 	background-color: #eee;
 	border:2px solid #999;
 	border-radius: 10px;
@@ -203,5 +204,18 @@ div.botonesElem button.active{
 
 .propiedades select, .propiedades input{
 	padding:1px !important;
+}
+
+#responsivePrev .modal-content{
+	width:360px !important;
+	height:640px !important;
+	padding:0px;
+	overflow: hidden;
+}
+#responsivePrevDesktop .modal-content{
+	width:630px !important;
+	height:600px !important;
+	padding:0px;
+	overflow: hidden;
 }
 

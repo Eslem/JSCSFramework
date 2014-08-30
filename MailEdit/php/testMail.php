@@ -31,6 +31,7 @@
 				}
 			}
 		</style>
+		<link href="http://www.slemframework.alzatezabala.com/framework/framework.css" rel="stylesheet">
 	</head>
 	<body>
 		

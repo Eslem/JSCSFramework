@@ -218,6 +218,8 @@ function dragStart(e){
 		elem='<tr class="tableRow" data-type="img"><td><table class="imgTable"><tbody><tr><td><img src="images/cat.jpg"></img></td></tr></tbody></table></td></tr>'; 
 	}else if(type=="buttonElem"){
 		elem='<tr class="tableRow" data-type="button"><td><table class="buttonTable"><tbody><tr><td><button class="bt block default">Button</button></td></tr></tbody></table></td></tr>'; 
+	}else if(type=="col2Elem"){
+		elem='<tr class="tableRow" data-type="col"><td><table  border="0" cellpadding="0" cellspacing="0" align="left" width="49%">									<tbody>										<tr class="tableRow" data-type="Text">											<td><table class="txtTable prop" >													<tbody>														<tr>															<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget aliquet ante. Vivamus congue fringilla semper.</td>														</tr>													</tbody>											</table>											</td>										</tr>									</tbody>								</table>								<table  border="0" cellpadding="0" cellspacing="0" align="left" width="49%">									<tbody>										<tr class="tableRow" data-type="Text">											<td><table class="txtTable prop ">													<tbody>														<tr>															<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget aliquet ante. Vivamus congue fringilla semper.</td>														</tr>													</tbody>											</table>											</td>										</tr>									</tbody>								</table></td></tr>'; 
 	}
 }
 
@@ -344,3 +346,18 @@ function margin(type){
 	}
 }
 
+function preview(){
+	var iframe = document.getElementById('mobileIframe'),
+	iframedoc = iframe.contentDocument || iframe.contentWindow.document;
+
+	iframedoc.body.innerHTML = $("#backMail").html();
+	showModal("responsivePrev");
+}
+
+function previewDesktop(){
+	var iframe = document.getElementById('mobileIframeDesktop'),
+	iframedoc = iframe.contentDocument || iframe.contentWindow.document;
+
+	iframedoc.body.innerHTML = $("#backMail").html();
+	showModal("responsivePrevDesktop");
+}

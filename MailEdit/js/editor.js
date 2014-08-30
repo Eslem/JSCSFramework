@@ -356,7 +356,7 @@ function dragStart(e){
 		elem='<p class="elemento">Text</h3>'; 
 	}else if(type=="row"){
 		elem='<div class="elemento row"><div class="col-4 elemento"><p>col-4</p></div><div class="col-4 elemento"><p>col-4</p></div><div class="col-4 elemento"><p>col-4</p></div></div>'; 
-	}else if(type=="col"){
+	}else if(type=="col-2"){
 		elem='<div class="elemento col-4"></div>'; 
 	}
 }

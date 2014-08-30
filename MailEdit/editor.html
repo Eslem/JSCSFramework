@@ -15,9 +15,9 @@
 		<meta name="revisit-after" content="15 days">
 		<title>Mail Edit</title>
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>		
+		<script src="js/jquery.min.js"></script>		
 
-		<link rel="stylesheet" type="text/css" href="http://slemframework.alzatezabala.com/framework/framework.css">		
+		<link rel="stylesheet" type="text/css" href="../framework/framework.css">		
 		<script src="../framework/framework.js" ></script>
 
 		<link rel="stylesheet" type="text/css" href="css/mf.css">		
@@ -43,22 +43,28 @@
 					<li><hr class=""></li>
 					<li>
 						<div class="row container elementContainer">
-							<div class="col-4" style="padding:2px">
+							<div class="col-3" style="padding:2px">
 								<div class="element" draggable="true" id="txtElem">
 									<i class="fa fa-file-text-o"></i>
 									<p>Texto</p>
 								</div>								
 							</div>
-							<div class="col-4" style="padding:2px">
+							<div class="col-3" style="padding:2px">
 								<div class="element" draggable="true" id="imgElem">
 									<i class="fa fa-picture-o"></i>
 									<p>Image</p>
 								</div>								
 							</div>
-							<div class="col-4" style="padding:2px">
+							<div class="col-3" style="padding:2px">
 								<div class="element" draggable="true" id="buttonElem">
 									<i class="fa fa-square"></i>
 									<p>Boton</p>
+								</div>								
+							</div>
+							<div class="col-3" style="padding:2px">
+								<div class="element" draggable="true" id="col2Elem">
+									<i class="fa fa-square"></i>
+									<p>Col-2</p>
 								</div>								
 							</div>
 						</div>
@@ -79,6 +85,12 @@
 					<li class="form inline">Padding <button class="bt sm btnat" onclick="padding('up')"><i class="fa fa-toggle-up"></i></button><button class="bt sm btnat" onclick="padding('down')"><i class="fa fa-toggle-down"></i></button></li>
 					<li class="form inline">Src <input type="text" id="src" class="sm">
 					</li>
+					<li><hr></li>
+				</ul>
+				<ul class="center-text">
+					<li><button class="bt event" onclick="savePage(this)"><span id="spanSave">Save</span> <div id="loaderSave" class="loader hidden">Loading...</div></button></li>
+					<li><button class="bt info" onclick="preview()">Preview <i class="fa fa-mobile xl"></i></button></li>
+					<li><button class="bt info" onclick="previewDesktop()">Preview <i class="fa fa-laptop xl"></i></button></a></li>
 				</ul>
 			</div>
 
@@ -86,7 +98,7 @@
 		</div>
 		<div class="" style="min-height: 100%;">
 			<div class="centerDiv" id="backMail">
-				<table id="mailBody" class="centerDiv">
+				<table id="mailBody" class="centerDiv" width="100%">
 					<tbody>
 						<tr class="tableRow" data-type="Text">
 							<td>
@@ -140,5 +152,17 @@
 
 		</div>
 		<div class="tagName" id="tagName"></div>
+		<div class="modal sm" id="responsivePrev">
+				<div class="modal-content">
+					<iframe width="360px" height="640px" id="mobileIframe"></iframe>
+
+				</div>
+			</div>
+			<div class="modal" id="responsivePrevDesktop">
+				<div class="modal-content">
+					<iframe width="1280px" height="600px" id="mobileIframeDesktop"></iframe>
+
+				</div>
+			</div>
 	</body>
 </html>

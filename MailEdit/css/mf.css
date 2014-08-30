@@ -1,0 +1,207 @@
+body, html{
+	height:100%;
+}
+body *, html *{
+}
+table {
+
+}
+
+/*-----------Attr*/
+
+[draggable=true] {
+	cursor: -webkit-grab; cursor: -moz-grab;
+}
+
+/*---------Classes----*/
+.navbar-vertical{
+	width:25%;
+}
+
+.navbar-vertical ul{
+	width:100%;
+	padding:10px;
+}
+.bodyContent{
+	width:75%;
+	padding-top:20px;
+	overflow-y: none;
+	max-height:100%;
+}
+.bodyContent *{
+	max-width:100%;
+}
+
+.elementContainer{
+	text-align:center;
+
+}
+
+.elementContainer .element{
+	padding:10px;
+	background-color: #eee;
+	border:2px solid #999;
+	border-radius: 10px;
+	box-shadow: 0 1px #737373 inset;
+}
+
+.elementContainer .element:hover{
+	background-color: #656465;
+	border-color:#2EBDFF;
+}
+
+.elementContainer i{
+	font-size: 2.5em;
+}
+.elementContainer p{
+	margin:5px
+}
+
+
+
+.bordeBefore{
+	box-shadow: -3px -3px 0px 0px #2EBDFF !important;
+}
+.bordeAfter{
+	box-shadow: 3px 3px 0px 0px #2EBDFF  !important;
+}
+
+.divDrop{
+	background-color: #eee;
+	border-radius: 10px;
+	border:2px solid #2EBDFF ;
+	padding:15px;
+	text-align: center;
+	box-shadow: 0 1px #737373 inset;
+}
+
+.tableRow:hover{
+	box-shadow: 0px 0px 0px 1px rgba(73,146,209, 0.3);
+	border-radius:2px;
+}
+
+.tagName{
+	background: #4992D1;
+	opacity:0.8;
+	border-radius:5px 5px 0px 0px;
+	top: 18px;
+	color: #fff;
+	left: 0px;
+	padding: 2px 6px;
+	z-index: 98;
+	font-size: 14px;
+	position:absolute;
+}
+
+.selection, .selection:hover{
+	box-shadow: 0px 0px 0px 2px #4992D1 !important;	
+	-moz-box-shadow:0px 0px 0px 2px #4992D1 !important;	
+	-webkit-box-shadow:0px 0px 0px 2px #4992D1 !important;	
+	border-radius:2px;
+	position: relative;
+	display: block;
+}
+
+table { box-sizing: border-box; }
+tr { display: block; }
+img{
+	width:100%;
+}
+
+/*--------------Ids--*/
+#backMail{
+	width:100%;
+	height:100%;
+	padding:25px
+}
+
+#mailBody{
+	width: 630px;
+	border-radius:10px;
+	padding:15px;
+}
+#mailBody *{
+	max-width: 100%;
+}
+
+#mailBody td{
+	width:100%;
+}
+
+.tableContent{
+	width:100%;
+}
+
+
+
+
+
+/*---------Tables style								*/
+
+.txtTable{
+	padding:10px;
+}
+
+
+/*----Menus				*/
+
+div.botonesElem{
+	background-color: #272727;
+	width:auto;
+	height:auto;
+	position:absolute;
+	border-radius:3px;	
+}
+div.botonesElem button{
+	color:#999;
+	background-color: #222;
+	margin:2px;
+	border:none;
+	border-radius:2px;
+}
+div.botonesElem button:hover{
+	color:#fff;
+	background-color: #272727;
+}
+div.botonesElem button.active{
+	color:#4992D1 !important;
+	background-color: #272727;
+	border-radius: 3px;
+	box-shadow: 0 0 0 1px #aaa inset; 
+}
+
+.txtTable > tbody > tr >td:empty {
+	width: 100%;
+	height: 20px;
+	background: #ff0000;
+}
+
+.propiedades{
+	margin-top: 5px;
+	border-bottom: 1px solid #111010;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.15) inset;
+	background-color: #222;
+}
+
+.propiedades li{
+	padding-left:25px !important;
+	font-weight: bold;
+
+}
+
+.propiedades .btnat{
+	background-color: #eee;
+	border:1px solid #999;
+	border-radius: 5px;
+	box-shadow: 0 1px #737373 inset;
+}
+
+.propiedades .btnat:hover{
+	background-color: #656465;
+	border-color:#2EBDFF;
+}
+
+.propiedades select, .propiedades input{
+	padding:1px !important;
+}
+

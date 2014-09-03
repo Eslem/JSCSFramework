@@ -1,7 +1,13 @@
 $(document).ready(function(){
-	prepareDrag();
-	loadFunctions();
+	loadTable("default.html");
 });
+
+function loadTable(){
+	$("#backMail").load("templates/default.html", function(){
+		prepareDrag();
+		loadFunctions();
+	});
+}
 //--------Buttons
 function addBotones(element){
 	var div=document.createElement("div");
@@ -20,7 +26,9 @@ function addBotones(element){
 		if(!$(this).hasClass("active")){
 			$(this).addClass("active")
 			$(element).attr("contenteditable", true);
-			showRtf(element, "../framework/rtf.html");
+			if($(element).data("type")=="Text"){
+				showRtf(element, "../framework/rtf.html");
+			}
 		}
 		else {
 			$(this).removeClass("active")
@@ -122,7 +130,30 @@ function loadFunctions(){
 		$(this).css("position", "relative");
 
 		addBotones(this);
-		$("#tipo").html($(this).data("type"));		
+		$("#tipo").html($(this).data("type"));	
+
+		if($("#imgProp").is(":visible")){
+			$("#imgProp").slideUp();
+		}
+
+		if($("#buttonProp").is(":visible")){
+			$("#buttonProp").slideUp();
+		}
+
+		if($(this).data("type")=="img"){
+			$("#thumbnailImg").attr("src", $(this).find("img").attr("src"));
+			$("#imgProp").slideDown();
+		}
+		if($(this).data("type")=="button"){
+			$("#buttonProp").slideDown();
+			$("#link").val($(this).find("a").attr("href"));
+			var button=this;
+			$("#setLink").click(function(){
+				$(button).find("a").attr("href", $("#link").val());
+			});
+		}
+
+
 
 		//Handle Clicks
 
@@ -150,7 +181,7 @@ function loadFunctions(){
 			if($(".editorRtf").is(":visible")){
 				$(".editorRtf").fadeOut();
 			}
-
+			$(".editorRtf li.selected").removeClass("selected");
 	});
 
 	$(".tableRow").mouseover(function(ev){
@@ -215,11 +246,11 @@ function dragStart(e){
 	if(type=="txtElem"){
 		elem='<tr class="tableRow" data-type="Text"><td><table class="txtTable"><tbody><tr><td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget aliquet ante. Vivamus congue fringilla semper. Praesent rutrum neque tortor, eget convallis libero blandit sed. Aenean nec libero quis mauris lobortis sodales quis non tellus.</td></tr></tbody></table></td></tr>'; 
 	}else if(type=="imgElem"){
-		elem='<tr class="tableRow" data-type="img"><td><table class="imgTable"><tbody><tr><td><img src="images/cat.jpg"></img></td></tr></tbody></table></td></tr>'; 
+		elem='<tr class="tableRow" data-type="img"><td><table class="imgTable"><tbody><tr><td><img src="images/default.jpg"></img></td></tr></tbody></table></td></tr>'; 
 	}else if(type=="buttonElem"){
-		elem='<tr class="tableRow" data-type="button"><td><table class="buttonTable"><tbody><tr><td><button class="bt block default">Button</button></td></tr></tbody></table></td></tr>'; 
+		elem='<tr class="tableRow" data-type="button"><td><table class="buttonTable"><tbody><tr><td><a href="http://www.google.com"><button class="bt block default">Button</button></a></td></tr></tbody></table></td></tr>'; 
 	}else if(type=="col2Elem"){
-		elem='<tr class="tableRow" data-type="col"><td><table  border="0" cellpadding="0" cellspacing="0" align="left" width="49%">									<tbody>										<tr class="tableRow" data-type="Text">											<td><table class="txtTable prop" >													<tbody>														<tr>															<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget aliquet ante. Vivamus congue fringilla semper.</td>														</tr>													</tbody>											</table>											</td>										</tr>									</tbody>								</table>								<table  border="0" cellpadding="0" cellspacing="0" align="left" width="49%">									<tbody>										<tr class="tableRow" data-type="Text">											<td><table class="txtTable prop ">													<tbody>														<tr>															<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget aliquet ante. Vivamus congue fringilla semper.</td>														</tr>													</tbody>											</table>											</td>										</tr>									</tbody>								</table></td></tr>'; 
+		elem='<tr class="tableRow" data-type="col"><td><table  border="0" cellpadding="0" cellspacing="0" align="left" width="49%"><tbody><tr class="tableRow" data-type="Text"><td><table class="txtTable prop" ><tbody><tr><td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget aliquet ante. Vivamus congue fringilla semper.</td></tr></tbody></table></td></tr></tbody></table><table  border="0" cellpadding="0" cellspacing="0" align="left" width="49%"><tbody><tr class="tableRow" data-type="Text"><td><table class="txtTable prop "><tbody><tr><td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget aliquet ante. Vivamus congue fringilla semper.</td></tr></tbody></table></td></tr></tbody></table></td></tr>'; 
 	}
 }
 
@@ -327,22 +358,17 @@ function dropEvent(e){
 
 //-----Propiedades
 
-function padding(type){
-	var padding=$(".selection").innerWidth() - $('.selection').width();	
-	if(type=="up"){
-		padding+=1;
-	}else{
-		padding-=1;
-	}
-	console.log(padding);
-	$(".selection ").css("padding",padding+"px");
-}
-function margin(type){
-	var margin=$(".selection td table").css("margin");
-	console.log(margin);
-	//console.log($(".selection td table").html());
-	if(type=="up"){
+function getPadding(elem){
+	//return window.getComputedStyle(elem, null).getPropertyValue('padding') 
+	return $(elem).css("padding")
 
+}
+
+function padding(input){
+	if($(input).is(":checked")){
+		$(".selection table").css("padding", "10px");
+	}else{
+		$(".selection table").css("padding", "0px");
 	}
 }
 
@@ -360,4 +386,42 @@ function previewDesktop(){
 
 	iframedoc.body.innerHTML = $("#backMail").html();
 	showModal("responsivePrevDesktop");
+}
+
+function createCanvas(file, canvas, max_width, max_height){
+	var img = document.getElementById("thumbnailImg");
+	var reader = new FileReader();  
+	reader.onload = function(e) {img.src = e.target.result}
+	reader.readAsDataURL(file);
+
+	img.onload = function () {
+		var ctx = canvas.getContext("2d");
+		ctx.drawImage(img, 0, 0);
+
+		var MAX_WIDTH = max_width;
+		var MAX_HEIGHT = max_height;
+		var width = img.width;
+		var height = img.height;
+
+		if (width > height) {
+			if (width > MAX_WIDTH) {
+				height *= MAX_WIDTH / width;
+				width = MAX_WIDTH;
+			}
+		} else {
+			if (height > MAX_HEIGHT) {
+				width *= MAX_HEIGHT / height;
+				height = MAX_HEIGHT;
+			}
+		}
+		canvas.width = width;
+		canvas.height = height;
+		var ctx = canvas.getContext("2d");
+		ctx.drawImage(img, 0, 0, width, height);
+
+		var dataurl = canvas.toDataURL("image/png");
+		thumbnail.push(dataurl);
+
+	}
+
 }

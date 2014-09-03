@@ -807,6 +807,7 @@ function rtfEditor(elem, dir){
 				if($(".editorRtf").is(":visible")){
 					$(".editorRtf").fadeOut();
 				}
+				$(".editorRtf li.selected").removeClass("selected");
 			}
 
 	});

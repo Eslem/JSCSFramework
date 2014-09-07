@@ -1,5 +1,8 @@
 $(document).ready(function(){
 	loadTable("default.html");
+	$(".buttonTable").children("a").click(function(e){
+		e.preventDefault();
+	});
 });
 
 function loadTable(){
@@ -112,6 +115,10 @@ function addBotones(element){
 
 
 function loadFunctions(){
+	$(".buttonTable").children("a").click(function(e){
+		e.preventDefault();
+	});
+
 	$(".tableRow").unbind("mouseover");
 	$(".tableRow").unbind("click");
 	$(document).unbind("mouseover");

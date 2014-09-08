@@ -807,6 +807,7 @@ function rtfEditor(elem, dir){
 				if($(".editorRtf").is(":visible")){
 					$(".editorRtf").fadeOut();
 				}
+				$(".editorRtf li.selected").removeClass("selected");
 			}
 
 	});
@@ -1010,6 +1011,9 @@ function scrollToElement(elem){
 }
 
 function scrollTo(){
+	$(".scrollTo li a").click(function(e){
+		e.preventDefault();
+	})
 	$(".scrollTo li").each(function(){
 		$(this).click(function(){
 			scrollToElement($(this).find("a").attr("href"));

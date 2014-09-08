@@ -86,14 +86,14 @@
 					</li>
 					<li class="form inline">Padding <input type="checkbox" id="padding" onchange="padding(this)" checked ></li>
 					<div id="buttonProp" class="hidden">
-					<li class="form inline">Link <input type="text" id="link" class="sm"><button class="bt sm primary" id="setLink">Set</button>		</li>			
+						<li class="form inline">Link <input type="text" id="link" class="sm"><button class="bt sm primary" id="setLink">Set</button>		</li>			
 					</div>
 
 					<li id="imgProp" style="display: none;" >Img:
 						<div class="dropContainer">						
 							<img id="thumbnailImg">
 						</div>
-						<button class="bt sm primary" id="chooseImg">Elegir</button>
+						<button class="bt sm primary" id="chooseImg" onclick="imgChooser()">Elegir</button>
 					</li>
 					<li><hr></li>
 				</ul>
@@ -122,6 +122,42 @@
 			<div class="modal-content">
 				<iframe width="1280px" height="600px" id="mobileIframeDesktop"></iframe>
 
+			</div>
+		</div>
+		<div class="modal" id="choseImg" style="display: block;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="bt modal-close noStyle" data-function="closeModal">×</button>
+					<h3 class="primary">Seleccion de imagen</h3>
+				</div>
+				<div class="modal-body">
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="bt" data-function="closeModal">Close</button>
+					<button type="button" class="bt primary" onclick="">Save changes</button>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal sm" id="imgUpload" style="display: block;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="bt modal-close noStyle" data-function="closeModal">×</button>
+					<h3 class="primary">Subir imagen</h3>
+				</div>
+				<div class="modal-body right-text">
+					<div class="dropContainer centerDiv" id="dropZone">
+						<h1 class="primary">Drop Image Here</h1>
+						<canvas id="canvasImg"></canvas>
+					</div>
+					<br/>
+					<button class="bt primary sm" style="display:right;">Elegir imagen</button>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="bt" data-function="closeModal">Close</button>
+					<button type="button" class="bt primary">Save changes</button>
+				</div>
 			</div>
 		</div>
 	</body>

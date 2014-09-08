@@ -219,43 +219,31 @@ div.botonesElem button.active{
 	overflow: hidden;
 }
 
-<<<<<<< HEAD
 
 
-=======
 /*--------drop				*/
 .dropContainer{
 	border:2px dashed #ccc;
-	width:250px;
 	height:auto;
+	width:250px;
 	border-radius:5px;
-	padding:5px;
-	margin-left: 45px;
 }
 
-.dropContainer:empty{
-	/*background-image: url('../images/default.jpg');*/
-	background-repeat: no-repeat;
-	background-position: right top;
-	background-size:  cover;
-}
-
-.dropContainer.over, .dropContainer:hover{
+.dropContainer.over{
 	border-color: #2EBDFF;
 }	
 
 .dropContainer h1{
 	margin-left: auto;
-	margin-top: 5%;
+	margin-top: 45%;
 	text-align: center;
-	opacity:0.4;
-	font-size: 1em;
-
-	padding-top:25%;
-	padding-bottom:25%;
+	opacity:0.4
 }
 
-.dropContainer.over h1, .dropContainer:hover h1{
+.dropContainer.over h1{
 	opacity:1
 }
->>>>>>> 1c94734d871b052193e26d4922ddacbbc67e06dd
+.dropContainer .imageSrc{
+	width:100%;
+	height:100%;
+}	

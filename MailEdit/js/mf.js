@@ -1,8 +1,26 @@
+var filesData=[];
+var thumbnail=[];
+var imageNames=[];
+
 $(document).ready(function(){
 	loadTable("default.html");
-	$(".buttonTable").children("a").click(function(e){
+	$(".buttonTable").find("a").click(function(e){
 		e.preventDefault();
+		return null;
 	});
+
+	$("#mailBody").find("a").click(function(e){
+		e.preventDefault();
+		return null;
+	});
+
+	// Setup the dnd listeners.
+	var dropZone = document.getElementById('dropZone');
+	dropZone.addEventListener('dragover', handleDragOver, false);
+	dropZone.addEventListener('dragenter', handleDragEnter, false);
+	dropZone.addEventListener('dragleave', handleDragLeave, false);
+	dropZone.addEventListener('drop', handleFileSelect, false);
+
 });
 
 function loadTable(){
@@ -257,7 +275,7 @@ function dragStart(e){
 	}else if(type=="buttonElem"){
 		elem='<tr class="tableRow" data-type="button"><td><table class="buttonTable"><tbody><tr><td><a href="http://www.google.com"><button class="bt block default">Button</button></a></td></tr></tbody></table></td></tr>'; 
 	}else if(type=="col2Elem"){
-		elem='<tr class="tableRow" data-type="col"><td><table  border="0" cellpadding="0" cellspacing="0" align="left" width="49%"><tbody><tr class="tableRow" data-type="Text"><td><table class="txtTable prop" ><tbody><tr><td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget aliquet ante. Vivamus congue fringilla semper.</td></tr></tbody></table></td></tr></tbody></table><table  border="0" cellpadding="0" cellspacing="0" align="left" width="49%"><tbody><tr class="tableRow" data-type="Text"><td><table class="txtTable prop "><tbody><tr><td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget aliquet ante. Vivamus congue fringilla semper.</td></tr></tbody></table></td></tr></tbody></table></td></tr>'; 
+		elem='<tr class="tableRow columns" data-type="col"><td><table  border="0" cellpadding="0" cellspacing="0" align="left" width="49%" class="col"><tbody><tr class="tableRow" data-type="Text"><td><table class="txtTable prop" ><tbody><tr><td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget aliquet ante. Vivamus congue fringilla semper.</td></tr></tbody></table></td></tr></tbody></table><table  border="0" cellpadding="0" cellspacing="0" align="left" width="49%" class="col"><tbody><tr class="tableRow" data-type="Text"><td><table class="txtTable prop "><tbody><tr><td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget aliquet ante. Vivamus congue fringilla semper.</td></tr></tbody></table></td></tr></tbody></table></td></tr>'; 
 	}
 }
 
@@ -395,40 +413,144 @@ function previewDesktop(){
 	showModal("responsivePrevDesktop");
 }
 
-function createCanvas(file, canvas, max_width, max_height){
-	var img = document.getElementById("thumbnailImg");
-	var reader = new FileReader();  
-	reader.onload = function(e) {img.src = e.target.result}
-	reader.readAsDataURL(file);
-
-	img.onload = function () {
-		var ctx = canvas.getContext("2d");
-		ctx.drawImage(img, 0, 0);
-
-		var MAX_WIDTH = max_width;
-		var MAX_HEIGHT = max_height;
-		var width = img.width;
-		var height = img.height;
-
-		if (width > height) {
-			if (width > MAX_WIDTH) {
-				height *= MAX_WIDTH / width;
-				width = MAX_WIDTH;
-			}
-		} else {
-			if (height > MAX_HEIGHT) {
-				width *= MAX_HEIGHT / height;
-				height = MAX_HEIGHT;
-			}
+function savePage(button){
+	$("#spanSave").text("");
+	$("#loaderSave").slideDown();
+	$(".selection").removeClass("selection");
+	var imagen="";
+	html2canvas($("#mailBody")[0], {
+		onrendered: function(canvas) {
+			imagen = canvas.toDataURL("image/png");
+			resetSrcImg();
+			$.ajax({
+				type:"POST",
+				url:"php/pagesRequests.php",
+				data:{
+					name:name,
+					img:imagen,
+					wth:'save',
+					html:$("#mailBody").html()
+				},
+				success:function(data){
+					$("#spanSave").text("Saved");
+					$("#loaderSave").slideUp();
+					loadEditor();
+					setTimeout(function(){$("#spanSave").text("Save");}, 5000);
+				}
+			});
 		}
-		canvas.width = width;
-		canvas.height = height;
-		var ctx = canvas.getContext("2d");
-		ctx.drawImage(img, 0, 0, width, height);
-
-		var dataurl = canvas.toDataURL("image/png");
-		thumbnail.push(dataurl);
-
-	}
+	});
 
 }
+
+function imgChooser(){
+	$('#choseImg').slideDown();
+	var jsonFile="images/images.json";
+	if(fileExist(jsonFile)){
+		$.getJSON( jsonFile, function( data ) {
+			var items = [];
+			$.each( data, function( key, val ) {
+				items.push( "<li id='" + key + "'>" + val + "</li>" );
+			});
+		});
+	}
+	else{
+		alert();
+	}
+}
+
+
+//--Canvas--/
+
+function upload(){
+
+	var formData = new FormData();
+	for (i = 0; i < imageNames.length; i++) {
+		formData.append("names["+i+"]",imageNames[i]);
+	}
+	for (var i = 0, f; f = thumbnail[i]; i++) {
+		formData.append('file'+i, f);
+	}
+	for (var i = 0, f; f = filesData[i]; i++) {
+		formData.append('file'+i, f);
+	}
+	$.ajax({
+		xhr: function(){
+			var xhr = new window.XMLHttpRequest();
+			//Upload progress
+			xhr.upload.addEventListener("progress", function(evt){
+				if (evt.lengthComputable) {
+					var percentComplete = evt.loaded / evt.total;
+					//Do something with upload progress
+					console.log(percentComplete);
+				}
+				}, false);
+			//Download progress
+			xhr.addEventListener("progress", function(evt){
+				if (evt.lengthComputable) {
+					var percentComplete = evt.loaded / evt.total;
+					//Do something with download progress
+					console.log(percentComplete);
+				}
+				}, false);
+			return xhr;
+		},
+		type:'POST',
+		url:"php/fileUpload.php",
+		data:formData,
+		cache:false,
+		contentType: false,
+		processData: false,
+		success:function(data){
+			console.log(data);
+		}
+	});
+}
+
+
+
+
+function handleFileSelect(evt) {
+	evt.stopPropagation();
+	evt.preventDefault();
+
+	var files = evt.dataTransfer.files; // FileList object.
+
+	// files is a FileList of File objects. List some properties.
+	f = files[0];
+	var canvas = document.getElementById("canvasImg");
+
+	var html= document.createElement("div");
+	html.className="row";
+
+	var imgSrc=document.createElement("div");
+	imgSrc.className="imageSrc";
+	imgSrc.appendChild(canvas);
+
+	html.appendChild(imgSrc);
+
+	$("#dropZone h1").remove();
+
+	$("#dropZone")[0].appendChild(html);
+	$(html).find(".imageSrc").append(canvas);
+	createCanvasFromFile(f, canvas, $("#dropZone").width(), $("#dropZone").height());
+	//$(evt.target).removeClass("over");
+}
+
+function handleDragOver(evt) {
+	$(evt.target).addClass("over");
+	evt.stopPropagation();
+	evt.preventDefault();
+	evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+}
+
+function handleDragEnter(evt) {
+	evt.stopPropagation();
+	$(evt.target).addClass("over");
+}
+
+function handleDragLeave(evt){
+	evt.stopPropagation();
+	$(evt.target).removeClass("over");
+}
+

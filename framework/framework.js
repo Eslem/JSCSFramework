@@ -765,6 +765,8 @@ function setPos(obj, position){
 //--	Rtf Editor
 
 function rtfEditor(elem){
+
+	console.log(elem);
 	$(elem).click(function(){
 		var elem=this;
 		$(this).attr("contenteditable", "true");
@@ -775,8 +777,6 @@ function rtfEditor(elem){
 	$(elem).mouseup(function(ev){
 		return false;
 	});
-
-
 
 	$(document).mouseup(function()
 		{
@@ -790,9 +790,16 @@ function rtfEditor(elem){
 }
 
 function rtfEditor(elem, dir){
+
+
 	$(elem).click(function(){
 		var elem=this;
 		$(this).attr("contenteditable", "true");
+		if(dir==null){
+			showRtf(elem, "framework/rtf.html");
+		}else{
+
+		}
 		showRtf(elem, dir);
 		return 
 	});
@@ -885,35 +892,6 @@ function loadRtf(elem, dir){
 		showRtf(elem);
 	});
 	document.body.appendChild(div);
-}
-
-
-function showRtf(elem){
-	if($(".editorRtf").length == 0){
-		loadRtf(elem);
-	}else{
-		$(".editorRtf").fadeIn().css("display","inline-block");
-		var pos=findPos(elem);
-		var widthParent=$(elem).width()/2;
-		var widthDiv=$(".editorRtf").width()/2;
-		var heightDiv=$(".editorRtf").height();
-		var heightElem=$(elem).height();
-		var x=pos[0]+widthParent-widthDiv;
-		var y=pos[1]-heightDiv-30;
-
-		//var check=y-heightDiv;
-		if(y<=0){
-			y=pos[1]+30+heightElem;
-			if($(".editorRtf").hasClass("top"))  $(".editorRtf").removeClass("top");
-			if(!$(".editorRtf").hasClass("bottom"))  $(".editorRtf").addClass("bottom");
-		}else{
-			if(!$(".editorRtf").hasClass("top")) $(".editorRtf").addClass("top");
-			if($(".editorRtf").hasClass("bottom")) $(".editorRtf").removeClass("bottom");
-		}
-
-		var newPos=[ x, y];
-		setPos($(".editorRtf").parent()[0], newPos);
-	}
 }
 
 function showRtf(elem, dir){
@@ -1118,4 +1096,47 @@ function slideAuto(elem, time){
 		elem.slideUp();
 		}, time);
 
+}
+
+function fileExist(url){
+	var http = new XMLHttpRequest();
+	http.open('HEAD', url, false);
+	http.send();
+	return http.status!=404;
+}
+
+function createCanvasFromFile(file, canvas, max_width, max_height){
+	var img = document.createElement("img");
+	var reader = new FileReader();  
+	reader.onload = function(e) {img.src = e.target.result}
+	reader.readAsDataURL(file);
+
+	img.onload = function () {
+		var ctx = canvas.getContext("2d");
+		ctx.drawImage(img, 0, 0);
+
+		var MAX_WIDTH = max_width;
+		var MAX_HEIGHT = max_height;
+		var width = img.width;
+		var height = img.height;
+
+		if (width > height) {
+			if (width > MAX_WIDTH) {
+				height *= MAX_WIDTH / width;
+				width = MAX_WIDTH;
+			}
+		} else {
+			if (height > MAX_HEIGHT) {
+				width *= MAX_HEIGHT / height;
+				height = MAX_HEIGHT;
+			}
+		}
+		canvas.width = width;
+		canvas.height = height;
+		var ctx = canvas.getContext("2d");
+		ctx.drawImage(img, 0, 0, width, height);
+
+		var dataurl = canvas.toDataURL("image/png");
+		thumbnail.push(dataurl);
+	}
 }

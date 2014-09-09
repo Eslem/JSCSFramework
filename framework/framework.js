@@ -809,11 +809,14 @@ function rtfEditor(elem){
 
 	});
 }
-function loadRtf(elem){
+function loadRtf(elem, file){
 	var div= document.createElement("div");
 	div.className="parentRtf";
-
-	$(div).load("framework/rtf.html", function(){
+	
+	if(file==null){
+		file="framework/rtf.html";
+	}
+	$(div).load(file, function(){
 		$(".editorRtf ul li").click(function(ev){
 			$("li.selected").removeClass("selected");
 			$(this).addClass("selected");
@@ -842,9 +845,13 @@ function loadRtf(elem){
 	document.body.appendChild(div);
 }
 
-function showRtf(elem){
+function showRtf(elem, file){
 	if($(".editorRtf").length == 0){
-		loadRtf(elem);
+		if(file==null){
+			loadRtf(elem);
+		}else{
+			loadRtf(elem, file);
+		}		
 	}else{
 		$(".editorRtf").fadeIn().css("display","inline-block");
 		var pos=findPos(elem);

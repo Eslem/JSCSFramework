@@ -1,40 +1,33 @@
 <?php
 
 $dir="../images/";
-if ($file["error"] > 0) {
-	echo 0;
-} else {
-	echo "Upload: " . $file["name"] . "<br>";
-	echo "Type: " . $file["type"] . "<br>";
-	echo "Size: " . ($file["size"] / 1024) . " kB<br>";
-	echo "Stored in: " . $file["tmp_name"];
+
+
+if(file_exists("../images/images.json")){
+	$json = json_decode(file_get_contents("../images/images.json"), true);
+}else{
+	$json=array();
 }
 
-if(file_exists($dir)){
-	foreach($_FILES as $file){
-		move_uploaded_file($file["tmp_name"], $dir. $_POST["id"]);
-		echo $dir.$file["name"];
-	}
+$file=$_FILES["file"];
+print_r($_FILES);
+$type=explode("/", $file["type"])[1];		
+move_uploaded_file($file["tmp_name"], $dir. $_POST["id"].".$type");
 
-}
-else{
-	echo 0;
-}
+$json[]=array(
+	"type"=>$type,
+	"filename"=>$_POST['id']
+);
 
-$i=0;
-	//$data = $_POST['image'];
+$data = $_POST['thumbnail'];
 
-	// remove the prefix
-	$uri =  substr($data,strpos($data,",")+1);
+$uri =  substr($data,strpos($data,",")+1);
+$file ="../images/thumbnails/".$_POST['id']. '.png';
 
-	// create a filename for the new image
-	//$file = md5(uniqid()) . '.png';
-	$name=explode(".", $names[$i]);
-	$file ="../images/thumbnails/".$_POST['id']. '.png';
+file_put_contents($file, base64_decode($uri));
 
-	// decode the image data and save it to file
-	file_put_contents($file, base64_decode($uri));
+// return the filename
+print_r($json);
 
-	// return the filename
-	echo $file;
+file_put_contents("../images/images.json", json_encode($json));	
 ?>

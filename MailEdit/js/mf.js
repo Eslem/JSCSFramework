@@ -18,7 +18,7 @@ $(document).ready(function(){
 
 	// Setup the dnd listeners.
 	loadDropImg();
-	toggleSelected(".imgJSON");
+
 
 });
 
@@ -126,10 +126,6 @@ function addBotones(element){
 
 	setPos(div,newPos);
 }
-
-
-
-
 
 function loadFunctions(){
 	$(".buttonTable").children("a").click(function(e){
@@ -416,7 +412,7 @@ function savePage(button){
 	html2canvas($("#mailBody")[0], {
 		onrendered: function(canvas) {
 			imagen = canvas.toDataURL("image/png");
-			resetSrcImg();
+			//resetSrcImg();
 			$.ajax({
 				type:"POST",
 				url:"php/pagesRequests.php",
@@ -457,7 +453,6 @@ function loadDropImg(){
 		$("#canvasImg").show();
 		createCanvasFromFile(f, canvas, $("#dropZone").width(), $("#dropZone").height());
 		file=f;
-		thumbnail=canvas.toDataURL("image/png");
 	});
 }
 
@@ -481,7 +476,6 @@ function handleFileSelect(evt) {
 	createCanvasFromFile(f, canvas, $("#dropZone").width(), $("#dropZone").height());
 	$("#canvasImg").show();
 	file=f;
-	thumbnail=canvas.toDataURL("image/png");
 }
 
 function handleDragOver(evt) {
@@ -502,42 +496,71 @@ function handleDragLeave(evt){
 }
 
 function seleccionImg(){
-	imgSelected=$(".imgJSON.selected").data("pos");
-	console.log(imgSelected);
+	var name=$(".imgJSON.selected").data("pos");
+	var type=$(".imgJSON.selected").data("type");
+	$(".tableRow.selection").find("img").attr("src", "images/"+name+"."+type);
+	$("#thumbnailImg").attr("src", "images/"+name+"."+type);
+	$("#choseImg").slideUp();
 }
 
 function imgChooser(){
 	var jsonFile="images/images.json";
 	console.log(fileExist(jsonFile));
 	if(fileExist(jsonFile)==true){
-		$.getJSON( jsonFile, function( data ) {
-			JSONImagesFile=data;
-			$.each( data, function( i, obj ) {
-				var html='<div class="col-3 container"><div class="imgJSON selected" data-pos='+key+'><img src="images/'+key+'.jpg" alt="default" ></div></div>';
-				$("#imgJSONContainer").append(html);
-			});
-			newImgName=JSONImagesFile.length;
-		});
+		showImagesJSON(jsonFile);
 	}
 	else{
 		newImgName=1;
-		JSONImagesFile=JSON.parse('{ "img" :[] }');
 	}
 	$("#choseImg").slideDown();
 }
 
 function uploadImg(){
+	var formData = new FormData();
+	var thm=$("#canvasImg")[0].toDataURL("image/png");
+	formData.append("id",newImgName);
+	formData.append('thumbnail', thm);
+	formData.append('file', file);
+
+
 	$.ajax({
 		type:'POST',
 		url:"php/fileUpload.php",
-		data:{ id:newImgName, file:file, thumbnail:thumbnail },
-		/*
+		data:formData,
+
 		cache:false,
 		contentType: false,
-		processData: false,*/
+		processData: false,
 		success:function(data){
-			console.log(data);
-			JSONImagesFile.img.push({id:newImgName});
+			$("#imgUpload").slideUp();
+			var jsonFile="images/images.json";
+			if(fileExist(jsonFile)==true){
+				$("#imgJSONContainer").html(""); 
+				showImagesJSON("images/images.json");
+			}
+			else{
+				newImgName=1;
+			}
+		}
+	});
+}
+
+function showImagesJSON(url){
+	$("#imgJSONContainer").html("");
+	$.ajaxSetup({ cache: false });
+	$.ajax({
+		cache: false,
+		url: url,
+		dataType: "json",
+		success: function(data) {
+			JSONImagesFile=data;
+			$.each( data, function( i, obj ) {
+				var i=obj.filename;
+				var html='<div class="col-3 container"><div class="imgJSON" data-pos='+i+' data-type='+obj.type+'><img src="images/'+i+'.'+obj.type+'" alt="default" ></div></div>';
+				$("#imgJSONContainer").append(html);
+			});
+			newImgName=JSONImagesFile.length+1;
+			toggleSelected(".imgJSON");
 		}
 	});
 }

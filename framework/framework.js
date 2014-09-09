@@ -10,6 +10,18 @@ $(document).ready(function(){
 	navbarResponsiveVertical();*/
 });
 
+function loadAll(){
+	windowResize();
+	slider();
+	responsive();
+	dropDown();
+	modal();
+	Tabs();
+	writeGridContent();
+	ScrollVerticalNav();
+	navbarResponsiveVertical();
+}
+
 function windowResize(){
 	$( window ).resize(function() {
 		resizeSlider();
@@ -201,7 +213,7 @@ function navbarResponsiveVertical(){
 	else{
 		with2Resize=divWidth;
 	}
-	//with2Resize+=2;
+	with2Resize+=2;
 
 	var parentWidth = $('body').offsetParent().width();
 	var percent = 100*divWidth/parentWidth;
@@ -212,7 +224,7 @@ function navbarResponsiveVertical(){
 	var maxWidth=$('.navbar-vertical').data("max-width");
 
 	if($('.navbar-vertical').data("resizable")==true){
-		var button='<button class="slideNavVertical bt" onclick="slideMenuVertical('+with2Resize+')"><i class="fa fa-bars"></i></button>';
+		var button='<button class="slideNavVertical bt" onclick="buttonSlideNavClick('+with2Resize+')"><i class="fa fa-bars"></i></button>';
 		if(($(".slideNavVertical").length)==0){
 			$("body").append(button);
 		}
@@ -220,7 +232,7 @@ function navbarResponsiveVertical(){
 
 	if((responsive==true) && (maxWidth=='none' || maxWidth==null)){
 		if(screen.width<=480){
-			var button='<button class="slideNavVertical bt" onclick="slideMenuVertical('+with2Resize+')"><i class="fa fa-bars"></i></button>';
+			var button='<button class="slideNavVertical bt" onclick="buttonSlideNavClick('+with2Resize+')"><i class="fa fa-bars"></i></button>';
 			if(($(".slideNavVertical").length)==0){
 				$("body").append(button);
 			}
@@ -230,7 +242,7 @@ function navbarResponsiveVertical(){
 	}
 	else{		
 		if((responsive==true) && (percent>maxWidth)){
-			var button='<button class="slideNavVertical bt" onclick="slideMenuVertical('+with2Resize+')"><i class="fa fa-bars"></i></button>';
+			var button='<button class="slideNavVertical bt" onclick="buttonSlideNavClick('+with2Resize+')"><i class="fa fa-bars"></i></button>';
 			if(($(".slideNavVertical").length)==0){
 				$("body").append(button);
 			}
@@ -238,10 +250,6 @@ function navbarResponsiveVertical(){
 			SetWidthVerticalNav("0px");	
 		}
 	}
-
-
-
-
 }
 
 function slideMenuVertical(width){
@@ -256,21 +264,34 @@ function slideMenuVertical(width){
 	}
 }
 
+function buttonSlideNavClick(width){
+	var fullWidth=$('body').width();
+	if($(".navbar-vertical").is(":visible")){
+		//SetWidthVerticalNav("0px");
+		$(".navbar-vertical").animate({width:'toggle'},500);
+		$(".bodyContent").animate({width:screen.width+"px"},500);
+	}
+	else{
+		//SetWidthVerticalNav(width);
+		var fullWidth=$('body').width();
+		$(".navbar-vertical").animate({width:'toggle'},500);
+		$(".bodyContent").animate({width:(fullWidth-width)+"px"},500);
+		//ScrollVerticalNav();
+	}
+}
+
 
 function SetWidthVerticalNav(width){
 	var fullWidth=$('body').width();
 
 	if(width=="0px"){
 		$(".bodyContent").width(screen.width+"px");
-		if($(".navbar-vertical").hasClass("fixed")){
-			$(".bodyContent").css("margin-left", width);
-		}
-
+		//$(".navbar-vertical").animate({width:'toggle'},2000);
+		//$(".bodyContent").css("margin-left", width);
 	}else{
-		if($(".navbar-vertical").hasClass("fixed")){
-			$(".bodyContent").css("margin-left", width);
-		}
+		//$(".bodyContent").css("margin-left", width);
 		$(".bodyContent").width((fullWidth-width)+"px");
+		//$(".navbar-vertical").animate({width:'toggle'},2000);
 	}
 }
 
@@ -765,8 +786,6 @@ function setPos(obj, position){
 //--	Rtf Editor
 
 function rtfEditor(elem){
-
-	console.log(elem);
 	$(elem).click(function(){
 		var elem=this;
 		$(this).attr("contenteditable", "true");
@@ -778,6 +797,8 @@ function rtfEditor(elem){
 		return false;
 	});
 
+
+
 	$(document).mouseup(function()
 		{
 			if($(".editorRtf").length != 0){
@@ -788,59 +809,26 @@ function rtfEditor(elem){
 
 	});
 }
-
-function rtfEditor(elem, dir){
-
-
-	$(elem).click(function(){
-		var elem=this;
-		$(this).attr("contenteditable", "true");
-		if(dir==null){
-			showRtf(elem, "framework/rtf.html");
-		}else{
-
-		}
-		showRtf(elem, dir);
-		return 
-	});
-
-	$(elem).mouseup(function(ev){
-		return false;
-	});
-
-	$(document).mouseup(function()
-		{
-			if($(".editorRtf").length != 0){
-				if($(".editorRtf").is(":visible")){
-					$(".editorRtf").fadeOut();
-				}
-				$(".editorRtf li.selected").removeClass("selected");
-			}
-
-	});
-}
-
 function loadRtf(elem){
 	var div= document.createElement("div");
 	div.className="parentRtf";
 
 	$(div).load("framework/rtf.html", function(){
-		$(".editorRtf ul li:not(#url)").click(function(ev){
+		$(".editorRtf ul li").click(function(ev){
 			$("li.selected").removeClass("selected");
 			$(this).addClass("selected");
 			var formato=$(this).data("function");
 
 			if(formato!=null){
 				if(formato=='fontname') formatRtf(formato, elem, $(this).find("a").html());
-				if(formato=='fontsize') formatRtf(formato, elem, $(this).data('size') );
 				formatRtf(formato, elem)
 			}else{
 				if($(this).hasClass("dropdown")) dropDownClick(this);
 			}	
 		});
 		$(".editorRtf").click(function(ev){
-			ev.stopPropagation();
-			ev.preventDefault();
+			ev.stopPropagation()
+			ev.preventDefault()
 		});
 
 		//dont hide on click in editor
@@ -854,49 +842,9 @@ function loadRtf(elem){
 	document.body.appendChild(div);
 }
 
-function loadRtf(elem, dir){
-	var div= document.createElement("div");
-	div.className="parentRtf";
-
-	$(div).load(dir, function(){
-		$(".editorRtf ul li:not(#url)").click(function(ev){
-			$("li.selected").removeClass("selected");
-			$(this).addClass("selected");
-			var formato=$(this).data("function");
-
-			if(formato!=null){
-				if(formato=='fontname'){ 
-					formatRtf(formato, elem, $(this).find("a").html());
-				}
-				else if(formato=='fontsize') {
-					formatRtf(formato, elem, $(this).data('size') );
-				}
-				else{				
-					formatRtf(formato, elem);
-				}
-			}else{
-				if($(this).hasClass("dropdown")) dropDownClick(this);
-			}	
-		});
-		$(".editorRtf").click(function(ev){
-			ev.stopPropagation();
-			ev.preventDefault();
-		});
-
-		//dont hide on click in editor
-
-		$(".editorRtf").bind('click mousedown mouseup',function(){
-			return false;
-		});
-
-		showRtf(elem);
-	});
-	document.body.appendChild(div);
-}
-
-function showRtf(elem, dir){
+function showRtf(elem){
 	if($(".editorRtf").length == 0){
-		loadRtf(elem, dir);
+		loadRtf(elem);
 	}else{
 		$(".editorRtf").fadeIn().css("display","inline-block");
 		var pos=findPos(elem);
@@ -923,14 +871,32 @@ function showRtf(elem, dir){
 }
 
 
+function formatRtf(format, editor){
+	var link=null;
+	if(format=="insertImage"){
+		link=$(".rtfMenu button[format='"+format+"']").parent().find("input").val();
+		$(editor).focus();
+	}
+	else if(format=="createlink"){
+		value=$(editor).parent().find(".rtfMenu button[format='"+format+"']").parent().find("input").val();
+		alert(value);
+	}
+	document.execCommand(format, false, link);
+	$(editor).focus();
+}
 
 function formatRtf(format, editor, value){
 
-	if(format=="createlink"  || format=="insertImage"){
-		value=prompt("Introduce el enlace");
+	if(format=="insertImage"){
+		value=$(editor).parent().find(".rtfMenu button[format='"+format+"']").parent().find("input").val();
+		$(editor).focus();
+	}
+	else if(format=="createlink"){
+		value=$(editor).parent().find(".rtfMenu button[format='"+format+"']").parent().find("input").val();
+
+		//selectText(posic, 2, editor);
 	}
 	document.execCommand(format, false, value);
-
 	$(editor).focus();
 }
 
@@ -989,9 +955,6 @@ function scrollToElement(elem){
 }
 
 function scrollTo(){
-	$(".scrollTo li a").click(function(e){
-		e.preventDefault();
-	})
 	$(".scrollTo li").each(function(){
 		$(this).click(function(){
 			scrollToElement($(this).find("a").attr("href"));
@@ -1089,54 +1052,21 @@ function getUrlVariable(variable)
 	return(false);
 }
 
-//AutoSlideUp
+
 function slideAuto(elem, time){
 	elem.slideDown();
 	setTimeout(function(){
 		elem.slideUp();
-		}, time);
-
+		}, time);	
 }
 
-function fileExist(url){
-	var http = new XMLHttpRequest();
-	http.open('HEAD', url, false);
-	http.send();
-	return http.status!=404;
-}
-
-function createCanvasFromFile(file, canvas, max_width, max_height){
-	var img = document.createElement("img");
-	var reader = new FileReader();  
-	reader.onload = function(e) {img.src = e.target.result}
-	reader.readAsDataURL(file);
-
-	img.onload = function () {
-		var ctx = canvas.getContext("2d");
-		ctx.drawImage(img, 0, 0);
-
-		var MAX_WIDTH = max_width;
-		var MAX_HEIGHT = max_height;
-		var width = img.width;
-		var height = img.height;
-
-		if (width > height) {
-			if (width > MAX_WIDTH) {
-				height *= MAX_WIDTH / width;
-				width = MAX_WIDTH;
-			}
-		} else {
-			if (height > MAX_HEIGHT) {
-				width *= MAX_HEIGHT / height;
-				height = MAX_HEIGHT;
-			}
+function JSONToInput(json, div){
+	$.each(json[0], function(i, obj){
+		var elemName=i;
+		if(div!=null){
+			$(div).find("input[name='"+i+"']").val(obj);
+		}else{
+			$("input[name='"+i+"']").val(obj);
 		}
-		canvas.width = width;
-		canvas.height = height;
-		var ctx = canvas.getContext("2d");
-		ctx.drawImage(img, 0, 0, width, height);
-
-		var dataurl = canvas.toDataURL("image/png");
-		thumbnail.push(dataurl);
-	}
+	});
 }

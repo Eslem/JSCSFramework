@@ -124,23 +124,40 @@
 
 			</div>
 		</div>
-		<div class="modal" id="choseImg" style="display: block;">
+		<div class="modal" id="choseImg" >
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="bt modal-close noStyle" data-function="closeModal">×</button>
 					<h3 class="primary">Seleccion de imagen</h3>
 				</div>
 				<div class="modal-body">
-					
+					<div class="row" id="imgJSONContainer">
+						<div class="col-3 container ">
+							<div class="imgJSON selected" data-pos="1">
+								<img src="images/default.jpg" alt="default" >
+							</div>
+						</div>
+						<div class="col-3 container ">
+							<div class="imgJSON" data-pos="2">
+								<img src="images/default.jpg" alt="default" >
+							</div>
+						</div>
+						<div class="col-3 container ">
+							<div class="imgJSON" data-pos="3">
+								<img src="images/default.jpg" alt="default" >
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="bt" data-function="closeModal">Close</button>
-					<button type="button" class="bt primary" onclick="">Save changes</button>
+					<button type="button" class="bt default" onclick="$('#imgUpload').fadeIn()">Nueva <i class="fa fa-plus"></i></button>
+					<button type="button" class="bt primary" onclick="seleccionImg()">Seleccionar</button>
 				</div>
 			</div>
 		</div>
-		
-		<div class="modal sm" id="imgUpload" style="display: block;">
+
+		<div class="modal sm" id="imgUpload">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="bt modal-close noStyle" data-function="closeModal">×</button>
@@ -149,14 +166,15 @@
 				<div class="modal-body right-text">
 					<div class="dropContainer centerDiv" id="dropZone">
 						<h1 class="primary">Drop Image Here</h1>
-						<canvas id="canvasImg"></canvas>
+						<canvas id="canvasImg"  class="hidden"></canvas>
 					</div>
 					<br/>
-					<button class="bt primary sm" style="display:right;">Elegir imagen</button>
+					<button class="bt primary sm" style="display:right;" onclick="$('#imgFile').click()">Elegir imagen</button>
+					<input type="file" class="hidden" id="imgFile">
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="bt" data-function="closeModal">Close</button>
-					<button type="button" class="bt primary">Save changes</button>
+					<button type="button" class="bt" onclick="$('#imgUpload').fadeOut()">Close</button>
+					<button type="button" class="bt primary" onclick="uploadImg()">Save changes</button>
 				</div>
 			</div>
 		</div>

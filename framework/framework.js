@@ -488,7 +488,7 @@ function toggleDisabled(elem){
 		$(elem).attr("disabled", "true");
 	}
 }
-
+/*
 function ulpoadImage(idForm, url, img){
 	var formData = new FormData($("#"+idForm)[0]);
 	$.ajax({
@@ -500,16 +500,16 @@ function ulpoadImage(idForm, url, img){
 		processData: false,
 		success:function(data){
 			if(data!=0){
-				/*$("#uploadImage").hide();
+				$("#uploadImage").hide();
 				var dir=data.substring(3);
 				$("#userImage").attr("src", dir);
-				$("#imageDir").val(dir);*/
+				$("#imageDir").val(dir);
 				$("#"+img).attr("src", data);
 			}
 		}
 	});
 }
-
+*/
 //--		Tags
 function tags(select){
 	var option = $(select).find("option:selected");
@@ -1069,4 +1069,58 @@ function JSONToInput(json, div){
 			$("input[name='"+i+"']").val(obj);
 		}
 	});
+}
+
+function fileExist(url){
+	var http = new XMLHttpRequest();
+	http.open('HEAD', url, false);
+	http.send();
+	return http.status!=404;
+}
+
+function toggleSelected(elem){
+	$(elem).click(function(){
+		$(elem+".selected").removeClass("selected");
+		$(this).addClass("selected");
+	});
+}	
+
+
+
+//--Canvas function
+function createCanvasFromFile(file, canvas, max_width, max_height){
+	var img = document.createElement("img");
+	var reader = new FileReader();  
+	reader.onload = function(e) {img.src = e.target.result}
+	reader.readAsDataURL(file);
+
+	img.onload = function () {
+		var ctx = canvas.getContext("2d");
+		ctx.drawImage(img, 0, 0);
+
+		var MAX_WIDTH = max_width;
+		var MAX_HEIGHT = max_height;
+		var width = img.width;
+		var height = img.height;
+
+		if (width > height) {
+			if (width > MAX_WIDTH) {
+				height *= MAX_WIDTH / width;
+				width = MAX_WIDTH;
+			}
+		} else {
+			if (height > MAX_HEIGHT) {
+				width *= MAX_HEIGHT / height;
+				height = MAX_HEIGHT;
+			}
+		}
+		canvas.width = width;
+		canvas.height = height;
+		var ctx = canvas.getContext("2d");
+		ctx.drawImage(img, 0, 0, width, height);
+
+		//var dataurl = canvas.toDataURL("image/png");
+
+	}
+
 }

@@ -1,6 +1,8 @@
-var filesData=[];
-var thumbnail=[];
-var imageNames=[];
+var file;
+var thumbnail;
+var newImgName=0;
+var imgSelected=0;
+var JSONImagesFile=null;;
 
 $(document).ready(function(){
 	loadTable("default.html");
@@ -15,11 +17,8 @@ $(document).ready(function(){
 	});
 
 	// Setup the dnd listeners.
-	var dropZone = document.getElementById('dropZone');
-	dropZone.addEventListener('dragover', handleDragOver, false);
-	dropZone.addEventListener('dragenter', handleDragEnter, false);
-	dropZone.addEventListener('dragleave', handleDragLeave, false);
-	dropZone.addEventListener('drop', handleFileSelect, false);
+	loadDropImg();
+	toggleSelected(".imgJSON");
 
 });
 
@@ -177,9 +176,6 @@ function loadFunctions(){
 				$(button).find("a").attr("href", $("#link").val());
 			});
 		}
-
-
-
 		//Handle Clicks
 
 		$(this).mouseup(function()
@@ -386,7 +382,6 @@ function dropEvent(e){
 function getPadding(elem){
 	//return window.getComputedStyle(elem, null).getPropertyValue('padding') 
 	return $(elem).css("padding")
-
 }
 
 function padding(input){
@@ -443,105 +438,57 @@ function savePage(button){
 
 }
 
-function imgChooser(){
-	$('#choseImg').slideDown();
-	var jsonFile="images/images.json";
-	if(fileExist(jsonFile)){
-		$.getJSON( jsonFile, function( data ) {
-			var items = [];
-			$.each( data, function( key, val ) {
-				items.push( "<li id='" + key + "'>" + val + "</li>" );
-			});
-		});
-	}
-	else{
-		alert();
-	}
-}
+
 
 
 //--Canvas--/
 
-function upload(){
+function loadDropImg(){
+	var dropZone = document.getElementById('dropZone');
+	dropZone.addEventListener('dragover', handleDragOver, false);
+	dropZone.addEventListener('dragenter', handleDragEnter, false);
+	dropZone.addEventListener('dragleave', handleDragLeave, false);
+	dropZone.addEventListener('drop', handleFileSelect, false);
 
-	var formData = new FormData();
-	for (i = 0; i < imageNames.length; i++) {
-		formData.append("names["+i+"]",imageNames[i]);
-	}
-	for (var i = 0, f; f = thumbnail[i]; i++) {
-		formData.append('file'+i, f);
-	}
-	for (var i = 0, f; f = filesData[i]; i++) {
-		formData.append('file'+i, f);
-	}
-	$.ajax({
-		xhr: function(){
-			var xhr = new window.XMLHttpRequest();
-			//Upload progress
-			xhr.upload.addEventListener("progress", function(evt){
-				if (evt.lengthComputable) {
-					var percentComplete = evt.loaded / evt.total;
-					//Do something with upload progress
-					console.log(percentComplete);
-				}
-				}, false);
-			//Download progress
-			xhr.addEventListener("progress", function(evt){
-				if (evt.lengthComputable) {
-					var percentComplete = evt.loaded / evt.total;
-					//Do something with download progress
-					console.log(percentComplete);
-				}
-				}, false);
-			return xhr;
-		},
-		type:'POST',
-		url:"php/fileUpload.php",
-		data:formData,
-		cache:false,
-		contentType: false,
-		processData: false,
-		success:function(data){
-			console.log(data);
-		}
+	$("#imgFile").change(function(){
+		var f=$(this)[0].files[0];;
+		var canvas = document.getElementById("canvasImg");
+		$("#dropZone h1").remove();
+		$("#canvasImg").show();
+		createCanvasFromFile(f, canvas, $("#dropZone").width(), $("#dropZone").height());
+		file=f;
+		thumbnail=canvas.toDataURL("image/png");
 	});
 }
-
-
-
 
 function handleFileSelect(evt) {
 	evt.stopPropagation();
 	evt.preventDefault();
-
-	var files = evt.dataTransfer.files; // FileList object.
-
-	// files is a FileList of File objects. List some properties.
+	var files = evt.dataTransfer.files; 
 	f = files[0];
 	var canvas = document.getElementById("canvasImg");
 
 	var html= document.createElement("div");
-	html.className="row";
-
 	var imgSrc=document.createElement("div");
 	imgSrc.className="imageSrc";
 	imgSrc.appendChild(canvas);
-
 	html.appendChild(imgSrc);
 
 	$("#dropZone h1").remove();
 
 	$("#dropZone")[0].appendChild(html);
-	$(html).find(".imageSrc").append(canvas);
+	$(imgSrc).append(canvas);
 	createCanvasFromFile(f, canvas, $("#dropZone").width(), $("#dropZone").height());
-	//$(evt.target).removeClass("over");
+	$("#canvasImg").show();
+	file=f;
+	thumbnail=canvas.toDataURL("image/png");
 }
 
 function handleDragOver(evt) {
 	$(evt.target).addClass("over");
 	evt.stopPropagation();
 	evt.preventDefault();
-	evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+	evt.dataTransfer.dropEffect = 'copy'; 
 }
 
 function handleDragEnter(evt) {
@@ -554,3 +501,43 @@ function handleDragLeave(evt){
 	$(evt.target).removeClass("over");
 }
 
+function seleccionImg(){
+	imgSelected=$(".imgJSON.selected").data("pos");
+	console.log(imgSelected);
+}
+
+function imgChooser(){
+	var jsonFile="images/images.json";
+	console.log(fileExist(jsonFile));
+	if(fileExist(jsonFile)==true){
+		$.getJSON( jsonFile, function( data ) {
+			JSONImagesFile=data;
+			$.each( data, function( i, obj ) {
+				var html='<div class="col-3 container"><div class="imgJSON selected" data-pos='+key+'><img src="images/'+key+'.jpg" alt="default" ></div></div>';
+				$("#imgJSONContainer").append(html);
+			});
+			newImgName=JSONImagesFile.length;
+		});
+	}
+	else{
+		newImgName=1;
+		JSONImagesFile=JSON.parse('{ "img" :[] }');
+	}
+	$("#choseImg").slideDown();
+}
+
+function uploadImg(){
+	$.ajax({
+		type:'POST',
+		url:"php/fileUpload.php",
+		data:{ id:newImgName, file:file, thumbnail:thumbnail },
+		/*
+		cache:false,
+		contentType: false,
+		processData: false,*/
+		success:function(data){
+			console.log(data);
+			JSONImagesFile.img.push({id:newImgName});
+		}
+	});
+}
